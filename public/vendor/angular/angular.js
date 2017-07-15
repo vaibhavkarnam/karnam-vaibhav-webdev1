@@ -70,7 +70,7 @@ function isValidObjectMaxDepth(maxDepth) {
  * value of bar. The object is not restricted in the number of arguments it can
  * take.
  *
- * If fewer arguments are specified than necessary for interpolation, the extra
+ * If fewer arguments are specified than necessary for interpolation, the vendor
  * interpolation markers will be preserved in the final string.
  *
  * Since data will be parsed statically during a build step, some restrictions
@@ -4172,7 +4172,7 @@ var $$MapProvider = [/** @this */function() {
  *
  * Sometimes you want to get access to the injector of a currently running Angular app
  * from outside Angular. Perhaps, you want to inject and compile some markup after the
- * application has been bootstrapped. You can do this using the extra `injector()` added
+ * application has been bootstrapped. You can do this using the vendor `injector()` added
  * to JQuery/jqLite elements. See {@link angular.element}.
  *
  * *This is fairly rare but could be the case if a third party library is injecting the
@@ -5375,7 +5375,7 @@ function splitClasses(classes) {
   var obj = createMap();
   forEach(classes, function(klass) {
     // sometimes the split leaves empty string values
-    // incase extra spaces were applied to the options
+    // incase vendor spaces were applied to the options
     if (klass.length) {
       obj[klass] = true;
     }
@@ -16735,7 +16735,7 @@ function $ParseProvider() {
  *   });
  * ```
  *
- * At first it might not be obvious why this extra complexity is worth the trouble. The payoff
+ * At first it might not be obvious why this vendor complexity is worth the trouble. The payoff
  * comes in the way of guarantees that promise and deferred APIs make, see
  * https://github.com/kriskowal/uncommonjs/blob/master/promises/specification.md.
  *
@@ -18704,7 +18704,7 @@ function $RootScopeProvider() {
           // Insanity Warning: scope depth-first traversal
           // yes, this code is a bit crazy, but it works and we have tests to prove it!
           // this piece should be kept in sync with the traversal in $digest
-          // (though it differs due to having the extra check for $$listenerCount)
+          // (though it differs due to having the vendor check for $$listenerCount)
           if (!(next = ((current.$$listenerCount[name] && current.$$childHead) ||
               (current !== target && current.$$nextSibling)))) {
             while (current !== target && !(next = current.$$nextSibling)) {
@@ -18970,7 +18970,7 @@ function adjustMatchers(matchers) {
  * <div class="alert alert-danger">
  * AngularJS strongly relies on contextual escaping for the security of bindings: disabling or
  * modifying this might cause cross site scripting (XSS) vulnerabilities. For libraries owners,
- * changes to this service will also influence users, so be extra careful and document your changes.
+ * changes to this service will also influence users, so be vendor careful and document your changes.
  * </div>
  *
  * Typically, you would configure or override the {@link ng.$sceDelegate $sceDelegate} instead of
@@ -22521,7 +22521,7 @@ function orderByFilter($parse) {
     return array;
 
     function getComparisonObject(value, index) {
-      // NOTE: We are adding an extra `tieBreaker` value based on the element's index.
+      // NOTE: We are adding an vendor `tieBreaker` value based on the element's index.
       // This will be used to keep the sort stable when none of the input predicates can
       // distinguish between two elements.
       return {
@@ -25183,7 +25183,7 @@ function createDateParser(regexp, mapping) {
     }
 
     if (isString(iso)) {
-      // When a date is JSON'ified to wraps itself inside of an extra
+      // When a date is JSON'ified to wraps itself inside of an vendor
       // set of double quotes. This makes the date parsing code unable
       // to match the date string and parse it as a date.
       if (iso.charAt(0) === '"' && iso.charAt(iso.length - 1) === '"') {
@@ -33195,7 +33195,7 @@ var selectDirective = function() {
 
       // If the select allows multiple values then we need to modify how we read and write
       // values from and to the control; also what it means for the value to be empty and
-      // we have to add an extra watch since ngModel doesn't work well with arrays - it
+      // we have to add an vendor watch since ngModel doesn't work well with arrays - it
       // doesn't trigger rendering if only an item in the array changes.
       if (attr.multiple) {
         selectCtrl.multiple = true;
