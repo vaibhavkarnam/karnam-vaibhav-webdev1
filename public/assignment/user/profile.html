@@ -2,26 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Title</title>
-<link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-<div class="navbar-header">
-<div class="navbar-brand">
-    <a href="#">Profile</a>
-</div>
-<p class="navbar-text pull-right">
-    <a href="profile.html" class="navbar-link">
-  <span class="glyphicon glyphicon-ok">
-  </span>
-    </a>
-</p>
-</div>
-</nav>
-<div class="container-fluid">
+
+    <!--<nav class="navbar navbar-default navbar-fixed-top">-->
+        <!--<div class="container-fluid">-->
+            <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+            <!--<div class="navbar-header">-->
+                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"-->
+                        <!--aria-controls="navbar">-->
+                    <!--<span class="sr-only">Toggle navigation</span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                <!--</button>-->
+                <!--<a class="navbar-brand" href="#">Profile</a>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+            <!--<div id="navbar" class="navbar-collapse collapse">-->
+                <!--<ul class="nav navbar-nav navbar-right">-->
+                    <!--<li><a href="#">Link</a></li>-->
+                <!--</ul>-->
+            <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+        <!--</div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+    <!--</nav>-->
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="#">
+                    Profile
+                </a>
+            </div>
+            <p class="navbar-text pull-right">
+                <a href="profile.html" class="navbar-link">
+      <span class="glyphicon glyphicon-ok">
+      </span>
+                </a>
+            </p>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
 <form>
 <div class="form-group">
     <label for="username">Username</label>
@@ -39,6 +69,14 @@
     <label for="last-name">Last Name</label>
     <input type="text" class="form-control" id="last-name" placeholder="karnam">
 </div>
+
+    <div class="form-group">
+    <label for="dob">Date of Birth</label>
+    <input name="dob"
+           type="date"
+           class="form-control"
+           id="dob"/>
+    </div>
 </form>
 
 <a class="btn btn-primary btn-block"
