@@ -11,12 +11,12 @@ padding-bottom: 60px;
 
 
 jga .navbar-default {
-    background-color: gray;
-    border-color: gray;
+background-color: gray;
+border-color: gray;
 }
 
 .jga .navbar-default .navbar-brand {
-    color: white;
+color: white;
 }
 
 nav.navbar.navbar-default.navbar-fixed-top{
@@ -29,8 +29,8 @@ padding-right: 15px;
 
 
 .navbar-default {
-    background-color: gray;
-    border-color: gray;
+background-color: gray;
+border-color: gray;
 }
 
 .navbar-default .navbar-brand{
@@ -88,7 +88,7 @@ white-space: nowrap;
 
 @media (max-width: 768px){
 .navbar-text{
-    margin-right: 15px;
+margin-right: 15px;
 }
 }
 .embed-responsive {
@@ -126,21 +126,21 @@ margin-right: -15px;
 }
 
 .jga .jga-split-view-left {
-    position: absolute;
-    top: 60px;
-    bottom: 0px;
-    z-index: 1;
-    overflow-y: scroll;
+position: absolute;
+top: 60px;
+bottom: 0px;
+z-index: 1;
+overflow-y: scroll;
 }
 
 
 @media (min-width: 1200px) {
-    .col-lg-9.jga-split-view-right {
-        width: 75%;
-        position: absolute;
-        right: 0px;
-        overflow-y: scroll;
-        top: 60px;
-        bottom: 0px;
-    }
+.col-lg-9.jga-split-view-right {
+width: 75%;
+position: absolute;
+right: 0px;
+overflow-y: scroll;
+top: 60px;
+bottom: 0px;
+}
 }
