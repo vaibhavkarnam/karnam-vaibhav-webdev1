@@ -1,0 +1,16 @@
+<div class="container-fluid">
+<label for="name">Name</label>
+<input id = "name" ng-model="model.widget.name" class="form-control" placeholder="GIZMODO"/>
+<label for="text">Text</label>
+<input id = "text" ng-model="model.widget.text" class="form-control"
+       placeholder="Marvel pulled out all the stops at this year’s San Diego Comic-Con"/>
+<label for="size">Size</label>
+<select id="size" ng-model="model.widget.size" class="form-control">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>5</option>
+    <option>6</option>
+</select>
+<a ng-click="model.widgetDelete(model.widgetId)" class="btn btn-block btn-danger">Delete</a>
+</div>

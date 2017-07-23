@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="navbar-header">
+<div class="navbar-brand">
+<a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+<span class="glyphicon glyphicon-chevron-left"></span></a>
+<a href="#">
+Widgets</a>
+</div>
+<p class="navbar-text pull-right">
+<a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
+<span class="glyphicon glyphicon-plus">
+</span></a>
+</p>
+</div>
+</nav>
+<div ng-repeat="widget in model.widgets" class="wd-widgets">
+<div class="wd-widgets-toolbar">
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+        <span class="glyphicon glyphicon-cog"></span>
+    </a>
+    <span class="glyphicon glyphicon-align-justify"></span>
+</div>
+<div ng-include="model.widgetUrl(widget)"></div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+<div class="navbar-header">
+<p class="navbar-text pull-right">
+<a href="../../user/templates/profile.view.client.html" class="navbar-link">
+<span class="glyphicon glyphicon-user"></span></a>
+</p>
+</div>
+</nav>
+</body>
+</html>
