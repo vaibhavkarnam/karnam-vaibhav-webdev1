@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-<title>Title</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../../css/style.css" rel="stylesheet"/>
-</head>
-<body>
+
 <div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 <h1>Register</h1>
 <label for="username">
 Username</label>
 <input id="username"
+       ng-model="username"
    type="text"
    class="form-control"
    placeholder="vaibhav"/>
@@ -20,20 +15,20 @@ Username</label>
 Password</label>
 <input id ="password"
    type="password"
+       ng-model="password"
    class="form-control"
    placeholder="pass"/>
 <label for="verifypass">
 Verfiy Password</label>
 <input id = "verifypass"
+       ng-model="password2"
    type="password"
    class="form-control"
    placeholder="pass"/>
 <a class="btn btn-primary btn-block"
-href="profile.html">
+   ng-click="model.registerUser(username, password, password2)">
 Register</a>
 <a class="btn btn-danger  btn-block"
-href="login.html">
+href="#!/login">
 Cancel</a>
 </div>
-</body>
-</html>

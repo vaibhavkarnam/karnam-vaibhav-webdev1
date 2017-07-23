@@ -13,7 +13,7 @@
 
         var api ={
             registerUser: registerUser,
-            findUserbyId: findUserbyId,
+            findUserById: findUserById,
             findUserbyUsername: findUserbyUsername,
             findUserByUsernameAndPassword : findUserByUsernameAndPassword,
             updateUser: updateUser,
@@ -39,7 +39,7 @@
             return user;
         }
 
-        function findUserbyId(userId) {
+        function findUserById(userId) {
             for(var u in users){
                 if(users[u]._id === userId)
                     return users[u];
