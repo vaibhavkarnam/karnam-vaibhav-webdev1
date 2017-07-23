@@ -40,10 +40,15 @@
                 controller: "websiteListController",
                 controllerAs: "model"
             })
-            .when("/user/:userId/website/new", {
-                templateUrl: "views/website/templates/website-new.view.client.html",
-                // controller: "websiteListController",
-                // controllerAs: "model"
-            });
+            .when('/user/:userId/website/new', {
+                templateUrl: 'views/website/templates/website-new.view.client.html',
+                controller: 'NewWebsiteController',
+                controllerAs: 'model'
+            })
+    .when('/user/:userId/website/:websiteId', {
+            templateUrl: 'views/website/templates/website-edit.view.client.html',
+            controller: 'EditWebsiteController',
+            controllerAs: 'model'
+        })
     }
 })();
