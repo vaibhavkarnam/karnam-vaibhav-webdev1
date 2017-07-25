@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
 <div class="navbar-header">
     <div class="navbar-brand">
-        <<a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span></a>
         <a href="#">
             Edit Widget</a></div>
@@ -14,19 +14,19 @@
 </nav>
 <div ng-switch="model.widget.widgetType">
 <div ng-switch-when="HEADING">
-    <div ng-include="'views/widget/editors/widget-heading.view.client.html'"></div>
+    <div ng-include="'views/widget/editor/widget-heading.view.client.html'"></div>
 </div>
 <div ng-switch-when="IMAGE">
-    <div ng-include="'views/widget/editors/widget-image.view.client.html'"></div>
+    <div ng-include="'views/widget/editor/widget-image.view.client.html'"></div>
 </div>
 <div ng-switch-when="YOUTUBE">
-    <div ng-include="'views/widget/editors/widget-youtube.view.client.html'"></div>
+    <div ng-include="'views/widget/editor/widget-youtube.view.client.html'"></div>
 </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
 <div class="navbar-header">
     <p class="navbar-text pull-right">
-        <a href="../../user/templates/profile.view.client.html" class="navbar-link">
+        <a href="#!/user/{{model.userId}}" class="navbar-link">
             <span class="glyphicon glyphicon-user"></span></a>
     </p>
 </div>

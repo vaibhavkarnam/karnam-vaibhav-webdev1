@@ -21,10 +21,12 @@ color: white;
 
 nav.navbar.navbar-default.navbar-fixed-top{
 padding-right: 15px;
+    background-color: gray;
 }
 
 nav.navbar.navbar-default.navbar-fixed-bottom{
 padding-right: 15px;
+    background-color: gray;
 }
 
 

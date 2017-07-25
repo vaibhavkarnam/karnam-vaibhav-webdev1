@@ -65,5 +65,20 @@ function configuration($routeProvider) {
             controller: 'EditPageController',
             controllerAs: 'model'
         })
+        .when('/user/:userId/website/:websiteId/page/:pageId/widget', {
+            templateUrl: 'views/widget/templates/widget-list.view.client.html',
+            controller: 'WidgetListController',
+            controllerAs: 'model'
+        })
+        .when('/user/:userId/website/:websiteId/page/:pageId/widget/new', {
+            templateUrl: 'views/widget/templates/widget-chooser.view.client.html',
+            controller: 'WidgetNewController',
+            controllerAs: 'model'
+        })
+        .when('/user/:userId/website/:websiteId/page/:pageId/widget/:wgid', {
+            templateUrl: 'views/widget/templates/widget-edit.view.client.html',
+            controller: 'WidgetEditController',
+            controllerAs: 'model'
+        });
 }
 })();
