@@ -5,10 +5,10 @@
 
     function userService() {
         var users = [
-            {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder",  email: "alice@abc.com"},
-            {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley", email: "bob@abc.com"  },
-            {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia", email: "charly@abc.com"  },
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi", email: "jannuzi@abc.com" }
+            {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder",  email: "alice@abc.com", dob:""},
+            {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley", email: "bob@abc.com", dob:""  },
+            {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia", email: "charly@abc.com", dob:""  },
+            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi", email: "jannuzi@abc.com", dob:"" }
         ];
 
         var api ={
@@ -68,10 +68,11 @@
             user_old.firstName = user.firstName;
             user_old.lastName = user.lastName;
             user_old.email = user.email;
+            user_old.dob = user.dob;
         }
 
         function deleteUser(userId) {
-            var user_old = findUserbyId(userId);
+            var user_old = findUserById(userId);
             var index = users.indexOf(user_old);
             users.splice(index, 1);
         }
