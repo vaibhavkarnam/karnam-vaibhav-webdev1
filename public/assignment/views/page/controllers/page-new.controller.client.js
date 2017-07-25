@@ -13,6 +13,7 @@ function NewPageController($routeParams, PageService, $location){
     model.websiteId=$routeParams.websiteId;
     function init() {
         model.page = angular.copy(PageService.findPageById(model.pageId));
+        model.pages = angular.copy(PageService.findPageByWebsiteId(model.websiteId));
     }
     init();
 

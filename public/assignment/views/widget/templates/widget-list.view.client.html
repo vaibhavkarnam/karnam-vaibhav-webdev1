@@ -30,17 +30,15 @@ Widgets</a>
     <div ng-switch-when="YOUTUBE">
         <div ng-include="'views/widget/templates/widget-youtube.view.client.html'"></div>
     </div>
-    <div ng-switch-when="HTML" ng-bind-html="model.trust(widget.text)">
+    <div class="container-fluid" ng-switch-when="HTML" ng-bind-html="model.trust(widget.text)">
     </div>
     </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
 <div class="navbar-header">
 <p class="navbar-text pull-right">
-<a href="#!/user/{{model.userId}}" class="navbar-link">
+<a href="#!/profile/{{model.userId}}" class="navbar-link">
 <span class="glyphicon glyphicon-user"></span></a>
 </p>
 </div>
 </nav>
-</body>
-</html>

@@ -67,14 +67,14 @@ Name</label>
 Description</label>
 <textarea id="description" ng-model="model.website.description" class="form-control" rows="5" placeholder="Social network website.
 Connect with friends from around the world">Social networking website.Helps you to connect with friends from all around the world</textarea>
-<a href="#!/user/{{model.userId}}/website" class="btn btn-block btn-danger">Delete</a>
+<a ng-click="model.websiteDelete(model.websiteId)" class="btn btn-block btn-danger">Delete</a>
 </div>
 </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
 <div class="navbar-header">
 <p class="navbar-text pull-right">
-<a href="../../user/templates/profile.view.client.html" class="navbar-link">
+<a href="#!/profile/{{model.userId}}" class="navbar-link">
 <span class="glyphicon glyphicon-user"></span>
 </a>
 </p>
