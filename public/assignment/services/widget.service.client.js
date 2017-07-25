@@ -95,7 +95,7 @@ function WidgetService() {
             widget_old.width = widget.width;
             widget_old.url = widget.url;
             widget_old.text = widget.text;
-            widget_ol.name = widget.name;
+            widget_old.name = widget.name;
             break;
 
         case 'YOUTUBE':
