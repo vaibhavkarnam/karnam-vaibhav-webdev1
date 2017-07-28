@@ -11,7 +11,7 @@ function WidgetListController($routeParams, $sce, WidgetService) {
 
     model.trust = trust;
     model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
-
+    model.widgetsSort = widgetsSort;
 
     model.userId = $routeParams['userId'];
     model.websiteId = $routeParams.websiteId;
@@ -28,6 +28,10 @@ function WidgetListController($routeParams, $sce, WidgetService) {
     }
     function trust(html) {
         return $sce.trustAsHtml(html);
+    }
+    function widgetsSort (initalPos, finalPos) {
+        WidgetService
+            .WidgetsOrder(model.pageId, initalPos, finalPos);
     }
 }
 })();

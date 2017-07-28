@@ -13,6 +13,7 @@ Widgets</a>
 </p>
 </div>
 </nav>
+<div wbdvsortable callback="model.widgetsSort(InitalPosition, FinalPosition)">
 <div ng-repeat="widget in model.widgets" class="wd-widgets">
 <div class="wd-widgets-toolbar">
     <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
@@ -33,6 +34,7 @@ Widgets</a>
     <div class="container-fluid" ng-switch-when="HTML" ng-bind-html="model.trust(widget.text)">
     </div>
     </div>
+</div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
 <div class="navbar-header">
