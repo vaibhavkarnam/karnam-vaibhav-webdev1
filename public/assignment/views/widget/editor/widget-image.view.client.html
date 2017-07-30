@@ -1,22 +1,31 @@
 <div class="container-fluid">
 <label for="name">
-    Name</label>
+Name</label>
 <input id = "name" ng-model="model.widget.name" class="form-control"/>
 <label for="text">
-    Text</label>
+Text</label>
 <input id = "text" ng-model="model.widget.text" class="form-control"/>
 <label for="url">
-    URL</label>
+URL</label>
 <input id = "url" class="form-control" ng-model="model.widget.url"
-       placeholder="https://i.kinja-img.com/gawker-media/image/upload/kbzlvdhqcsbzbtlmr60a.png"/>
+placeholder="https://i.kinja-img.com/gawker-media/image/upload/kbzlvdhqcsbzbtlmr60a.png"/>
 <label for="width">
-    Width</label>
+Width</label>
 <input id = "width" ng-model="model.widget.width" class="form-control" placeholder="100%"/>
-<label for="file">
-    Upload</label>
-<input id="file" multiple type="file" class="form-control"/>
-<a href="#" class="btn btn-block btn-primary">
-    Upload Image</a>
+<form action="/api/upload/"   method="post" enctype="multipart/form-data">
+<input  name="myFile"    type="file" class="form-control"/>
+<input  name="width"    value={{model.widget.width}} style="display: none"/>
+<input  name="userId"   value={{model.userId}} style="display: none"/>
+<input  name="websiteId"  value={{model.websiteId}}   style="display: none"/>
+<input  name="pageId"    value={{model.pageId}}   style="display: none"/>
+<input  name="widgetId"   value={{model.widgetId}}   style="display: none"/>
+<button type="submit"  multiple type="file"  class="btn btn-block btn-primary">Upload Image</button>
+</form>
+
+<a id = "searchButton" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr" class="btn btn-block btn-success form-control">
+Search Flickr
+</a>
+
 <a ng-click="model.widgetDelete(model.widgetId)" class="btn btn-block btn-danger">
-    Delete</a>
+Delete</a>
 </div>
