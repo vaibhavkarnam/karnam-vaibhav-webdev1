@@ -2,18 +2,22 @@
 (function () {
 
 angular
-    .module('WamApp')
-    .controller('PageListController', PageListController);
+.module('WamApp')
+.controller('PageListController', PageListController);
 
 function PageListController($routeParams, PageService){
-    var model = this;
-    model.userId = $routeParams['userId'];
-    model.websiteId = $routeParams['websiteId'];
-    function init() {
-        model.pages = angular.copy(PageService.findPageByWebsiteId(model.websiteId));
-    }
-    init();
+var model = this;
+
+model.websiteId = $routeParams['websiteId'];
+model.userId = $routeParams['userId'];
+
+function init() {
+    PageService
+        .findPageByWebsiteId(model.websiteId)
+        .then(function (pages) {
+            model.pages = pages;
+        });
+}
+init();
 }
 })();
-
-

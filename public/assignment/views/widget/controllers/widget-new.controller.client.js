@@ -1,36 +1,45 @@
 (function () {
 
 angular
-    .module('WamApp')
-    .controller('WidgetNewController', WidgetNewController);
+.module('WamApp')
+.controller('WidgetNewController', WidgetNewController);
 function WidgetNewController($routeParams, $sce, WidgetService, $location) {
-    var model = this;
+var model = this;
 
-    model.createWidgetHeader = createWidgetHeader;
-    model.createWidgetImage = createWidgetImage;
-    model.createWidgetYoutube = createWidgetYoutube;
+model.createWidgetHeader = createWidgetHeader;
+model.createWidgetImage = createWidgetImage;
+model.createWidgetYoutube = createWidgetYoutube;
 
-    model.userId = $routeParams['userId'];
-    model.websiteId = $routeParams.websiteId;
-    model.pageId = $routeParams.pageId;
-    model.widgetId = $routeParams.wgid;
-    function init() {
-        model.widget = angular.copy(WidgetService.findWidgetById(model.widgetId));
-    }
-    init();
-    function createWidgetHeader(widget) {
-        var widget_id = WidgetService.createWidgetHeader(model.pageId, widget);
+model.userId = $routeParams['userId'];
+model.websiteId = $routeParams.websiteId;
+model.pageId = $routeParams.pageId;
+model.widgetId = $routeParams.wgid;
+
+function createWidgetImage(widget) {
+WidgetService
+    .createWidgetImage(model.pageId, widget)
+    .then(function (widgetId) {
+        var widget_id = widgetId;
         $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
-    }
+    });
+}
 
-    function createWidgetImage(widget) {
-        var widget_id = WidgetService.createWidgetImage(model.pageId, widget);
+function createWidgetHeader(widget) {
+WidgetService
+    .createWidgetHeader(model.pageId, widget)
+    .then(function (widgetId) {
+        var widget_id = widgetId;
         $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
-    }
+    });
+}
 
-    function createWidgetYoutube(widget) {
-        var widget_id =  WidgetService.createWidgetYoutube(model.pageId, widget);
+function createWidgetYoutube(widget) {
+WidgetService
+    .createWidgetYoutube(model.pageId, widget)
+    .then(function (widgetId) {
+        var widget_id = widgetId;
         $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
-    }
+    });
+}
 }
 })();
