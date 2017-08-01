@@ -35,7 +35,7 @@ function trust(html) {
 }
 function widgetsSort (initalPos, finalPos) {
     WidgetService
-        .WidgetsOrder(model.pageId, initalPos, finalPos);
+        .WidgetSortable(model.pageId, initalPos, finalPos);
 }
 }
 })();

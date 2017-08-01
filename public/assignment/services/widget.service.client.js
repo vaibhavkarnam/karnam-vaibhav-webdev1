@@ -11,7 +11,7 @@ this.findWidgetById = findWidgetById;
 this.createWidgetHeader = createWidgetHeader;
 this.createWidgetImage = createWidgetImage;
 this.createWidgetYoutube = createWidgetYoutube;
-this.WidgetsOrder = WidgetsOrder;
+this.WidgetSortable = WidgetSortable;
 this.findWidgetsByPageId = findWidgetsByPageId;
 this.deleteWidget = deleteWidget;
 
@@ -84,7 +84,7 @@ return $http.put(url, widget)
     })
 }
 
-function WidgetsOrder(pageId, index1, index2) {
+function WidgetSortable(pageId, index1, index2) {
 var url = '/api/page/' + pageId + '/widget?initial=' + index1 + "&final=" + index2;
 return $http.put(url);
 }
