@@ -31,6 +31,7 @@ if(username && password){
     }
     return res.sendStatus(404);
 }
+
 if(username){
     for(var u in users) {
         var user = users[u];
@@ -41,6 +42,7 @@ if(username){
     }
     return res.sendStatus(404);
 }
+
 else {
     res.json(users);
 }
@@ -66,6 +68,18 @@ users.push(user);
 res.json(user);
 }
 
+function updateUser(req, res) {
+var user = req.body;
+for(var u in users) {
+    if(users[u]._id === req.params.userId) {
+        users[u] = user;
+        res.sendStatus(200);
+        return;
+    }
+}
+res.sendStatus(404);
+}
+
 function deleteUser(req, res) {
 var user = req.body;
 for(var u in users) {
@@ -78,14 +92,3 @@ for(var u in users) {
 res.sendStatus(404);
 }
 
-function updateUser(req, res) {
-var user = req.body;
-for(var u in users) {
-    if(users[u]._id === req.params.userId) {
-        users[u] = user;
-        res.sendStatus(200);
-        return;
-    }
-}
-res.sendStatus(404);
-}

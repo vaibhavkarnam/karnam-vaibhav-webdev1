@@ -22,46 +22,47 @@ res.json(page);
 function findPageById(req, res) {
 var pageId = req.params['websiteId'];
 for(var u in pages){
-    if(pages[u]._id === req.params.pageId) {
-        res.send(pages[u]);
-        return;
-    }
+if(pages[u]._id === req.params.pageId) {
+    res.send(pages[u]);
+    return;
+}
 }
 res.sendStatus(404)
-    .send({message: 'Page was not found'});
+.send({message: 'Page was not found'});
 }
 
 function findPageByWebsiteId(req, res) {
 var results = [];
 for (var v in pages){
-    if(pages[v].websiteId === req.params.websiteId) {
+if(pages[v].websiteId === req.params.websiteId) {
 
-        results.push(pages[v]);
-    }
+    results.push(pages[v]);
+}
 }
 res.json(results);
-}
-
-function deletePage(req, res) {
-var page = req.body;
-for(var u in pages) {
-    if(pages[u]._id === req.params.pageId) {
-        pages.splice(u, 1);
-        res.sendStatus(200);
-        return;
-    }
-}
-res.sendStatus(404);
 }
 
 function updatePage(req, res) {
 var page = req.body;
 for(var u in pages) {
-    if(pages[u]._id === req.params.pageId) {
-        pages[u] = page;
-        res.sendStatus(200);
-        return;
-    }
+if(pages[u]._id === req.params.pageId) {
+    pages[u] = page;
+    res.sendStatus(200);
+    return;
+}
+}
+res.sendStatus(404);
+}
+
+
+function deletePage(req, res) {
+var page = req.body;
+for(var u in pages) {
+if(pages[u]._id === req.params.pageId) {
+    pages.splice(u, 1);
+    res.sendStatus(200);
+    return;
+}
 }
 res.sendStatus(404);
 }

@@ -17,29 +17,29 @@ model.widgetId = $routeParams.wgid;
 
 function createWidgetImage(widget) {
 WidgetService
-    .createWidgetImage(model.pageId, widget)
-    .then(function (widgetId) {
-        var widget_id = widgetId;
-        $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
-    });
+.createWidgetImage(model.pageId, widget)
+.then(function (widgetId) {
+    var widget_id = widgetId;
+    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
+});
 }
 
 function createWidgetHeader(widget) {
 WidgetService
-    .createWidgetHeader(model.pageId, widget)
-    .then(function (widgetId) {
-        var widget_id = widgetId;
-        $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
-    });
+.createWidgetHeader(model.pageId, widget)
+.then(function (widgetId) {
+    var widget_id = widgetId;
+    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
+});
 }
 
 function createWidgetYoutube(widget) {
 WidgetService
-    .createWidgetYoutube(model.pageId, widget)
-    .then(function (widgetId) {
-        var widget_id = widgetId;
-        $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
-    });
+.createWidgetYoutube(model.pageId, widget)
+.then(function (widgetId) {
+    var widget_id = widgetId;
+    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/'+widget_id);
+});
 }
 }
 })();

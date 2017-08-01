@@ -20,22 +20,22 @@ app.delete('/api/assignment/website/:websiteId', deleteWebsite);
 function findWebsiteById(req, res) {
 var websiteId = req.params['websiteId']
 for(var u in websites){
-    if(websites[u]._id === websiteId) {
-        res.send(websites[u]);
-        return;
-    }
+if(websites[u]._id === websiteId) {
+    res.send(websites[u]);
+    return;
+}
 }
 res.sendStatus(404)
-    .send({message: 'Website was not found'});
+.send({message: 'Website was not found'});
 }
 
 function findAllWebsitesForUser(req, res) {
 var results = [];
 
 for (var v in websites){
-    if(websites[v].developerId === req.params.userId) {
-        results.push(websites[v]);
-    }
+if(websites[v].developerId === req.params.userId) {
+    results.push(websites[v]);
+}
 }
 res.json(results);
 }
@@ -46,28 +46,29 @@ websites.push(website);
 res.json(website);
 }
 
-function deleteWebsite(req, res) {
-var website = req.body;
-for(var u in websites) {
-    if(websites[u]._id === req.params.websiteId) {
-        websites.splice(u, 1);
-        res.sendStatus(200);
-        return;
-    }
-}
-res.sendStatus(404);
-
-}
-
 function updateWebsite(req, res) {
 var website = req.body;
 for(var u in websites) {
-    if(websites[u]._id === req.params.websiteId) {
-        websites[u] = website;
-        res.sendStatus(200);
-        return;
-    }
+if(websites[u]._id === req.params.websiteId) {
+    websites[u] = website;
+    res.sendStatus(200);
+    return;
+}
 }
 res.sendStatus(404);
 }
+
+function deleteWebsite(req, res) {
+var website = req.body;
+for(var u in websites) {
+if(websites[u]._id === req.params.websiteId) {
+    websites.splice(u, 1);
+    res.sendStatus(200);
+    return;
+}
+}
+res.sendStatus(404);
+
+}
+
 

@@ -8,26 +8,27 @@ angular
 .directive('wbdvsortable', wbdvsortable);
 
 function wbdvsortable () {
-
 function linkFunction(scope, element) {
-    $(element).sortable({
-        start: function(event, ui)
-        {
+$(element).sortable({
+    start: function(event, ui)
+    {
 
-            this.Index = ui.item.index();
+        this.Index = ui.item.index();
 
-            },
-        stop: function(event, ui)
-        {
+        },
+    stop: function(event, ui)
+    {
 
-            scope.callback({InitalPosition: this.Index, FinalPosition: ui.item.index()});
+        scope.callback({InitalPosition: this.Index, FinalPosition: ui.item.index()});
 
-        }});
+    }});
 }
 return {
 
-    scope:{callback:'&'},
-    link: linkFunction
+
+scope:{callback:'&'},
+link: linkFunction
+
 
 };
 }
