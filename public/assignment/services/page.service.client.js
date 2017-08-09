@@ -28,7 +28,6 @@ return $http.get(url)
 }
 
 function createPage(websiteId, page) {
-page._id = (new Date()).getTime()+"";
 var url = "/api/assignment/website/"+websiteId+"/page";
 return $http.post(url, page)
     .then(function (response) {
@@ -44,8 +43,8 @@ return $http.put(url, page)
 });
 }
 
-function deletePage(pageId) {
-var url = "/api/assignment/page/"+pageId;
+function deletePage(websiteId, pageId) {
+var url = "/api/assignment/website/"+websiteId+"/page/"+pageId;
 return $http.delete(url)
     .then(function (response) {
         return response.data;

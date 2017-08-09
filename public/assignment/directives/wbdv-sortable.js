@@ -1,34 +1,26 @@
-/**
-* Created by vaibhav on 27-07-2017.
-*/
 (function () {
 
 angular
 .module('WamApp')
 .directive('wbdvsortable', wbdvsortable);
-
 function wbdvsortable () {
 function linkFunction(scope, element) {
 $(element).sortable({
-    start: function(event, ui)
-    {
 
-        this.Index = ui.item.index();
+    start: function(e, ele) {
+        this.startIndex = ele.item.index();
+    },
 
-        },
-    stop: function(event, ui)
-    {
+    stop: function(e, ele) {
+        scope.callback({Inital: this.startIndex, Final: ele.item.index()});
 
-        scope.callback({InitalPosition: this.Index, FinalPosition: ui.item.index()});
+    }
+});
 
-    }});
 }
 return {
-
-
-scope:{callback:'&'},
+scope: { callback: '&' },
 link: linkFunction
-
 
 };
 }

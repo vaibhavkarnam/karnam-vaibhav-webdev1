@@ -16,10 +16,8 @@ function init() {
 }
 init();
 function createWebsite(website) {
-    website.developerId = model.userId;
-    website._id = (new Date()).getTime()+"";
     websiteService
-        .createWebsite(website)
+        .createWebsite(website, model.userId)
         .then(function () {
             $location.url('/user/'+model.userId+'/website');
         });

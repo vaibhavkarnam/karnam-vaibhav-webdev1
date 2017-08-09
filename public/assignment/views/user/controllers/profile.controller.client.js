@@ -31,7 +31,7 @@ userService
 
 function unregister() {
 userService.deleteUser(model.userId)
-    .then(function () {
+    .then(function (status) {
     $location.url('/')
 },
 function () {

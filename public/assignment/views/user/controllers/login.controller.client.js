@@ -24,7 +24,7 @@ function login(user) {
                 }
             },
             function (error) {
-                model.message = "Sorry the entered" + username + "was not found";
+                model.message = "Sorry the entered username " + model.user.username + " was not found";
             });
 }
 }

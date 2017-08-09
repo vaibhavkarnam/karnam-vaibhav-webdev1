@@ -61,8 +61,8 @@ return $http.put(url, user)
 function deleteUser(userId) {
 var url = "/api/assignment/user/"+userId;
 return $http.delete(url)
-    .then(function (response) {
-        return response.data;
+    .then(function (status) {
+        return status;
     })
 }
 }

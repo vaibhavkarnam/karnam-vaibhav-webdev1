@@ -20,8 +20,6 @@ PageService
 }
 init();
 function createPage(page) {
-page.websiteId = model.websiteId;
-page._id = (new Date()).getTime()+"";
 PageService
     .createPage(model.websiteId, page)
     .then(function () {

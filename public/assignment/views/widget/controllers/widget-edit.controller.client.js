@@ -18,12 +18,13 @@ WidgetService
 .findWidgetById(model.widgetId)
 .then(function (widget) {
     model.widget = widget;
+    console.log(widget);
 });
 }
 init();
 function widgetDelete(widgetId) {
 WidgetService
-.deleteWidget(widgetId)
+.deleteWidget(model.pageId, widgetId)
 .then(function () {
     $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
 });

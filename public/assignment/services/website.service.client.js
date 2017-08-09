@@ -27,8 +27,8 @@ return $http.get(url)
     });
 }
 
-function createWebsite(website) {
-var url = "/api/assignment/user/:userId/website";
+function createWebsite(website, userId) {
+var url = "/api/assignment/user/"+userId+"/website";
 return $http.post(url, website)
     .then(function (response) {
         return response.data;
@@ -43,8 +43,8 @@ return $http.put(url, website)
 })
 }
 
-function deleteWebsite(websiteId) {
-var url = "/api/assignment/website/"+websiteId;
+function deleteWebsite(userId, websiteId) {
+var url = "/api/assignment/user/"+userId+"/website/"+websiteId;
 return $http.delete(url)
     .then(function (response) {
         return response.data;

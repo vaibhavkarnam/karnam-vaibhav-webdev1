@@ -32,7 +32,7 @@ init();
 
 function pageDelete(pageId) {
 PageService
-    .deletePage(pageId)
+    .deletePage(model.websiteId, pageId)
     .then(function () {
         $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
     });
