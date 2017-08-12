@@ -15,17 +15,19 @@
         return api;
 
         function searchMovieById(imdbID) {
-            var url = "http://www.omdbapi.com/?i=" + imdbID + "&apikey=509f6a23";
+            var url = "/api/id/"+imdbID;
             return $http.get(url)
                 .then(function (response) {
+                    console.log(response);
                     return response.data;
                 });
         }
 
             function searchMovieByTitle(movieTitle) {
-                var url = "http://www.omdbapi.com/?s="+movieTitle+"&apikey=509f6a23";
+                var url = "/api/search/"+movieTitle;
                 return $http.get(url)
                     .then(function (response) {
+                        console.log(response);
                         return response.data;
                     });
             }
