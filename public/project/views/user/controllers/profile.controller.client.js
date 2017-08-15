@@ -126,6 +126,8 @@ userService
                     .then(function (user) {
                         model.user = user.data;
                         init();
+                        $location
+                            .url('/profile/' + model.userId)
                     })
 
             })

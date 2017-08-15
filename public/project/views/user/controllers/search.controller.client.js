@@ -43,6 +43,8 @@
                         .createReview(model.rev, model.rev.userID)
                         .then(function (newReview) {
                             model.rev.description = ""
+                            $location
+                                .url('/profile/' + model.rev.userID)
                         });
                 })
 
