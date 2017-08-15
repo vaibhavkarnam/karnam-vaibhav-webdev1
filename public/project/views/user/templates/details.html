@@ -1,0 +1,29 @@
+<h1>OMDB API</h1>
+<h2>Movie Details</h2>
+
+{{model.movie}}
+
+
+<div class="col-lg=5 col-md-5">
+    <div class="modal-body">
+        <div class="form-group">
+
+                        <textarea id="reviewdes" ng-model="model.rev.description"
+                                  placeholder="Description" rows="5" cols="50"></textarea>
+        </div>
+    </div>
+
+    <a class="btn btn-success form-control"
+       ng-click="model.submit(model.rev)" data-dismiss="modal">Submit</a>
+</div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <button type="button" class="btn btn-success form-control"
+                    ng-click="model.updateReview(model.rev)" data-dismiss="modal">Update</button>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-danger form-control"
+                    ng-click="model.deleteReview(model.rev)" data-dismiss="modal">Delete</button>
+        </div>
+    </div>
+</div>
