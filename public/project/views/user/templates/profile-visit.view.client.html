@@ -52,10 +52,10 @@
                             <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
                                 <ul class="nav nav-tabs nav-justified">
                                     <li ng-class="{active: selectedTab == 1}">
-                                        <a data-target="#" ng-click="selectedTab = 1;">Reviews</a>
+                                        <a data-target="#" ng-click="selectedTab = 1;">Profile</a>
                                     </li>
                                     <li ng-class="{active: selectedTab == 2}">
-                                        <a data-target="#" ng-click="selectedTab = 2;">Profile</a>
+                                        <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
                                     </li>
                                     <li ng-class="{active: selectedTab == 3}">
                                         <a data-target="#" ng-click="selectedTab = 3;">Following</a>
@@ -68,62 +68,50 @@
                                 <div class="tab-content" ng-show="selectedTab == 1">
                                     <div class="container-fluid">
                                         <h1>Profile</h1>
+                                        <div ng-repeat="user in model.users">
+                                            <h1><a href="#!/profile/{{model.userId}}/visitor/{{user._id}}"> {{user.username}}</a></h1>
+                                        </div>
+                                        <div class="panel-heading">
+                                            <div class="container-fluid"><h4><b>UserName : {{model.user.username}}</b></h4>
+                                            </div>
+                                            <h5><b>Role : {{model.user.role}}</b></h5>
+                                        </div>
+
                                         <a class="btn btn-success pull-right" ng-hide="model.flag"  ng-click="model.followUser()" >Follow</a>
                                         <a class="btn btn-danger pull-right" ng-show="model.flag" ng-click="model.unFollow()" >Unfollow</a>
                                     </div>
                                 </div>
 
                                 <div class="tab-content" ng-show="selectedTab == 2">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="vaibhav">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email address</label>
-                                            <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="vaibhav@gmail.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="first-name">First Name</label>
-                                            <input type="text" ng-model="model.user.firstName" class="form-control" id="first-name" placeholder="vaibhav">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last-name">Last Name</label>
-                                            <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="karnam">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="dob">Date of Birth</label>
-                                            <input name="dob"
-                                                   ng-model="model.user.dob"
-                                                   type="date"
-                                                   class="form-control"
-                                                   id="dob"/>
-                                        </div>
-                                    </form>
-
-                                    <a class="btn btn-primary btn-block"
-                                       href="#!/user/{{model.user._id}}/website">
-                                        Websites</a>
-                                    <a class="btn btn-danger  btn-block"
-                                       href="#!/login">
-                                        Logout</a>
-                                    <a class="btn btn-default btn-danger btn-block"
-                                       ng-click="model.unregister()"
-                                       role="button">Unregister</a>
-
-                                    <a class="btn btn-default btn-primary btn-block"
-                                       ng-click="model.updateUser()"
-                                       role="button">Update</a>
+                                    <div ng-repeat="review in model.userGivenReviews">
+                                        <h4>Movie :
+                                            <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.moviename}}</a>
+                                            <a ng-click="model.reviewDownVote(review._id)">
+                                                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                            </a>
+                                            <a ng-click="model.reviewUpVote(review._id)">
+                                                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                            </a>
+                                        </h4>
+                                        <h4>Content :</h4> <p>{{review.description}}</p>
+                                        <hr>
+                                    </div>
                                 </div>
 
                                 <div class="tab-content" ng-show="selectedTab == 3">
-                                    3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <div ng-repeat="user in model.users">
+                                        <h1><a href="#!/profile/{{model.userId}}/visitor/{{user._id}}"> {{user.username}}</a></h1>
+                                    </div>
+                                    <div class="panel-heading">
+                                        <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
+                                        <div ng-repeat="user in model.UsersFollowing">
+                                            <h1><a href="#!/profile/{{user._id}}"> {{user.username}}</a></h1>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-content" ng-show="selectedTab == 4">
                                     <div class="panel-heading">

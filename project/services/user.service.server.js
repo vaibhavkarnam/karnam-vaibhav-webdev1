@@ -68,6 +68,7 @@ userModelNew
 function createUser(req, res) {
 var user = req.body;
 console.log("inside server");
+console.log(user);
 userModelNew
     .createUser(user)
     .then(function (user) {

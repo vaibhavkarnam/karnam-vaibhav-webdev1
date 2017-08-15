@@ -58,7 +58,8 @@ return $http.get(url)
 
 function createUser(user) {
 var url = "/api/project/user";
-console.log("creating user");
+console.log("creating userrrr");
+console.log(user);
 return $http.post(url, user)
     .then(function (response) {
         return response.data;

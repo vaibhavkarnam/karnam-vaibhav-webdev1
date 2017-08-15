@@ -36,7 +36,7 @@
             })
             .when('/profile/:userId/visitor/:visitorId',{
                 templateUrl : 'views/user/templates/profile-visit.view.client.html',
-                controller  : 'profileController',
+                controller  : 'profileVisitController',
                 controllerAs: 'model'
             })
             .when('/movies/reviewUpdate/:reviewId',{

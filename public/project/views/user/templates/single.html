@@ -79,20 +79,15 @@
 										<div class="tabbable tabs-below" ng-init="selectedTab = 1;">
 											<ul class="nav nav-tabs nav-justified">
 												<li ng-class="{active: selectedTab == 1}">
-													<a data-target="#" ng-click="selectedTab = 1;">Reviews</a>
+													<a data-target="#" ng-click="selectedTab = 1;">Critic Reviews</a>
 												</li>
 												<li ng-class="{active: selectedTab == 2}">
-													<a data-target="#" ng-click="selectedTab = 2;">Profile</a>
-												</li>
-												<li ng-class="{active: selectedTab == 3}">
-													<a data-target="#" ng-click="selectedTab = 3;">Following</a>
-												</li>
-												<li ng-class="{active: selectedTab == 3}">
-													<a data-target="#" ng-click="selectedTab = 4;">Followers</a>
+													<a data-target="#" ng-click="selectedTab = 2;">User Reviews</a>
 												</li>
 											</ul>
 
 											<div class="tab-content" ng-show="selectedTab == 1">
+												<div ng-repeat="review in model.criticReviews">
 												<span class="glyphicon glyphicon-user"></span> Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link">
 												{{review.user_name}}</a>
 												<a ng-click="model.reviewDownVote(review._id)">
@@ -104,9 +99,21 @@
 												</h4>
 												<p>{{review.description}}</p>
 											</div>
-
+											</div>
 											<div class="tab-content" ng-show="selectedTab == 2">
-
+												<div ng-repeat="review in model.userReviews">
+													<span class="glyphicon glyphicon-user"></span> Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link">
+													{{review.user_name}}</a>
+													<a ng-click="model.reviewDownVote(review._id)">
+														<i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+													</a>
+													<a ng-click="model.reviewUpVote(review._id)">
+														<i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+													</a>
+													</h4>
+													<p>{{review.description}}</p>
+												</div>
+											</div>
 											</div>
 										</div>
 									</div>

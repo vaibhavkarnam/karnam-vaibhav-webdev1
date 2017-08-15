@@ -15,12 +15,14 @@
         model.submit = submit;
         model.updateReview = updateReview;
         model.deleteReview = deleteReview;
+        model.getUserReviews = getUserReviews;
         var userId = $routeParams.userId;
 
         function init() {
             movieService
                 .searchMovieById(imdbID)
                 .then(renderMovie);
+            getUserReviews(imdbID);
         }
         init();
 
@@ -38,7 +40,8 @@
                     model.rev.moviename = model.movie.Title;
                     model.rev.user_name = user.username;
                     model.rev.userID = userId;
-                    console.log(model.rev);
+                    model.rev.userRole = user.role;
+                    console.log(model.rev.userRole);
                     movieService
                         .createReview(model.rev, model.rev.userID)
                         .then(function (newReview) {
@@ -48,6 +51,29 @@
                         });
                 })
 
+        }
+
+
+        function getUserReviews(movieId) {
+            model.criticReviews=[];
+            model.userReviews =[];
+            console.log("getting reviews");
+            movieService.getUserReviews(movieId)
+                .then(function (response) {
+                    console.log("response in review");
+                    console.log(response);
+                    response.forEach(function (review) {
+                        console.log(review.userRole);
+                        if (review.userRole=="CRITIC"){
+                            model.criticReviews.push(review);
+
+                            console.log( model.criticReviews);
+                        }
+                       else if (review.userRole=="USER"){
+                            model.userReviews.push(review);
+                        }
+                    });
+                });
         }
 
         function deleteReview(review) {

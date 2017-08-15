@@ -11,7 +11,7 @@ function init() {
 
 }
 init();
-function registerUser(username, password, password2) {
+function registerUser(username, password, password2, role) {
 if(username === null || username === '' || typeof username === 'undefined'){
     model.error ='Enter Username';
     return;
@@ -32,7 +32,8 @@ userService
         function () {
         var newUser = {
             username: username,
-            password: password
+            password: password,
+            role:role
         };
         return userService
             .createUser(newUser);

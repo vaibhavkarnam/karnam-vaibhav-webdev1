@@ -9,7 +9,7 @@ firstName: String,
 lastName: String,
 email: String,
 phone : String,
-websites: [{type: mongoose1.Schema.Types.ObjectId, ref: "websiteModel"}],
+role : [{type: String, default: 'USER', enum: ['USER', 'CRITIC','ADMIN']}],
 dateCreated: {type: Date, default: Date.now},
 following: [{type:mongoose1.Schema.Types.ObjectId, ref:"userModelNew"}],
 followers: [{type:mongoose1.Schema.Types.ObjectId, ref:"userModelNew"}]

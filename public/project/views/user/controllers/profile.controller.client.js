@@ -143,20 +143,6 @@ userService
     }
 
 
-    function getUserReviews(movieId) {
-        model.criticReviews=[];
-        movieService.getUserReviews(movieId)
-            .then(function (response) {
-                //console.log(response);
-                response.forEach(function (review) {
-                    if (review.authorRole==="CRITIC"){
-                        model.criticReviews.push(review);
-                    }
-                });
-                //console.log(model.criticReviews);
-                model.UserReviews=angular.copy(response);
-            });
-    }
 
 function unregister() {
 userService.deleteUser(model.userId)

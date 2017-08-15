@@ -20,10 +20,21 @@ app.get   ("/api/getReviewByUserId/:userId",getReviewByUserId);
 app.delete("/api/review/:reviewId",deleteReview);
 app.put   ("/api/review/:reviewId",updateReview);
 app.get   ("/api/review/:reviewId",findReview);
+app.get   ("/api/getReviewByMovieId/:movieId",getReviewByMovieId);
 
 function getReviewByUserId(req,res) {
     var userId=req.params.userId;
     movieProjectModel.findReviewByUserId(userId)
+        .then(function (reviews) {
+            //console.log(reviews);
+            res.json(reviews);
+        });
+}
+
+function getReviewByMovieId(req,res) {
+    console.log("review in server");
+    var movieId= req.params.movieId;
+    movieProjectModel.findReviewByMovieId(movieId)
         .then(function (reviews) {
             //console.log(reviews);
             res.json(reviews);

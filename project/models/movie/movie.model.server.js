@@ -18,6 +18,7 @@ movieProjectModel.deleteReviewsforUser = deleteReviewsforUser;
 movieProjectModel.findReviewByUserId=findReviewByUserId;
 movieProjectModel.findReviewByUserId=findReviewByUserId;
 movieProjectModel.findReviewById=findReviewById;
+movieProjectModel.findReviewByMovieId = findReviewByMovieId;
 
 module.exports = movieProjectModel;
 
@@ -32,6 +33,10 @@ function createReview(newReview, userId) {
 }
 function findReview(reviewId) {
     return movieProjectModel.findById(reviewId);
+}
+
+function findReviewByMovieId(movieId) {
+    return movieProjectModel.find({movieID:movieId})
 }
 
 function findReviewByUserId(userId) {

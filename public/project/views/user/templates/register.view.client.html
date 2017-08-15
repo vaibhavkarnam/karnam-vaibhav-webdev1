@@ -62,8 +62,15 @@
                            type="password"
                            class="form-control"
                            placeholder="pass"/>
+                    <label class="sr-only">Choose your role</label>
+                    <div class="radio">
+                        <label><input id ="critic" type="radio" ng-model="role" value="CRITIC">CRITIC</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="fan" type="radio" ng-model="role" value="USER">USER</label>
+                    </div>
                     <a class="btn btn-primary btn-block"
-                       ng-click="model.registerUser(username, password, password2)">
+                       ng-click="model.registerUser(username, password, password2, role)">
                         Register</a>
                     <a class="btn btn-danger  btn-block"
                        href="#!/login">
