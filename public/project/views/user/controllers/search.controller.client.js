@@ -8,7 +8,7 @@
         .module('cineReview')
         .controller('searchController', searchController);
 
-    function searchController($routeParams, movieService, userService){
+    function searchController($routeParams, movieService, userService, $location){
         var model = this;
 
         var imdbID = $routeParams.id;
@@ -42,7 +42,7 @@
                     movieService
                         .createReview(model.rev, model.rev.userID)
                         .then(function (newReview) {
-                            model.rev.description = ""
+                            model.rev.description = "";
                             $location
                                 .url('/profile/' + model.rev.userID)
                         });
