@@ -60,9 +60,9 @@ app1.get('/auth/project/google/callback',
     }));
 
 app1.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
-app1.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: '/project/#!/profile',
-    failureRedirect: '/project/#!/login'
+app1.get('/auth/facebook/callback/', passport.authenticate('facebook', {
+    successRedirect: 'project/#!/profile',
+    failureRedirect: 'project/#!/login'
 }));
 
 
