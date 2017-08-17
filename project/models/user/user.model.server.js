@@ -19,6 +19,10 @@ userModelNew.deleteWebsite = deleteWebsite;
 userModelNew.addFollowers = addFollowers;
 userModelNew.addReview = addReview;
 userModelNew.ImageUpload =ImageUpload;
+userModelNew.findUserByGoogleId =findUserByGoogleId;
+userModelNew.findUserByFacebookId =findUserByFacebookId;
+
+
 
 module.exports = userModelNew;
 
@@ -31,6 +35,19 @@ user.websites.splice(index, 1);
 return user.save();
 });
 }
+
+function findUserByGoogleId(googleId) {
+    return userModelNew
+        .findOne({'google.id':googleId});
+}
+
+function findUserByFacebookId(facebookId) {
+    return userModelNew
+        .findOne({'facebook.id':facebookId});
+}
+// function findUserByGoogleId(googleId) {
+//     return userModel.findOne({'google.id' : googleId});
+// }
 
 function ImageUpload (userId, url) {
     // console.log("userID" + userId);

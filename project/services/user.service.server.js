@@ -71,7 +71,6 @@ var multer = require('multer');
 var upload = multer({dest: __dirname + '/../../public/uploads'});
 app1.post('/api/upload/project', upload.single('avatar-2'), uploadImage);
 
-passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 function localStrategy(username, password, done) {
     console.log(username);
