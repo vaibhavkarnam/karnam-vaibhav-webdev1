@@ -31,7 +31,7 @@
             console.log("updating");
             movieService.reviewUpdate(reviewId,review)
                 .then(function (response) {
-                    $location.url('/profile/' + review.userID)
+                    $location.url('/profile' )
                 });
         }
     }

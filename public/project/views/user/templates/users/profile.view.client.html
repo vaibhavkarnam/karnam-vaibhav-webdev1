@@ -78,10 +78,10 @@
                                             <a href="#!/user/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
                                             <h4>
                                             <a ng-click="model.reviewDownVote(review._id)">
-                                                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
+                                                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
                                             </a>
                                             <a ng-click="model.reviewUpVote(review._id)">
-                                                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
+                                                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
                                             </a>
                                         </h4>
                                         Description : {{review.description}}
