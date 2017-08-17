@@ -1,0 +1,77 @@
+<div id="site-content">
+    <header class="site-header">
+        <div class="container">
+            <a href="../home.html" id="branding">
+                <img src="../../../vendor/images/logo.png" alt="" class="logo">
+                <div class="logo-copy">
+                    <h1 class="site-title">Company Name</h1>
+                    <small class="site-description">Tagline goes here</small>
+                </div>
+            </a> <!-- #branding -->
+
+            <div class="main-navigation">
+                <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+                <ul class="menu">
+                    <li class="menu-item"><a href="../home.html">Home</a></li>
+                    <li class="menu-item"><a href="about.html">About</a></li>
+                    <li class="menu-item"><a href="SearchMovies.view.client.html">Movie reviews</a></li>
+                    <li class="menu-item current-menu-item"><a href="../users/login.view.client.html">Join us</a></li>
+                    <li class="menu-item"><a href="contact.html">Contact</a></li>
+                </ul> <!-- .menu -->
+
+                <form action="#" class="search-form">
+                    <input type="text" placeholder="Search...">
+                    <button><i class="fa fa-search"></i></button>
+                </form>
+            </div> <!-- .main-navigation -->
+
+            <div class="mobile-navigation"></div>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="container">
+            <div class="page">
+                <div class="breadcrumbs">
+                    <a href="../home.html">Home</a>
+                    <span>Update Review</span>
+                </div>
+
+                <!-- markup -->
+                <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
+                <!-- the avatar markup -->
+                <div class="col-lg=5 col-md-5">
+                        <div class="form-group">
+
+                            <textarea type="text" class="form-control" ng-model="model.reviewForUpdate.description"
+                                     rows="8" laceholder="Description"></textarea>
+                        </div>
+
+                </div>
+                        <button type="button" class="btn btn-success"
+                                ng-click="model.reviewUpdate(model.reviewForUpdate._id,model.reviewForUpdate)">Update</button>
+
+
+
+
+
+
+
+
+                <!-- the fileinput plugin initialization -->
+
+            </div>
+        </div> <!-- .container -->
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+            </div> <!-- .row -->
+
+
+            <div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+        </div> <!-- .container -->
+
+    </footer>
+</div>
+<!-- Default snippet for navigation -->
+

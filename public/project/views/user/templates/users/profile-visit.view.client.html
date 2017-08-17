@@ -1,7 +1,7 @@
 <div id="site-content">
     <header class="site-header">
         <div class="container">
-            <a href="../../../home.html" id="branding">
+            <a href="../home.html" id="branding">
                 <img src="../../../vendor/images/logo.png" alt="" class="logo">
                 <div class="logo-copy">
                     <h1 class="site-title">Company Name</h1>
@@ -12,9 +12,9 @@
             <div class="main-navigation">
                 <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                 <ul class="menu">
-                    <li class="menu-item"><a href="../../../home.html">Home</a></li>
+                    <li class="menu-item"><a href="../home.html">Home</a></li>
                     <li class="menu-item"><a href="about.html">About</a></li>
-                    <li class="menu-item"><a href="review.html">Movie reviews</a></li>
+                    <li class="menu-item"><a href="../cinema/SearchMovies.view.client.html">Movie reviews</a></li>
                     <li class="menu-item current-menu-item"><a href="login.view.client.html">Join us</a></li>
                     <li class="menu-item"><a href="contact.html">Contact</a></li>
                 </ul> <!-- .menu -->
@@ -32,33 +32,29 @@
         <div class="container">
             <div class="page">
                 <div class="breadcrumbs">
-                    <a href="../../../home.html">Home</a>
-                    <span>Profile</span>
+                    <a href="../home.html">Home</a>
+                    <span>Profile Visit</span>
                 </div>
 
-                <a href="#!/user/{{model.userId}}/movie/search" class="btn btn-primary btn-block">
-                    Search Movies
-                </a>
                 <!-- markup -->
                 <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
                 <!-- the avatar markup -->
                 <div id="kv-avatar-errors-2" class="center-block"></div>
-                <form class="form form-vertical" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
+                <form class="form form-vertical">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="kv-avatar center-block text-center" style="width:200px">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Russia-Portugal_CC2017_%2811%29_%28cropped%29.jpg">
-                                <input id="avatar-2" name="avatar-2" type="file" class="file-loading" required>
+                                <img ng-src="{{model.user.ProfilePic}}">
                             </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
                                 <ul class="nav nav-tabs nav-justified">
                                     <li ng-class="{active: selectedTab == 1}">
-                                        <a data-target="#" ng-click="selectedTab = 1;">Reviews</a>
+                                        <a data-target="#" ng-click="selectedTab = 1;">Profile</a>
                                     </li>
                                     <li ng-class="{active: selectedTab == 2}">
-                                        <a data-target="#" ng-click="selectedTab = 2;">Profile</a>
+                                        <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
                                     </li>
                                     <li ng-class="{active: selectedTab == 3}">
                                         <a data-target="#" ng-click="selectedTab = 3;">Following</a>
@@ -69,15 +65,29 @@
                                 </ul>
 
                                 <div class="tab-content" ng-show="selectedTab == 1">
+                                    <div class="container-fluid">
+                                        <div class="page-header">
+                                            Profile
+                                        </div>
+                                        <div ng-repeat="user in model.users">
+                                            <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
+                                        </div>
+                                        <div class="panel-heading">
+                                            <div class="container-fluid"><h3><b>UserName : {{model.user.username}}</b></h3>
+                                                <h4><b>Role : {{model.user.role[0]}}</b></h4>
+                                            </div>
+                                            <a class="btn btn-success pull-right" ng-hide="model.flag"  ng-click="model.followUser()" >Follow</a>
+                                            <a class="btn btn-danger pull-right" ng-show="model.flag" ng-click="model.unFollow()" >Unfollow</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="tab-content" ng-show="selectedTab == 2">
                                     <div ng-repeat="review in model.userGivenReviews">
-                                        <a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right" style="margin-left: 4px">
-                                            <i class="fa fa-trash " aria-hidden="true"></i>
-                                        </a>
-                                        <a  href="#!/movies/reviewUpdate/{{review._id}}" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px">
-                                            <i class="fa fa-pencil " aria-hidden="true"></i>
-                                        </a>
-                                        <h4>Movie :
-                                            <a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.moviename}}</a>
+                                        <h5>Movie :
+                                            <a href="#!/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
+                                        <h4>
                                             <a ng-click="model.reviewDownVote(review._id)">
                                                 <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.downVotes.length}}</i>
                                             </a>
@@ -85,63 +95,14 @@
                                                 <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.upVotes.length}}</i>
                                             </a>
                                         </h4>
-                                        <h4>Content :</h4> <p>{{review.description}}</p>
+                                        Description : {{review.description}}
                                         <hr>
                                     </div>
                                 </div>
 
-                                <div class="tab-content" ng-show="selectedTab == 2">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="vaibhav">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email address</label>
-                                            <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="vaibhav@gmail.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="first-name">First Name</label>
-                                            <input type="text" ng-model="model.user.firstName" class="form-control" id="first-name" placeholder="vaibhav">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last-name">Last Name</label>
-                                            <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="karnam">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="dob">Date of Birth</label>
-                                            <input name="dob"
-                                                   ng-model="model.user.dob"
-                                                   type="date"
-                                                   class="form-control"
-                                                   id="dob"/>
-                                        </div>
-                                    </form>
-
-                                    <a class="btn btn-primary btn-block"
-                                       href="#!/user/{{model.user._id}}/website">
-                                        Websites</a>
-                                    <a class="btn btn-danger  btn-block"
-                                       href="#!/login">
-                                        Logout</a>
-                                    <a class="btn btn-default btn-danger btn-block"
-                                       ng-click="model.unregister()"
-                                       role="button">Unregister</a>
-
-                                    <a class="btn btn-default btn-primary btn-block"
-                                       ng-click="model.updateUser()"
-                                       role="button">Update</a>
-                                </div>
-                            </div>
                                 <div class="tab-content" ng-show="selectedTab == 3">
-
-                                    <a class="btn btn-default btn-primary btn-block"
-                                       ng-click="model.findAllUsers()"
-                                       role="button">Find all Users</a>
-
                                     <div ng-repeat="user in model.users">
-                                        <h1><a href="#!/profile/{{model.userId}}/visitor/{{user._id}}"> {{user.username}}</a></h1>
+                                        <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
                                     </div>
                                     <div class="panel-heading">
                                         <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
@@ -150,7 +111,9 @@
                                     <div class="panel-body">
                                         <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
                                         <div ng-repeat="user in model.UsersFollowing">
-                                            <h1><a href="#!/profile/{{user._id}}"> {{user.username}}</a></h1>
+                                            <h4> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h4>
+                                            <h4> Role : {{user.role[0]}}</h4>
+                                            <hr>
                                         </div>
                                     </div>
                                 </div>
@@ -162,15 +125,18 @@
                                     <div class="panel-body">
                                         <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1"> No followers yet! </div>
                                         <div ng-repeat="follower in model.UsersFollowers">
-                                            <h1><a href="#!/profile/{{follower._id}}">{{follower.username}}</a></h1>
+                                            <h4> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h4>
+                                            <h4> Role : {{follower.role[0]}}</h4>
+                                            <hr>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </form>
 
-            <!-- the fileinput plugin initialization -->
+                <!-- the fileinput plugin initialization -->
 
             </div>
         </div> <!-- .container -->

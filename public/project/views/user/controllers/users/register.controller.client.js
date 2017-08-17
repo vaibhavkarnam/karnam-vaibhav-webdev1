@@ -39,7 +39,7 @@ userService
             .createUser(newUser);
     })
     .then(function (user) {
-        $location.url('/profile/' + user._id);
+        $location.url('/profile');
     });
 }
 }

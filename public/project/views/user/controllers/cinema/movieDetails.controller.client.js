@@ -8,15 +8,19 @@
         .module('cineReview')
         .controller('searchController', searchController);
 
-    function searchController($routeParams, movieService, userService, $location){
+    function searchController($routeParams,$route, movieService, userService,currentUser, $location){
         var model = this;
 
         var imdbID = $routeParams.id;
-        model.submit = submit;
+        model.postReview = postReview;
         model.updateReview = updateReview;
         model.deleteReview = deleteReview;
         model.getUserReviews = getUserReviews;
-        var userId = $routeParams.userId;
+        model.logout = logout;
+        var userId = currentUser._id;
+        model.user = currentUser;
+        model.thumbsUp = thumbsUp;
+        model.dislike = dislike;
 
         function init() {
             movieService
@@ -30,7 +34,7 @@
             model.movie = movie;
         }
 
-        function submit(review) {
+        function postReview(review) {
             model.rev = review;
             userService
                 .findUserById(userId)
@@ -44,13 +48,42 @@
                     console.log(model.rev.userRole);
                     movieService
                         .createReview(model.rev, model.rev.userID)
-                        .then(function (newReview) {
+                        .then(function (status) {
+                            console.log("jdfs");
                             model.rev.description = "";
-                            $location
-                                .url('/profile/' + model.rev.userID)
+                            $route.reload();
                         });
                 })
 
+        }
+
+
+        function dislike(reviewId) {
+            if(model.user.role[0] == 'CRITIC') {
+                movieService.dislike(reviewId, model.user._id)
+                    .then(function (response) {
+                        getUserReviews(model.movieId);
+                        $route.reload();
+
+                    });
+            }
+        }
+        function thumbsUp(reviewId) {
+            if(model.user.role[0] == 'CRITIC') {
+                movieService.thumbsUp(reviewId, model.user._id)
+                    .then(function (response) {
+                        getUserReviews(model.movieId);
+                        $route.reload();
+                    });
+            }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
 

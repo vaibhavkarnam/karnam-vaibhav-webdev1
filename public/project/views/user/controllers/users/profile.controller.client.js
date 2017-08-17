@@ -4,9 +4,10 @@ angular
 .module("cineReview")
 .controller("profileController", profileController)
 
-function profileController($routeParams, userService, movieService, $location) {
+function profileController($routeParams, userService, movieService, currentUser, $location) {
 var model = this;
-model.userId = $routeParams["userId"];
+    model.user=currentUser;
+    model.userId =currentUser._id
 model.visitorId = $routeParams["visitorId"];
 model.updateUser = updateUser;
 model.unregister = unregister;
@@ -22,6 +23,7 @@ model.getReviewsForUser = getReviewsForUser;
 model.reviewUpdate = reviewUpdate;
 model.reviewDelete = reviewDelete;
 model.getReviewById = getReviewById;
+model.logout = logout;
 function init() {
 model.user = userService
     .findUserById(model.userId)
@@ -44,6 +46,14 @@ userService
         model.message = "User was updated successfully";
     })
 }
+
+    function logout() {
+        userService
+            .logout()
+            .then(function () {
+                $location.url('/login');
+            });
+    }
 
     function getReviewsForUser(userId) {
     console.log("getting reviews");

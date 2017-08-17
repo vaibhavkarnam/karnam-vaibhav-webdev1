@@ -8,7 +8,7 @@
 
     function movieService($http) {
         var api ={
-            searchMovieByTitle : searchMovieByTitle,
+            movieListByTitle : movieListByTitle,
             searchMovieById : searchMovieById,
             createReview : createReview,
             findReviewById : findReviewById,
@@ -20,7 +20,9 @@
             deleteReviewsforUser : deleteReviewsforUser,
             getReviewsForUser : getReviewsForUser,
             getReviewById : getReviewById,
-            getUserReviews : getUserReviews
+            getUserReviews : getUserReviews,
+            thumbsUp : thumbsUp,
+        dislike : dislike
         };
 
         return api;
@@ -42,9 +44,23 @@
                 });
         }
 
+        function thumbsUp(reviewId,userId) {
+            var url="/api/"+userId+"/thumbsUp/"+reviewId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        function dislike(reviewId,userId) {
+            var url="/api/"+userId+"/dislike/"+reviewId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
-        function searchMovieByTitle(movieTitle) {
-                var url = "/api/search/"+movieTitle;
+        function movieListByTitle(movieTitle) {
+                var url = "/api/search/title/"+movieTitle;
                 return $http.get(url)
                     .then(function (response) {
                         console.log(response);
@@ -77,9 +93,6 @@
         }
 
         function createReview(review, userId) {
-             console.log("Review:"+review);
-             console.log("UserId:"+userId);
-
             return $http.post("/api/user/"+userId+"/review", review);
         }
 

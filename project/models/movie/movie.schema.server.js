@@ -11,7 +11,10 @@ var movieProjectSchema = mongoose.Schema({
     description: String,
     moviename: String,
     userRole: String,
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    thumbsUp:[{type:mongoose.Schema.Types.ObjectId,ref:"userModelNew"}],
+    dislike:[{type:mongoose.Schema.Types.ObjectId,ref:"userModelNew"}],
+    sort:{type:Number,default:0}
 }, {collection: 'movies'});
 
 module.exports = movieProjectSchema;

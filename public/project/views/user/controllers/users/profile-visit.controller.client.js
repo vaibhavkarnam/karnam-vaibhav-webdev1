@@ -7,9 +7,9 @@
         .module("cineReview")
         .controller("profileVisitController", profileVisitController)
 
-    function profileVisitController($routeParams, userService, movieService, $location) {
+    function profileVisitController($routeParams, userService, currentUser, movieService, $location) {
         var model = this;
-        model.userId = $routeParams["userId"];
+        model.userId =currentUser._id
         model.visitorId = $routeParams["visitorId"];
         model.updateUser = updateUser;
         model.unregister = unregister;
@@ -25,6 +25,7 @@
         model.reviewUpdate = reviewUpdate;
         model.reviewDelete = reviewDelete;
         model.getReviewById = getReviewById;
+        model.logout = logout;
         function init() {
             model.user = userService
                 .findUserById(model.visitorId)
@@ -46,6 +47,14 @@
                 .then(function () {
                     model.message = "User was updated successfully";
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
         function getReviewsForUser(userId) {

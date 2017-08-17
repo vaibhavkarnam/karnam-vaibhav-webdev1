@@ -6,7 +6,7 @@ var app=require('../../express');
 var http =require('http');
 var movieProjectModel = require("../models/movie/movie.model.server");
 
-app.get("/api/search/:movie",searchMovieByTitle);
+app.get("/api/search/title/:movie",movieListByTitle);
 app.get("/api/id/:id",searchMovieByImdbId);
 app.post("/api/user/:userId/review", createReview);
 app.post("/api/user/del/:userId/review", deleteReviewsforUser);
@@ -21,6 +21,20 @@ app.delete("/api/review/:reviewId",deleteReview);
 app.put   ("/api/review/:reviewId",updateReview);
 app.get   ("/api/review/:reviewId",findReview);
 app.get   ("/api/getReviewByMovieId/:movieId",getReviewByMovieId);
+app.get   ("/api/reviews",getAllReviews);
+app.put   ("/api/:userId/thumbsUp/:reviewId",thumbsUp);
+app.put   ("/api/:userId/dislike/:reviewId",dislike);
+
+function getAllReviews(req,res) {
+    movieProjectModel.findAllReview()
+        .then(function (response) {
+            console.log(response);
+            res.json(response);
+        });
+}
+
+
+
 
 function getReviewByUserId(req,res) {
     var userId=req.params.userId;
@@ -41,6 +55,25 @@ function getReviewByMovieId(req,res) {
         });
 }
 
+function thumbsUp(req,res) {
+    var reviewId=req.params.reviewId;
+    var userId=req.params.userId;
+    movieProjectModel.thumbsUp(reviewId,userId)
+        .then(function (response) {
+            res.json(response);
+        });
+}
+
+function dislike(req,res) {
+    var reviewId=req.params.reviewId
+    var userId=req.params.userId;
+    movieProjectModel.dislike(reviewId,userId)
+        .then(function (response) {
+            res.json(response);
+        });
+}
+
+
 function findReview(req,res) {
     var reviewId=req.params.reviewId;
     movieProjectModel.findReview(reviewId)
@@ -55,7 +88,8 @@ function createReview(req,res) {
     console.log(review);
     movieProjectModel.createReview(review)
         .then(function (response) {
-            //console.log(response);
+            console.log("in revieww");
+            console.log(response);
             res.sendStatus(200);
         });
 }
@@ -171,24 +205,33 @@ res.send(response);
 
 }
 
-function searchMovieByTitle(req,res) {
-var movieTitle = req.params['movie'];
-var options ={
-host:"www.omdbapi.com",
-path:"/?s="+movieTitle+"&apikey=509f6a23"
+function movieListByTitle(req,res) {
+var movieName = req.params['movie'];
+var options =
+    {
+
+    host:"www.omdbapi.com",
+    path:"/?s="+movieName+"&apikey=509f6a23"
 
 };
 var callback = function (response) {
 var str = '';
+
 response.on('data', function (data) {
     str += data;
 });
-response.on('end', function () {
-    res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(str);
+
+response.on('end', function ()
+{
+    res.writeHead(200,
+            {"Content-Type": "application/json"});
+    res
+        .end(str);
 });
 };
+
 http.get(options,callback);
+
 }
 
 function searchMovieByImdbId(req,res) {

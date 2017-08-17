@@ -16,7 +16,13 @@ findfollowingUser : findfollowingUser,
 findfollowersforUser : findfollowersforUser,
 removeFollowing : removeFollowing,
 findAllUsers : findAllUsers,
-addFollowers : addFollowers
+addFollowers : addFollowers,
+login: login,
+logout: logout,
+loggedin:loggedin,
+register:register,
+checkAdmin: checkAdmin,
+deleteImage: deleteImage
 
 };
 
@@ -25,34 +31,38 @@ return api;
 function findUserbyUsername(username) {
 var url = "/api/project/user?username="+username;
 return $http.get(url)
-    .then(function (response) {
-        return response.data;
-    })
+.then(function (response) {
+    return response.data;
+})
 }
 
 function findUserById(userId) {
 var url = "/api/project/user/"+userId;
 return $http.get(url)
-    .then(function (response) {
-        return response.data;
-    })
+.then(function (response) {
+    return response.data;
+})
 }
 
 function findAllUsers() {
-    var url = "/api/project/user";
-    return $http.get(url)
-        .then(function (response) {
-            return response.data;
-        })
+var url = "/api/project/user";
+return $http.get(url)
+    .then(function (response) {
+        return response.data;
+    })
 }
 
 function findUserbyCredentials(username, password) {
 var url = "/api/project/user?username="+username+"&password="+password;
 return $http.get(url)
-    .then(function (response) {
-        console.log("found");
-        return response.data;
-    })
+.then(function (response) {
+    console.log("found");
+    return response.data;
+})
+}
+
+function deleteImage(userId) {
+    return $http.put("/api/project/deleteImage/" + userId);
 }
 
 
@@ -61,47 +71,97 @@ var url = "/api/project/user";
 console.log("creating userrrr");
 console.log(user);
 return $http.post(url, user)
-    .then(function (response) {
-        return response.data;
-    })
+.then(function (response) {
+    return response.data;
+})
 }
+
+function register(userObj) {
+    var url = "/api/register";
+    return $http.post(url, userObj)
+        .then(function (response) {
+            return response.data;
+        });
+}
+
+
+function logout() {
+    var url = "/api/logout";
+    return $http.post(url)
+        .then(function (response) {
+            return response.data;
+        });
+}
+
+
+// console.log("client login");
+function login(username,password) {
+    var url="/api/login";
+    credentials={
+        username:username,
+        password:password
+    };
+    return $http.post(url,credentials)
+        .then(function (response) {
+            return response.data;
+        });
+}
+
+
+
+function loggedin() {
+    var url = "/api/loggedin";
+    return $http.get(url)
+        .then(function (response) {
+            return response.data;
+        });
+}
+
+function checkAdmin() {
+    var url = "/api/admin";
+    return $http.get(url)
+        .then(function (response) {
+            return response.data;
+        });
+}
+
 
 function updateUser(userId, user) {
 var url = "/api/project/user/"+userId;
 return $http.put(url, user)
-    .then(function (response) {
-        return response.data;
-    })
+.then(function (response) {
+    return response.data;
+})
 
 }
 
-    function addFollowers(following) {
-        return $http.post("/api/followers/" , following);
-    }
+function addFollowers(following) {
+    return $http.post("/api/followers/" , following);
+}
 
 function FollowUser(following) {
 
-    return $http.post("/api/project/followUser/" , following);
+return $http.post("/api/project/followUser/" , following);
 }
 
 function findfollowingUser(userID) {
-    return $http.get("/api/project/followingUser/" + userID);
+return $http.get("/api/project/followingUser/" + userID);
 }
 
 function findfollowersforUser(userID) {
-    return $http.get("/api/project/followersUser/" + userID);
+return $http.get("/api/project/followersUser/" + userID);
 }
 
 function removeFollowing(following) {
-    return $http.post("/api/project/followingRemove" , following);
+return $http.post("/api/project/followingRemove" , following);
 }
 
 function deleteUser(userId) {
 var url = "/api/project/user/"+userId;
 return $http.delete(url)
-    .then(function (status) {
-        return status;
-    })
+.then(function (status) {
+    return status;
+})
 }
 }
 })();

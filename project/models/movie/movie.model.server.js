@@ -19,8 +19,73 @@ movieProjectModel.findReviewByUserId=findReviewByUserId;
 movieProjectModel.findReviewByUserId=findReviewByUserId;
 movieProjectModel.findReviewById=findReviewById;
 movieProjectModel.findReviewByMovieId = findReviewByMovieId;
+movieProjectModel.findAllReview = findAllReview;
+movieProjectModel.findAllReview = findAllReview;
+movieProjectModel.thumbsUp = thumbsUp;
+movieProjectModel.dislike = dislike;
 
 module.exports = movieProjectModel;
+
+function findAllReview() {
+    return movieProjectModel.find()
+        .populate();
+}
+
+function thumbsUp(reviewId,userId) {
+    return movieProjectModel
+        .findOne({_id:reviewId})
+        .then(function (response) {
+            var NewPos=response.dislike
+                .indexOf(userId);
+            var OldPos=response.thumbsUp
+                .indexOf(userId);
+            if(NewPos!==-1){
+                response.dislike
+                    .splice(NewPos,1);
+            }
+            if(OldPos===-1){
+
+                response.thumbsUp.push(userId);
+                response
+                    .sort= response.thumbsUp.length
+                    - response.dislike.length;
+                return response.save();
+
+            }
+            else {
+                return response.save();
+            }
+        });
+}
+
+
+
+function dislike(reviewId,userId) {
+    return movieProjectModel
+        .findOne({_id:reviewId})
+        .then(function (response) {
+
+            var NewIndex=response.dislike
+                .indexOf(userId);
+            var OldIndex=response.thumbsUp
+                .indexOf(userId);
+            if(OldIndex!==-1){
+                response.thumbsUp.splice(OldIndex,1);
+            }
+            if(NewIndex===-1){
+                response.dislike
+                    .push(userId);
+                response
+                    .sort=response.thumbsUp.length
+                    -response.dislike.length;
+
+                return response.save();
+            }
+            else {
+                return response.save();
+            }
+        });
+}
 
 function createReview(newReview, userId) {
     return movieProjectModel
@@ -37,6 +102,7 @@ function findReview(reviewId) {
 
 function findReviewByMovieId(movieId) {
     return movieProjectModel.find({movieID:movieId})
+        .sort({sort:-1});
 }
 
 function findReviewByUserId(userId) {

@@ -13,6 +13,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="jquery/jquery-ui.js"></script>
     <script src="jquery/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-carousel/1.1.0/angular-carousel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.js"></script>
     <!--<script src="angular/angular.min.js"></script>-->
     <!--<script src="angular/angular-route.min.js"></script>-->
     <script src="app.js"></script>
@@ -21,16 +25,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="views/user/controllers/login.controller.client.js"></script>
-    <script src="views/user/controllers/profile.controller.client.js"></script>
-    <script src="views/user/controllers/register.controller.client.js"></script>
-    <script src="views/user/controllers/movie.controller.client.js"></script>
-    <script src="views/user/controllers/search.controller.client.js"></script>
-    <script src="views/user/controllers/review.controller.client.js"></script>
-    <script src="views/user/controllers/profile-visit.controller.client.js"></script>
+    <script src="views/user/controllers/users/login.controller.client.js"></script>
+    <script src="views/user/controllers/users/profile.controller.client.js"></script>
+    <script src="views/user/controllers/users/register.controller.client.js"></script>
+    <script src="views/user/controllers/cinema/SearchMovie.controller.client.js"></script>
+    <script src="views/user/controllers/cinema/movieDetails.controller.client.js"></script>
+    <script src="views/user/controllers/cinema/review.controller.client.js"></script>
+    <script src="views/user/controllers/users/profile-visit.controller.client.js"></script>
+    <script src="views/user/controllers/admin/admin.controller.client.js"></script>
+    <script src="views/user/controllers/home.controller.client.js"></script>
 
     <script src="services/user.service.client.js"></script>
     <script src="services/movie.service.client.js"></script>
+    <script src="services/admin-service.service.client.js"></script>
 
     <script src="views/user/templates/script.js"></script>
     <script src="views/user/templates/bootstrap-responsive-tabs.js"></script>

@@ -1,0 +1,220 @@
+
+
+<div id="site-content">
+<header class="site-header">
+<div class="container">
+<a href="../home.html" id="branding">
+<img src="" alt="" class="logo">
+<div class="logo-copy">
+<h1 class="site-title">CINEREVIEW</h1>
+<small class="site-description">Explore Hollywood!</small>
+</div>
+</a> <!-- #branding -->
+
+<div class="main-navigation">
+<button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<div>
+<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+<ul class="nav navbar-nav">
+<li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
+<li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
+<li><a ng-show="model.user._id" href="#!/profile">Profile</a></li>
+<li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
+	<li><a href="#!/">BACK</a></li>
+</ul>
+</div>
+</div> <!-- .main-navigation -->
+
+<div class="mobile-navigation"></div>
+</div>
+</header>
+<main class="main-content">
+<div class="container">
+<div class="page">
+<div class="breadcrumbs">
+<a href="../home.html">Home</a>
+<span>{{model.movie.Title}}</span>
+</div>
+
+<div class="content">
+<div class="row">
+<div class="col-md-4">
+<figure class="movie-poster"><img ng-src={{model.movie.Poster}}></figure>
+</div>
+<div class="col-md-8">
+<h2 class="movie-title">{{model.movie.Title}}</h2>
+<div class="movie-summary">
+<p>
+{{model.movie.Plot}}
+</p>
+</div>
+<ul class="movie-meta">
+<li  ng-hide="model.user.role == 'CRITIC'"><span class="glyphicon glyphicon-star-empty"><strong>Rating:</strong></span>
+<div class="star-rating" title="Rated {{model.movie.imdbRating}} out of 10"><span><strong class="rating">{{model.movie.imdbRating}}</strong> out of 10</span></div>
+</li>
+<li><span class="glyphicon glyphicon-play-circle"></span>
+<strong>Runtime:</strong>{{model.movie.Runtime}}
+</li>
+<li  ng-hide="model.user.role == 'CRITIC'">
+<span class="glyphicon glyphicon-calendar"></span>
+<strong>Premiere:</strong>{{model.movie.Released}}
+</li>
+<li>
+<span class="glyphicon glyphicon-folder-open"></span>
+<strong>Category:</strong>
+{{model.movie.Genre}}
+</li>
+</ul>
+
+<ul class="starring">
+<li>
+<span class="glyphicon glyphicon-facetime-video"></span>
+<strong>Directors:</strong>
+{{model.movie.Director}}
+</li>
+<li>
+<span class="glyphicon glyphicon-pencil"></span>
+<strong>Writers:</strong>
+{{model.movie.Writer}}
+</li>
+<li>
+<span class="glyphicon glyphicon-star"></span>
+<strong>Stars:</strong>
+{{model.movie.Actors}}
+
+</li>
+</ul>
+</div>
+</div> <!-- .row -->
+<div class="entry-content">
+<div ng-hide="!model.user.role[0]"class="row">
+<div class="tabbable tabs-below" ng-init="selectedTab = 1;">
+<ul class="nav nav-tabs nav-justified">
+	<li ng-class="{active: selectedTab == 1}">
+		<a data-target="#" ng-click="selectedTab = 1;">Critic Reviews</a>
+	</li>
+	<li ng-hide="model.user.role[0] == 'CRITIC'" ng-class="{active: selectedTab == 2}">
+		<a data-target="#" ng-click="selectedTab = 2;">User Reviews</a>
+	</li>
+	<li
+		ng-class="{active: selectedTab == 3}">
+		<a data-target="#" ng-click="selectedTab = 3;">Post Review</a>
+	</li>
+</ul>
+<div class="tab-content" ng-show="selectedTab == 1">
+	<div  ng-repeat="review in model.criticReviews">
+	<span class="glyphicon glyphicon-user"></span> CRITIC :<a href="#!/profile" class="btn btn-link">
+	{{review.user_name}}</a>
+	<a ng-click="model.dislike(review._id)">
+		<i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
+	</a>
+	<a ng-click="model.thumbsUp(review._id)">
+		<i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
+	</a>
+	</h4>
+	<p>{{review.description}}</p>
+</div>
+</div>
+<div class="tab-content" ng-show="selectedTab == 2">
+	<div ng-repeat="review in model.userReviews">
+		<span class="glyphicon glyphicon-user"></span> USER :<a ng-click="model.getProfile(review._userId)" class="btn btn-link">
+		{{review.user_name}}</a>
+		</h4>
+		<p>{{review.description}}</p>
+	</div>
+</div>
+<div class="tab-content" ng-show="selectedTab ==3">
+	<div class="col-md-8">
+	<div class="form-group">
+		<div class="page-header">
+			Post a Review
+		</div>
+		<textarea id="reviewdes" ng-model="model.rev.description"
+				  placeholder="Description" rows="5" class="col-xs-12"></textarea>
+	</div>
+	<a class="btn btn-success form-control" id="post"
+	   ng-click="model.postReview(model.rev)" data-dismiss="modal">Post</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- .container -->
+</main>
+<footer class="site-footer">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<div class="widget">
+<h3 class="widget-title">About Us</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia tempore vitae mollitia nesciunt saepe cupiditate</p>
+</div>
+</div>
+<div class="col-md-2">
+<div class="widget">
+<h3 class="widget-title">Recent Review</h3>
+<ul class="no-bullet">
+<li>Lorem ipsum dolor</li>
+<li>Sit amet consecture</li>
+<li>Dolorem respequem</li>
+<li>Invenore veritae</li>
+</ul>
+</div>
+</div>
+<div class="col-md-2">
+<div class="widget">
+<h3 class="widget-title">Help Center</h3>
+<ul class="no-bullet">
+<li>Lorem ipsum dolor</li>
+<li>Sit amet consecture</li>
+<li>Dolorem respequem</li>
+<li>Invenore veritae</li>
+</ul>
+</div>
+</div>
+<div class="col-md-2">
+<div class="widget">
+<h3 class="widget-title">Join Us</h3>
+<ul class="no-bullet">
+<li>Lorem ipsum dolor</li>
+<li>Sit amet consecture</li>
+<li>Dolorem respequem</li>
+<li>Invenore veritae</li>
+</ul>
+</div>
+</div>
+<div class="col-md-2">
+<div class="widget">
+<h3 class="widget-title">Social Media</h3>
+<ul class="no-bullet">
+<li>Facebook</li>
+<li>Twitter</li>
+<li>Google+</li>
+<li>Pinterest</li>
+</ul>
+</div>
+</div>
+<div class="col-md-2">
+<div class="widget">
+<h3 class="widget-title">Newsletter</h3>
+<form action="#" class="subscribe-form">
+<input type="text" placeholder="Email Address">
+</form>
+</div>
+</div>
+</div> <!-- .row -->
+
+<div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+</div> <!-- .container -->
+
+</footer>
+</div>
+<!-- Default snippet for navigation -->

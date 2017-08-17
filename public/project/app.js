@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module("cineReview", ["ngRoute"]);
+        .module("cineReview", ["ngRoute", 'ui.bootstrap']);
 })();

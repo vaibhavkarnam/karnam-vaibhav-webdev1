@@ -10,50 +10,124 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'home.html',
-                controller  : 'movieController',
-                controllerAs: 'model'
+                templateUrl: 'views/user/templates/home.html',
+                controller  : 'homeController',
+                controllerAs: 'model',
+                resolve:{
+                    currentUser:checkCurrentUser
+                }
             })
             .when('/login',{
-                templateUrl : 'views/user/templates/login.view.client.html',
+                templateUrl : 'views/user/templates/users/login.view.client.html',
                 controller  : 'loginController',
                 controllerAs: 'model'
             })
             .when('/register',{
-                templateUrl : 'views/user/templates/register.view.client.html',
+                templateUrl : 'views/user/templates/users/register.view.client.html',
                 controller  : 'registerController',
                 controllerAs: 'model'
             })
-            .when('/profile/:userId',{
-                templateUrl : 'views/user/templates/profile.view.client.html',
+            .when('/profile',{
+                templateUrl : 'views/user/templates/users/profile.view.client.html',
                 controller  : 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when('/movie',{
-                templateUrl : 'views/user/templates/single.html',
+                templateUrl : 'views/user/templates/cinema/movieDetails.view.client.html',
                 controller  : 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+
             })
-            .when('/profile/:userId/visitor/:visitorId',{
-                templateUrl : 'views/user/templates/profile-visit.view.client.html',
+            .when('/profile/visitor/:visitorId',{
+                templateUrl : 'views/user/templates/users/profile-visit.view.client.html',
                 controller  : 'profileVisitController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when('/movies/reviewUpdate/:reviewId',{
-                templateUrl : 'views/user/templates/review-update.view.client.html',
+                templateUrl : 'views/user/templates/cinema/review-update.view.client.html',
                 controller  : 'reviewController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/movie/search',{
-                templateUrl : 'views/user/templates/review.html',
-                controller  : 'movieController',
-                controllerAs: 'model'
+            .when('/user/movie/search/:movie',{
+                templateUrl : 'views/user/templates/cinema/SearchMovies.view.client.html',
+                controller  : 'searchMovieController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
-            .when('/user/:userId/movies/:id',{
-                templateUrl : 'views/user/templates/single.html',
+            .when('/user/movies/:id',{
+                templateUrl : 'views/user/templates/cinema/movieDetails.view.client.html',
                 controller  : 'searchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
+            .when('/admin',{
+                templateUrl : 'views/user/templates/admin/admin.view.client.html',
+                controller  : 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            });
+
+
+        function checkCurrentUser(userService, $location, $q)
+        {
+            var deferred = $q.defer();
+            userService
+                .loggedin()
+                .then(function (user) {
+                    if (user === '0'){
+                        deferred
+                            .resolve({});
+                    }
+                            else
+                    {
+                        deferred
+                            .resolve(user);
+                    }
+                });
+            return deferred
+                .promise;
+        }
+
+        function checkLoggedIn(userService, $q, $location)
+        {
+            var deferred = $q.defer();
+            userService
+                .loggedin()
+                .then(function (user)
+                {
+                    if(user === '0')
+                    {
+                        deferred
+                            .reject();
+                        $location.url('/login');
+                    } else
+
+                    {
+                        deferred
+                            .resolve(user);
+                    }
+                });
+            return deferred
+                .promise;
+        }
 
     }
 })();
