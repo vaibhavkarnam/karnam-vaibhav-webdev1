@@ -13,6 +13,10 @@ id:    String,
 token: String
 },
 phone : String,
+google:{
+id: String,
+token: String
+},
 ProfilePic: {type: String, default: "images/avatarimg.png"},
 role : [{type: String, default: 'USER', enum: ['USER', 'CRITIC','ADMIN']}],
 dateCreated: {type: Date, default: Date.now},
