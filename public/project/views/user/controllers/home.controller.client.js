@@ -8,11 +8,12 @@ angular
 .module('cineReview')
 .controller('homeController', homeController);
 
-function homeController($routeParams, movieService, userService){
+function homeController($routeParams,$location, currentUser, movieService, userService){
 
 var model = this;
 
-model.userId = $routeParams.userId;
+model.userId = currentUser._id;
+model.user = currentUser;
 model.searchMovieByTitle = searchMovieByTitle;
 model.logout = logout;
 model.groupBy = groupBy;
@@ -56,7 +57,7 @@ console.log(model.movies);
 function logout() {
 userService
 .logout()
-.then(function () {
+.then(function (status) {
     $location.url('/login');
 });
 }

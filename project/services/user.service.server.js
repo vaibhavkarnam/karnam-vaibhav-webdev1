@@ -29,9 +29,10 @@ app1.delete('/api/project/user/:userId', deleteUser);
 app1.post("/api/project/followUser", FollowUser);
 app1.get("/api/project/followingUser/:userId", findfollowingforUser);
 app1.get("/api/project/followersUser/:userId", findfollowersforUser);
-app1.post("/api/project/FollowingRemove", removeFromFollowing);
+app1.post("/api/project/followingRemove", removeFromFollowing);
 app1.post("/api/followers", addFollowers);
 app1.get ('/api/getallusers',findAllUser);
+app1.post('/api/remove/user/followers', removeFollowers);
 
 var bcrypt = require("bcrypt-nodejs");
 
@@ -172,6 +173,7 @@ function deleteImage(req, res) {
 function uploadImage(req, res) {
 
     var userId = req.body.userId;
+    console.log("user is is"+ userId);
 
     var myFile = req.file;
 
@@ -361,9 +363,10 @@ function addFollowers(req, res){
 }
 
 function removeFollowers(req, res) {
+    console.log("removinnnnnn");
     var follow = req.body;
     userModelNew
-        .removeFollowers(follow._follower, follow._following)
+        .remFollower(follow._follower, follow._following)
         .then(function (response) {
             res.json(response);
         }, function (err) {

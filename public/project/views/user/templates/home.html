@@ -10,30 +10,26 @@
 </div>
 </a> <!-- #branding -->
 
-<nav id = "homenav" class="navbar navbar-inverse navbar-fixed-top">
-<div class="container-fluid">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-</div>
-<div>
-<div class="collapse navbar-collapse navbar-right" id="myNavbar">
-<ul class="nav navbar-nav">
-<li><a href="#!/login">Login</a></li>
-<li><a href="#!/register">Register</a></li>
-<li><a data-toggle="modal" data-target="#regModal">About</a></li>
-<li><a data-toggle="modal" data-target="#regModal">Profile</a></li>
-</ul>
-</div>
+	<div class="main-navigation">
+		<button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<div>
+		<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li><a ng-show="model.user.role[0] == 'ADMIN'" href="#!/admin">ADMIN</a></li>
+				<li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
+				<li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
+				<li><a ng-show="model.user._id" href="#!/profile">Profile</a></li>
+				<li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
+			</ul>
+		</div>
+	</div>
 
-</div>
-</div>
-</nav>
-
-<div class="mobile-navigation"></div>
+	<div class="mobile-navigation"></div>
 </div>
 </header>
 <main class="main-content">
@@ -163,72 +159,8 @@
 </div> <!-- .row -->
 
 <div class="row">
-<div class="col-md-4">
-<h2 class="section-title">December premiere</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-<ul class="movie-schedule">
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-</ul> <!-- .movie-schedule -->
-</div>
-<div class="col-md-4">
-<h2 class="section-title">November premiere</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-<ul class="movie-schedule">
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-</ul> <!-- .movie-schedule -->
-</div>
-<div class="col-md-4">
-<h2 class="section-title">October premiere</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-<ul class="movie-schedule">
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-<li>
-<div class="date">16/12</div>
-<h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-</li>
-</ul> <!-- .movie-schedule -->
-</div>
+
+
 </div>
 </div>
 </div> <!-- .container -->
@@ -236,64 +168,7 @@
 <footer class="site-footer">
 <div class="container">
 <div class="row">
-<div class="col-md-2">
-<div class="widget">
-<h3 class="widget-title">About Us</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia tempore vitae mollitia nesciunt saepe cupiditate</p>
-</div>
-</div>
-<div class="col-md-2">
-<div class="widget">
-<h3 class="widget-title">Recent Review</h3>
-<ul class="no-bullet">
-<li><a href="#">Lorem ipsum dolor</a></li>
-<li><a href="#">Sit amet consecture</a></li>
-<li><a href="#">Dolorem respequem</a></li>
-<li><a href="#">Invenore veritae</a></li>
-</ul>
-</div>
-</div>
-<div class="col-md-2">
-<div class="widget">
-<h3 class="widget-title">Help Center</h3>
-<ul class="no-bullet">
-<li><a href="#">Lorem ipsum dolor</a></li>
-<li><a href="#">Sit amet consecture</a></li>
-<li><a href="#">Dolorem respequem</a></li>
-<li><a href="#">Invenore veritae</a></li>
-</ul>
-</div>
-</div>
-<div class="col-md-2">
-<div class="widget">
-<h3 class="widget-title">Join Us</h3>
-<ul class="no-bullet">
-<li><a href="#">Lorem ipsum dolor</a></li>
-<li><a href="#">Sit amet consecture</a></li>
-<li><a href="#">Dolorem respequem</a></li>
-<li><a href="#">Invenore veritae</a></li>
-</ul>
-</div>
-</div>
-<div class="col-md-2">
-<div class="widget">
-<h3 class="widget-title">Social Media</h3>
-<ul class="no-bullet">
-<li><a href="#">Facebook</a></li>
-<li><a href="#">Twitter</a></li>
-<li><a href="#">Google+</a></li>
-<li><a href="#">Pinterest</a></li>
-</ul>
-</div>
-</div>
-<div class="col-md-2">
-<div class="widget">
-<h3 class="widget-title">Newsletter</h3>
-<form action="#" class="subscribe-form">
-<input type="text" placeholder="Email Address">
-</form>
-</div>
-</div>
+
 </div> <!-- .row -->
 
 <div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>

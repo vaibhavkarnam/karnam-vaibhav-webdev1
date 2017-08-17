@@ -21,7 +21,7 @@ userModelNew.addReview = addReview;
 userModelNew.ImageUpload =ImageUpload;
 userModelNew.findUserByGoogleId =findUserByGoogleId;
 userModelNew.findUserByFacebookId =findUserByFacebookId;
-
+userModelNew.remFollower = remFollower;
 
 
 module.exports = userModelNew;
@@ -179,11 +179,6 @@ return userModelNew.find({_id: userID})
 function findfollowersforUser(userID) {
 return userModelNew.find({_id: userID})
 }
-
-function remFollowing(id) {
-return userModelNew.findByIdAndRemove({following: id})
-}
-
 
 
 function deleteUser(userId) {

@@ -103,10 +103,10 @@
 
 
 
-        function unregister() {
-            userService.deleteUser(model.userId)
+        function unregister(userId) {
+            userService.deleteUser(userId)
                 .then(function (status) {
-                        $location.url('/')
+                        $route.reload();
                     },
                     function () {
                         model.error = "unable to unregister user";

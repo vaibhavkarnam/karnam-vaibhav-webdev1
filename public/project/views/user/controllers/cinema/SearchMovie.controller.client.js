@@ -7,11 +7,12 @@ angular
 .module('cineReview')
 .controller('searchMovieController', searchMovieController);
 
-function searchMovieController($routeParams, currentUser,  movieService, userService){
+function searchMovieController($routeParams, currentUser,$location,  movieService, userService){
 
 var model = this;
 
 model.userId = currentUser._id;
+model.user = currentUser;
 model.movieListByTitle = movieListByTitle;
 model.logout = logout;
 model.movie = $routeParams.movie;

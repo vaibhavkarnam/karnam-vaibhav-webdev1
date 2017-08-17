@@ -1,213 +1,159 @@
 <div id="site-content">
-    <header class="site-header">
-        <div class="container">
-            <a href="../home.html" id="branding">
-                <img src="../../../vendor/images/logo.png" alt="" class="logo">
-                <div class="logo-copy">
-                    <h1 class="site-title">Company Name</h1>
-                    <small class="site-description">Tagline goes here</small>
+<header class="site-header">
+<div class="container">
+<a href="../home.html" id="branding">
+    <img src="../../../vendor/images/logo.png" alt="" class="logo">
+    <div class="logo-copy">
+        <h1 class="site-title">CINEREVIEW</h1>
+        <small class="site-description">Explore Hollywood!</small>
+    </div>
+</a> <!-- #branding -->
+
+<div class="main-navigation">
+    <button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div>
+    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
+            <li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
+            <li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
+            <li><a href="#!/">Search Movies</a></li>
+            <li><a href="#!/profile">BACK</a></li>
+        </ul>
+    </div>
+</div> <!-- .main-navigation -->
+
+<div class="mobile-navigation"></div>
+</div>
+</header>
+<main class="main-content">
+<div class="container">
+<div class="page">
+    <div class="breadcrumbs">
+        <a href="../home.html">Home</a>
+        <span>Profile Visit</span>
+    </div>
+
+    <!-- markup -->
+    <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
+    <!-- the avatar markup -->
+    <div id="kv-avatar-errors-2" class="center-block"></div>
+    <form class="form form-vertical">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="kv-avatar center-block text-center" style="width:200px">
+                    <img ng-src="{{model.user.ProfilePic}}">
                 </div>
-            </a> <!-- #branding -->
-
-            <div class="main-navigation">
-                <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-                <ul class="menu">
-                    <li class="menu-item"><a href="../home.html">Home</a></li>
-                    <li class="menu-item"><a href="about.html">About</a></li>
-                    <li class="menu-item"><a href="../cinema/SearchMovies.view.client.html">Movie reviews</a></li>
-                    <li class="menu-item current-menu-item"><a href="login.view.client.html">Join us</a></li>
-                    <li class="menu-item"><a href="contact.html">Contact</a></li>
-                </ul> <!-- .menu -->
-
-                <form action="#" class="search-form">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fa fa-search"></i></button>
-                </form>
-            </div> <!-- .main-navigation -->
-
-            <div class="mobile-navigation"></div>
-        </div>
-    </header>
-    <main class="main-content">
-        <div class="container">
-            <div class="page">
-                <div class="breadcrumbs">
-                    <a href="../home.html">Home</a>
-                    <span>Profile Visit</span>
-                </div>
-
-                <!-- markup -->
-                <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
-                <!-- the avatar markup -->
-                <div id="kv-avatar-errors-2" class="center-block"></div>
-                <form class="form form-vertical">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="kv-avatar center-block text-center" style="width:200px">
-                                <img ng-src="{{model.user.ProfilePic}}">
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
-                                <ul class="nav nav-tabs nav-justified">
-                                    <li ng-class="{active: selectedTab == 1}">
-                                        <a data-target="#" ng-click="selectedTab = 1;">Profile</a>
-                                    </li>
-                                    <li ng-class="{active: selectedTab == 2}">
-                                        <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
-                                    </li>
-                                    <li ng-class="{active: selectedTab == 3}">
-                                        <a data-target="#" ng-click="selectedTab = 3;">Following</a>
-                                    </li>
-                                    <li ng-class="{active: selectedTab == 3}">
-                                        <a data-target="#" ng-click="selectedTab = 4;">Followers</a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content" ng-show="selectedTab == 1">
-                                    <div class="container-fluid">
-                                        <div class="page-header">
-                                            Profile
-                                        </div>
-                                        <div ng-repeat="user in model.users">
-                                            <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
-                                        </div>
-                                        <div class="panel-heading">
-                                            <div class="container-fluid"><h3><b>UserName : {{model.user.username}}</b></h3>
-                                                <h4><b>Role : {{model.user.role[0]}}</b></h4>
-                                            </div>
-                                            <a class="btn btn-success pull-right" ng-hide="model.flag"  ng-click="model.followUser()" >Follow</a>
-                                            <a class="btn btn-danger pull-right" ng-show="model.flag" ng-click="model.unFollow()" >Unfollow</a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="tab-content" ng-show="selectedTab == 2">
-                                    <div ng-repeat="review in model.userGivenReviews">
-                                        <h5>Movie :
-                                            <a href="#!/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
-                                        <h4>
-                                            <a ng-click="model.reviewDownVote(review._id)">
-                                                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
-                                            </a>
-                                            <a ng-click="model.reviewUpVote(review._id)">
-                                                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
-                                            </a>
-                                        </h4>
-                                        Description : {{review.description}}
-                                        <hr>
-                                    </div>
-                                </div>
-
-                                <div class="tab-content" ng-show="selectedTab == 3">
-                                    <div ng-repeat="user in model.users">
-                                        <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
-                                    </div>
-                                    <div class="panel-heading">
-                                        <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
-                                        <div ng-repeat="user in model.UsersFollowing">
-                                            <h4> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h4>
-                                            <h4> Role : {{user.role[0]}}</h4>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-content" ng-show="selectedTab == 4">
-                                    <div class="panel-heading">
-                                        <div class="container-fluid"><h4>Users following <b>{{model.user.username}}</b>:</h4>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1"> No followers yet! </div>
-                                        <div ng-repeat="follower in model.UsersFollowers">
-                                            <h4> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h4>
-                                            <h4> Role : {{follower.role[0]}}</h4>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- the fileinput plugin initialization -->
-
             </div>
-        </div> <!-- .container -->
-    </main>
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="widget">
-                        <h3 class="widget-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia tempore vitae mollitia nesciunt saepe cupiditate</p>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="widget">
-                        <h3 class="widget-title">Recent Review</h3>
-                        <ul class="no-bullet">
-                            <li>Lorem ipsum dolor</li>
-                            <li>Sit amet consecture</li>
-                            <li>Dolorem respequem</li>
-                            <li>Invenore veritae</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="widget">
-                        <h3 class="widget-title">Help Center</h3>
-                        <ul class="no-bullet">
-                            <li>Lorem ipsum dolor</li>
-                            <li>Sit amet consecture</li>
-                            <li>Dolorem respequem</li>
-                            <li>Invenore veritae</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="widget">
-                        <h3 class="widget-title">Join Us</h3>
-                        <ul class="no-bullet">
-                            <li>Lorem ipsum dolor</li>
-                            <li>Sit amet consecture</li>
-                            <li>Dolorem respequem</li>
-                            <li>Invenore veritae</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="widget">
-                        <h3 class="widget-title">Social Media</h3>
-                        <ul class="no-bullet">
-                            <li>Facebook</li>
-                            <li>Twitter</li>
-                            <li>Google+</li>
-                            <li>Pinterest</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="widget">
-                        <h3 class="widget-title">Newsletter</h3>
-                        <form action="#" class="subscribe-form">
-                            <input type="text" placeholder="Email Address">
-                        </form>
-                    </div>
-                </div>
-            </div> <!-- .row -->
+            <div class="col-sm-8">
+                <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li ng-class="{active: selectedTab == 1}">
+                            <a data-target="#" ng-click="selectedTab = 1;">Profile</a>
+                        </li>
+                        <li ng-class="{active: selectedTab == 2}">
+                            <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
+                        </li>
+                        <li ng-class="{active: selectedTab == 3}">
+                            <a data-target="#" ng-click="selectedTab = 3;">Following</a>
+                        </li>
+                        <li ng-class="{active: selectedTab == 3}">
+                            <a data-target="#" ng-click="selectedTab = 4;">Followers</a>
+                        </li>
+                    </ul>
 
-            <div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
-        </div> <!-- .container -->
+                    <div class="tab-content" ng-show="selectedTab == 1">
+                        <div class="container-fluid">
+                            <div class="page-header">
+                                Profile
+                            </div>
+                            <div ng-repeat="user in model.users">
+                                <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="container-fluid"><h3><b>UserName : {{model.user.username}}</b></h3>
+                                    <h4><b>Role : {{model.user.role[0]}}</b></h4>
+                                </div>
+                                <a class="btn btn-success pull-right" ng-click="model.followVisitedUser()" >Follow</a>
+                                <a class="btn btn-danger pull-right"  ng-click="model.unFollowVisitedUser()" >Unfollow</a>
+                            </div>
 
-    </footer>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" ng-show="selectedTab == 2">
+                        <div ng-repeat="review in model.userGivenReviews">
+                            <h5>Movie :
+                                <a href="#!/user/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
+                            <h4>
+                                <a ng-click="model.reviewDownVote(review._id)">
+                                    <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
+                                </a>
+                                <a ng-click="model.reviewUpVote(review._id)">
+                                    <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
+                                </a>
+                            </h4>
+                            Description : {{review.description}}
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" ng-show="selectedTab == 3">
+                        <div ng-repeat="user in model.users">
+                            <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
+                        </div>
+                        <div class="panel-heading">
+                            <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
+                            <div ng-repeat="user in model.UsersFollowing">
+                                <h4> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h4>
+                                <h4> Role : {{user.role[0]}}</h4>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" ng-show="selectedTab == 4">
+                        <div class="panel-heading">
+                            <div class="container-fluid"><h4>Users following <b>{{model.user.username}}</b>:</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1"> No followers yet! </div>
+                            <div ng-repeat="follower in model.UsersFollowers">
+                                <h4> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h4>
+                                <h4> Role : {{follower.role[0]}}</h4>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- the fileinput plugin initialization -->
+
+</div>
+</div> <!-- .container -->
+</main>
+<footer class="site-footer">
+<div class="container">
+<div class="row">
+
+</div> <!-- .row -->
+
+<div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+</div> <!-- .container -->
+
+</footer>
 </div>
 <!-- Default snippet for navigation -->
 

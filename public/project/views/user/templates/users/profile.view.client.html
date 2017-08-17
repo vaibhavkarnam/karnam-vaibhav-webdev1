@@ -1,181 +1,186 @@
 <div id="site-content">
-    <header class="site-header">
-        <div class="container">
-            <a href="../home.html" id="branding">
-                <img src="../../../vendor/images/logo.png" alt="" class="logo">
-                <div class="logo-copy">
-                    <h1 class="site-title">Company Name</h1>
-                    <small class="site-description">Tagline goes here</small>
-                </div>
-            </a> <!-- #branding -->
+<header class="site-header">
+<div class="container">
+<a href="../home.html" id="branding">
+<img src="../../../vendor/images/logo.png" alt="" class="logo">
+<div class="logo-copy">
+<h1 class="site-title">CINEREVIEW</h1>
+<small class="site-description">Explore Hollywood</small>
+</div>
+</a> <!-- #branding -->
 
-            <div class="main-navigation">
-                <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-                <ul class="menu">
-                    <li class="menu-item"><a href="../home.html">Home</a></li>
-                    <li class="menu-item"><a href="about.html">About</a></li>
-                    <li class="menu-item"><a href="../cinema/SearchMovies.view.client.html">Movie reviews</a></li>
-                    <li class="menu-item current-menu-item"><a href="login.view.client.html">Join us</a></li>
-                    <li class="menu-item"><a href="contact.html">Contact</a></li>
-                </ul> <!-- .menu -->
+<div class="main-navigation">
+<button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<div>
+<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+<ul class="nav navbar-nav">
+    <li><a ng-show="model.user.role[0] == 'ADMIN'" href="#!/admin">ADMIN</a></li>
+    <li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
+    <li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
+    <li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
+    <li><a href="#!/">Search Movies</a></li>
+    <li><a href="#!/">BACK</a></li>
+</ul>
+</div>
+</div> <!-- .main-navigation -->
 
-                <form action="#" class="search-form">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fa fa-search"></i></button>
-                </form>
-            </div> <!-- .main-navigation -->
+<div class="mobile-navigation"></div>
+</div>
+</header>
+<main class="main-content">
+<div class="container">
+<div class="page">
+<div class="breadcrumbs">
+<a href="../home.html">Home</a>
+<span>Profile</span>
+</div>
 
-            <div class="mobile-navigation"></div>
+<!-- markup -->
+<!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
+<!-- the avatar markup -->
+<div id="kv-avatar-errors-2" class="center-block"></div>
+<form class="form form-vertical" action="/api/upload/project" method="post" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-sm-4" id="profilebtn">
+        <div class="kv-avatar center-block text-center" style="width:200px">
+            <img ng-src="{{model.user.ProfilePic}}">
+            <input id="avatar-2" name="avatar-2" type="file" class="file-loading" required>
+            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+            <button type="submit"    class="btn btn-sucess btn-block">Upload Profile Pic</button>
         </div>
-    </header>
-    <main class="main-content">
-        <div class="container">
-            <div class="page">
-                <div class="breadcrumbs">
-                    <a href="../home.html">Home</a>
-                    <span>Profile</span>
+    </div>
+    <div class="col-sm-8">
+        <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
+            <ul class="nav nav-tabs nav-justified">
+                <li ng-class="{active: selectedTab == 1}">
+                    <a data-target="#" ng-click="selectedTab = 1;">Reviews</a>
+                </li>
+                <li ng-class="{active: selectedTab == 2}">
+                    <a data-target="#" ng-click="selectedTab = 2;">Profile</a>
+                </li>
+                <li ng-class="{active: selectedTab == 3}">
+                    <a data-target="#" ng-click="selectedTab = 3;">Following</a>
+                </li>
+                <li ng-class="{active: selectedTab == 3}">
+                    <a data-target="#" ng-click="selectedTab = 4;">Followers</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" ng-show="selectedTab == 1">
+                <div ng-repeat="review in model.userGivenReviews">
+                    <a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right">
+                        <i class="fa fa-trash " aria-hidden="true"></i>
+                    </a>
+                    <a  href="#!/movies/reviewUpdate/{{review._id}}" class="btn btn-primary btn-sm pull-right">
+                        <i class="fa fa-pencil " aria-hidden="true"></i>
+                    </a>
+                    <h5>Movie :
+                        <a href="#!/user/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
+                        <h4>
+                        <a ng-click="model.reviewDownVote(review._id)">
+                            <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
+                        </a>
+                        <a ng-click="model.reviewUpVote(review._id)">
+                            <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
+                        </a>
+                    </h4>
+                    Description : {{review.description}}
+                    <hr>
                 </div>
-
-                <!-- markup -->
-                <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
-                <!-- the avatar markup -->
-                <div id="kv-avatar-errors-2" class="center-block"></div>
-                <form class="form form-vertical" action="/api/upload/project" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="kv-avatar center-block text-center" style="width:200px">
-                                <img ng-src="{{model.user.ProfilePic}}">
-                                <input id="avatar-2" name="avatar-2" type="file" class="file-loading" required>
-                                <button type="submit"    class="btn btn-sucess btn-block">Upload Profile Pic</button>
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
-                                <ul class="nav nav-tabs nav-justified">
-                                    <li ng-class="{active: selectedTab == 1}">
-                                        <a data-target="#" ng-click="selectedTab = 1;">Reviews</a>
-                                    </li>
-                                    <li ng-class="{active: selectedTab == 2}">
-                                        <a data-target="#" ng-click="selectedTab = 2;">Profile</a>
-                                    </li>
-                                    <li ng-class="{active: selectedTab == 3}">
-                                        <a data-target="#" ng-click="selectedTab = 3;">Following</a>
-                                    </li>
-                                    <li ng-class="{active: selectedTab == 3}">
-                                        <a data-target="#" ng-click="selectedTab = 4;">Followers</a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content" ng-show="selectedTab == 1">
-                                    <div ng-repeat="review in model.userGivenReviews">
-                                        <a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right">
-                                            <i class="fa fa-trash " aria-hidden="true"></i>
-                                        </a>
-                                        <a  href="#!/movies/reviewUpdate/{{review._id}}" class="btn btn-primary btn-sm pull-right">
-                                            <i class="fa fa-pencil " aria-hidden="true"></i>
-                                        </a>
-                                        <h5>Movie :
-                                            <a href="#!/user/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
-                                            <h4>
-                                            <a ng-click="model.reviewDownVote(review._id)">
-                                                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
-                                            </a>
-                                            <a ng-click="model.reviewUpVote(review._id)">
-                                                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
-                                            </a>
-                                        </h4>
-                                        Description : {{review.description}}
-                                        <hr>
-                                    </div>
-                                </div>
-
-                                <div class="tab-content" ng-show="selectedTab == 2">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="vaibhav">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email address</label>
-                                            <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="vaibhav@gmail.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="first-name">First Name</label>
-                                            <input type="text" ng-model="model.user.firstName" class="form-control" id="first-name" placeholder="vaibhav">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last-name">Last Name</label>
-                                            <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="karnam">
-                                        </div>
-
-                                    </form>
-                                    <a class="btn btn-danger  btn-block"
-                                       href="#!/login">
-                                        Logout</a>
-                                    <a class="btn btn-default btn-danger btn-block"
-                                       ng-click="model.unregister()"
-                                       role="button">Unregister</a>
-
-                                    <a class="btn btn-default btn-primary btn-block"
-                                       ng-click="model.updateUser()"
-                                       role="button">Update</a>
-                                </div>
-                            </div>
-                                <div class="tab-content" ng-show="selectedTab == 3">
-
-                                    <a class="btn btn-default btn-primary btn-block"
-                                       ng-click="model.findAllUsers()"
-                                       role="button" id="proflieUser">Find Users to Follow</a>
-                                    <div class="container-fluid" ng-repeat="user in model.users">
-                                        <h4>  Username : <a href="#!/profile/visitor/{{user._id}}">{{user.username}}</a> </h4>
-                                        <h4> Role : {{user.role[0]}}</h4>
-                                        <hr>
-                                    </div>
-                                    <div class="panel-heading">
-                                        <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
-                                        <div ng-repeat="user in model.UsersFollowing">
-                                            <h4> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h4>
-                                            <h4> Role : {{user.role[0]}}</h4>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-content" ng-show="selectedTab == 4">
-                                    <div class="panel-heading">
-                                        <div class="container-fluid"><h4>Users following <b>{{model.user.username}}</b>:</h4>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1"> No followers yet! </div>
-                                        <div ng-repeat="follower in model.UsersFollowers">
-                                            <h4> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h4>
-                                            <h4> Role : {{follower.role[0]}}</h4>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            <!-- the fileinput plugin initialization -->
-
             </div>
-        </div> <!-- .container -->
-    </main>
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
 
-            </div> <!-- .row -->
+            <div class="tab-content" ng-show="selectedTab == 2">
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="vaibhav">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="vaibhav@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" ng-model="model.user.firstName" class="form-control" id="first-name" placeholder="vaibhav">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="karnam">
+                    </div>
 
-            <div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
-        </div> <!-- .container -->
+                </form>
+                <a class="btn btn-danger  btn-block"
+                   href="#!/login">
+                    Logout</a>
+                <a class="btn btn-default btn-danger btn-block"
+                   ng-click="model.unregister()"
+                   role="button">Unregister</a>
 
-    </footer>
+                <a class="btn btn-default btn-primary btn-block"
+                   ng-click="model.updateUser()"
+                   role="button">Update</a>
+            </div>
+        </div>
+            <div class="tab-content" ng-show="selectedTab == 3">
+
+                <a class="btn btn-default btn-primary btn-block"
+                   ng-click="model.findAllUsers()"
+                   role="button" id="proflieUser">Find Users to Follow</a>
+                <div class="container-fluid" ng-repeat="user in model.users">
+                    <h4>  Username : <a href="#!/profile/visitor/{{user._id}}">{{user.username}}</a> </h4>
+                    <h4> Role : {{user.role[0]}}</h4>
+                    <hr>
+                </div>
+                <div class="panel-heading">
+                    <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
+                    <div ng-repeat="user in model.UsersFollowing">
+                        <h4> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h4>
+                        <h4> Role : {{user.role[0]}}</h4>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" ng-show="selectedTab == 4">
+                <div class="panel-heading">
+                    <div class="container-fluid"><h4>Users following <b>{{model.user.username}}</b>:</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1"> No followers yet! </div>
+                    <div ng-repeat="follower in model.UsersFollowers">
+                        <h4> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h4>
+                        <h4> Role : {{follower.role[0]}}</h4>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</form>
+
+<!-- the fileinput plugin initialization -->
+
+</div>
+</div> <!-- .container -->
+</main>
+<footer class="site-footer">
+<div class="container">
+<div class="row">
+
+</div> <!-- .row -->
+
+<div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+</div> <!-- .container -->
+
+</footer>
 </div>
 <!-- Default snippet for navigation -->
 
