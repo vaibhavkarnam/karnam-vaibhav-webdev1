@@ -11,7 +11,7 @@ findUserbyUsername: findUserbyUsername,
 findUserbyCredentials : findUserbyCredentials,
 updateUser: updateUser,
 deleteUser:deleteUser,
-FollowUser : FollowUser,
+    followVisitedUser : followVisitedUser,
 findfollowingUser : findfollowingUser,
 findfollowersforUser : findfollowersforUser,
 removeFollowing : removeFollowing,
@@ -140,9 +140,10 @@ function addFollowers(following) {
 return $http.post("/api/followers/" , following);
 }
 
-function FollowUser(following) {
+function followVisitedUser(following) {
 
-return $http.post("/api/project/followUser/" , following);
+return $http
+    .post("/api/project/followUser/" , following);
 }
 
 function findfollowingUser(userID) {

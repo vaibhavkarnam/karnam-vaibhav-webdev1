@@ -72,24 +72,24 @@
             </ul>
 
             <div class="tab-content" ng-show="selectedTab == 1">
-                <div ng-repeat="review in model.userGivenReviews">
-                    <a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right">
+                <div ng-repeat="userReviews in model.allUserReviews">
+                    <a ng-click="model.reviewDelete(userReviews._id)" class="btn btn-danger btn-sm pull-right">
                         <i class="fa fa-trash " aria-hidden="true"></i>
                     </a>
-                    <a  href="#!/movies/reviewUpdate/{{review._id}}" class="btn btn-primary btn-sm pull-right">
+                    <a  href="#!/movies/reviewUpdate/{{userReviews._id}}" class="btn btn-primary btn-sm pull-right">
                         <i class="fa fa-pencil " aria-hidden="true"></i>
                     </a>
                     <h5>Movie :
-                        <a href="#!/user/movies/{{review.movieID}}" class="btn btn-link"> {{review.moviename}}</a></h5>
+                        <a href="#!/user/movies/{{userReviews.movieID}}" class="btn btn-link"> {{userReviews.moviename}}</a></h5>
                         <h4>
                         <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.reviewDownVote(review._id)">
-                            <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
+                            <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{userReviews.dislike.length}}</i>
                         </a>
                         <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.reviewUpVote(review._id)">
-                            <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
+                            <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{userReviews.thumbsUp.length}}</i>
                         </a>
                     </h4>
-                    Description : {{review.description}}
+                    Description : {{userReviews.description}}
                     <hr>
                 </div>
             </div>

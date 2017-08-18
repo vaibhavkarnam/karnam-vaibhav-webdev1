@@ -9,20 +9,21 @@ var model = this;
 model.user=currentUser;
 model.userId =currentUser._id;
 model.visitorId = $routeParams["visitorId"];
+model.followers =[];
+model.following =[];
+model.UsersFollowing = [];
+model.UsersFollowers = [];
 model.updateUser = updateUser;
 model.unregister = unregister;
-model.getReviewsForUser = getReviewsForUser;
-model.reviewUpdate = reviewUpdate;
+model.getAllUserReviews = getAllUserReviews;
+model.updateUserReview = updateUserReview;
 model.reviewDelete = reviewDelete;
 model.getReviewById = getReviewById;
 model.logout = logout;
 model.FollowingUsers = FollowingUsers;
 model.FollowerUsers = FollowerUsers;
 model.findAllUsers = findAllUsers;
-model.followers =[];
-model.following =[];
-model.UsersFollowing = [];
-model.UsersFollowers = [];
+
 
 
 function init() {
@@ -37,107 +38,128 @@ model.error = "Sorry the User was not available";
 }
 FollowingUsers(model.userId);
 FollowerUsers(model.userId);
-getReviewsForUser(model.userId);
+getAllUserReviews(model.userId);
 }
 init();
+
 function updateUser() {
 userService
 .updateUser(model.userId, model.user)
 .then(function () {
-    model.message = "User was updated successfully";
-})
+model.message = "User was updated successfully";
+});
 }
 
 function logout() {
-    userService
-        .logout()
-        .then(function () {
-            $location.url('/login');
-        });
+userService
+.logout()
+.then(function () {
+    $location.url('/login');
+});
 }
 
-function getReviewsForUser(userId) {
-console.log("getting reviews");
-    movieService.getReviewsForUser(userId)
-        .then(function (response) {
-            model.userGivenReviews=angular.copy(response);
-            console.log(model.userGivenReviews);
-        })
+function getAllUserReviews(userId)
+{
+// console.log("getting reviews");
+movieService
+.getAllUserReviews(userId)
+.then(function (response) {
+    model.allUserReviews=angular.copy(response);
+    console.log(model.allUserReviews);
+});
 }
 
-function reviewDelete(reviewId) {
-    movieService.deleteReview(reviewId)
-        .then(function (response) {
-            getReviewsForUser(model.userId);
-        });
-}
 
-function reviewUpdate(reviewId,review) {
-console.log("updating");
-    movieService.reviewUpdate(reviewId,review)
-        .then(function (response) {
-            getReviewsForUser(model.userId);
-        });
+
+function updateUserReview(reviewId,review) {
+// console.log("updating");
+movieService
+.updateUserReview(reviewId,review)
+.then(function (response) {
+    getAllUserReviews(model.userId);
+});
 }
 
 function FollowingUsers(userId) {
-    userService
-        .findfollowingUser(userId)
-        .then(function (following) {
-            model.following = following.data[0].following;
-            console.log(model.following);
-            model.following.forEach(function (id) {
-                userService
-                    .findUserById(id)
-                    .then(function (user) {
-                        model.UsersFollowing.push(user);
-                    })
+userService
+.findfollowingUser(userId)
+.then(function (following)
+{
+    model.following = following.data[0].following;
+    // console.log(model.following);
+    model.following
+        .forEach(function (id)
+        {
+        userService
+            .findUserById(id)
+            .then(function (user)
+            {
+                model.UsersFollowing.push(user);
             });
-        });
+    });
+});
 }
 
-function FollowerUsers(userId) {
-    userService
-        .findfollowersforUser(userId)
-        .then(function (followers) {
-            console.log("followerr");
-            console.log(followers);
-            model.followers = followers.data[0].followers;
-            console.log(followers.data[0]);
-            model.followers.forEach(function (id) {
-                userService
-                    .findUserById(id)
-                    .then(function (user) {
-                        model.UsersFollowers.push(user);
-                    })
-            });
-
-        });
-}
 function getReviewById(reviewId) {
-console.log(reviewId);
-    movieService.getReviewById(reviewId)
-        .then(function(response){
-            model.reviewForUpdate=angular.copy(response);
-            console.log(model.reviewForUpdate);
-            console.log(model.reviewForUpdate.description);
-        });
+// console.log(reviewId);
+movieService
+    .getReviewById(reviewId)
+    .then(function(response)
+    {
+        model.reviewForUpdate
+            =
+            angular.copy(response);
+        // console.log(model.reviewForUpdate);
+        // console.log(model.reviewForUpdate.description);
+    });
 }
 
 
 
 function findAllUsers() {
-    userService.findAllUsers()
-        .then(function (users) {
-            console.log(users);
-            model.users = users;
-        })
+userService.findAllUsers()
+    .then(function (users)
+    {
+        // console.log(users);
+        model.users = users;
+    })
 }
 
+function FollowerUsers(userId) {
+userService
+.findfollowersforUser(userId)
+.then(function (followers)
+{
+    // console.log("followerr");
+    // console.log(followers);
+    model.followers = followers.data[0].followers;
+    // console.log(followers.data[0]);
+    model.followers
+        .forEach(function (id)
+        {
+        userService
+            .findUserById(id)
+            .then(function (user)
+            {
+                model.UsersFollowers.push(user);
+            });
+    });
 
+});
+}
+
+function reviewDelete(reviewId) {
+movieService
+    .deleteReview(reviewId)
+    .then(function (status)
+    {
+        getAllUserReviews(model.userId);
+    });
+}
 
 function unregister() {
-userService.deleteUser(model.userId)
+userService
+.deleteUser(model.userId)
 .then(function (status) {
 $location.url('/')
 },

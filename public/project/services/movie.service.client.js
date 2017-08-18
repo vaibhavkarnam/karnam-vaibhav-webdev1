@@ -12,13 +12,13 @@
             searchMovieById : searchMovieById,
             createReview : createReview,
             findReviewById : findReviewById,
-            reviewUpdate : reviewUpdate,
+            updateUserReview : updateUserReview,
             deleteReview : deleteReview,
             findAllReviews : findAllReviews,
             findUserReviewsforMovie : findUserReviewsforMovie,
             findCriticReviewsforMovie : findCriticReviewsforMovie,
             deleteReviewsforUser : deleteReviewsforUser,
-            getReviewsForUser : getReviewsForUser,
+            getAllUserReviews : getAllUserReviews,
             getReviewById : getReviewById,
             getUserReviews : getUserReviews,
             thumbsUp : thumbsUp,
@@ -76,10 +76,12 @@
                 });
         }
 
-        function reviewUpdate(reviewId,review) {
+        function updateUserReview(reviewId,review) {
             var url="/api/review/"+reviewId;
-            return $http.put(url,review)
-                .then(function (response) {
+            return $http
+                .put(url,review)
+                .then(function (response)
+                {
                     return response.data;
                 });
         }
@@ -120,7 +122,8 @@
             return $http.get("/api/rest/" + movieId + "/critic/review");
         }
 
-        function getReviewsForUser(userId) {
+
+        function getAllUserReviews(userId) {
             var url="/api/getReviewByUserId/"+userId;
             return $http.get(url)
                 .then(function (response) {
