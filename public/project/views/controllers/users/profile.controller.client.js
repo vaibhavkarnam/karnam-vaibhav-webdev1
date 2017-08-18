@@ -4,7 +4,7 @@ angular
 .module("cineReview")
 .controller("profileController", profileController)
 
-function profileController($routeParams, userService, movieService, currentUser, $location) {
+function profileController($routeParams, $route, userService, movieService, currentUser, $location) {
 var model = this;
 model.user=currentUser;
 model.userId =currentUser._id;
@@ -15,6 +15,7 @@ model.UsersFollowing = [];
 model.UsersFollowers = [];
 model.updateUser = updateUser;
 model.unregister = unregister;
+model.thumbsUp = thumbsUp;
 model.getAllUserReviews = getAllUserReviews;
 model.updateUserReview = updateUserReview;
 model.reviewDelete = reviewDelete;
@@ -23,6 +24,7 @@ model.logout = logout;
 model.FollowingUsers = FollowingUsers;
 model.FollowerUsers = FollowerUsers;
 model.findAllUsers = findAllUsers;
+model.dislike = dislike;
 
 
 
@@ -115,6 +117,32 @@ movieService
 }
 
 
+function dislike(reviewId)
+{
+if(model.user.role[0] == 'CRITIC')
+{
+    movieService
+        .dislike(reviewId, model.user._id)
+        .then(function (status)
+        {
+            getAllUserReviews(model.movieId);
+            $route.reload();
+
+        });
+}
+}
+function thumbsUp(reviewId)
+{
+if(model.user.role[0] == 'CRITIC')
+{
+    movieService.thumbsUp(reviewId, model.user._id)
+        .then(function (status)
+        {
+            getAllUserReviews(model.movieId);
+            $route.reload();
+        });
+}
+}
 
 function findAllUsers() {
 userService

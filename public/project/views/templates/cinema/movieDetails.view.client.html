@@ -110,10 +110,10 @@
 	<div  ng-repeat="criticReview in model.criticReviews">
 	<span class="glyphicon glyphicon-user"></span> CRITIC :<a href="#!/profile/visitor/{{criticReview.userID}}" class="btn btn-link">
 	{{criticReview.user_name}}</a>
-	<a  ng-click="model.dislike(review._id)">
+	<a  ng-click="model.dislike(criticReview._id)">
 		<span class="glyphicon glyphicon-thumbs-down pull-right"> {{criticReview.dislike.length}}</span>
 	</a>
-	<a ng-click="model.thumbsUp(review._id)">
+	<a ng-click="model.thumbsUp(criticReview._id)">
 		<span id ="thumbsup" class="glyphicon glyphicon-thumbs-up pull-right"> {{criticReview.thumbsUp.length}}</span>
 	</a>
 	</h4>

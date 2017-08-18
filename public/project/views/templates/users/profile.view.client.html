@@ -48,7 +48,7 @@
 <div class="row">
 <div class="col-sm-4" id="profilebtn">
 <div class="kv-avatar center-block text-center" style="width:200px">
-<img ng-src="{{model.user.ProfilePic}}">
+<img ng-src="{{model.user.ProfilePic}}" alt="../../images/avatarimg.png">
 <input id="avatar-2" name="avatar-2" type="file" class="file-loading" required>
 <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
 <button type="submit"    class="btn btn-sucess btn-block">Upload Profile Pic</button>
@@ -83,10 +83,10 @@
 
             <a href="#!/user/movies/{{userReviews.movieID}}" class="btn btn-link"> {{userReviews.moviename}}</a></h5>
             <h5>
-            <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.reviewDownVote(userReviews._id)">
+            <a ng-click="model.dislike(userReviews._id)">
                 <span id ="profiledown" class="glyphicon glyphicon-thumbs-down pull-right">{{userReviews.dislike.length}}</span>
             </a>
-            <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.reviewUpVote(userReviews._id)">
+            <a ng-click="model.thumbsUp(userReviews._id)">
                 <span id ="thumbsup" class="glyphicon glyphicon-thumbs-up pull-right"> {{userReviews.thumbsUp.length}}</span>
             </a></h5>
 
