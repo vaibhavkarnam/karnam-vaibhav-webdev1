@@ -53,86 +53,88 @@
 <div class="col-sm-8">
 <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
 <ul class="nav nav-tabs nav-justified">
-    <li ng-class="{active: selectedTab == 1}">
-        <a data-target="#" ng-click="selectedTab = 1;">Profile</a>
-    </li>
-    <li ng-class="{active: selectedTab == 2}">
-        <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
-    </li>
-    <li ng-class="{active: selectedTab == 3}">
-        <a data-target="#" ng-click="selectedTab = 3;">Following</a>
-    </li>
-    <li ng-class="{active: selectedTab == 4}">
-        <a data-target="#" ng-click="selectedTab = 4;">Followers</a>
-    </li>
+<li ng-class="{active: selectedTab == 1}">
+    <a data-target="#" ng-click="selectedTab = 1;">Profile</a>
+</li>
+<li ng-class="{active: selectedTab == 2}">
+    <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
+</li>
+<li ng-class="{active: selectedTab == 3}">
+    <a data-target="#" ng-click="selectedTab = 3;">Following</a>
+</li>
+<li ng-class="{active: selectedTab == 4}">
+    <a data-target="#" ng-click="selectedTab = 4;">Followers</a>
+</li>
 </ul>
 
 <div class="tab-content" ng-show="selectedTab == 1">
-    <div class="container-fluid">
-        <div class="page-header">
-            Profile
-        </div>
-        <div ng-repeat="user in model.users">
-            <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
-        </div>
-        <div class="panel-heading">
-            <div class="container-fluid"><h3><b>UserName : {{model.user.username}}</b></h3>
-                <h4><b>Role : {{model.user.role[0]}}</b></h4>
-            </div>
-            <a class="btn btn-success pull-right" ng-click="model.followVisitedUser()" >Follow</a>
-            <a class="btn btn-danger pull-right"  ng-click="model.unFollowVisitedUser()" >Unfollow</a>
-        </div>
-
+<div class="container-fluid">
+    <div class="page-header">
+        Profile
     </div>
-</div>
-
-<div class="tab-content" ng-show="selectedTab == 2">
-    <div ng-repeat="userReview in model.allUserReviews">
-        <h5>Movie :
-            <a href="#!/user/movies/{{userReview.movieID}}" class="btn btn-link"> {{userReview.moviename}}</a></h5>
-        <h4>
-            <a ng-click="model.reviewDownVote(review._id)">
-                <i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{userReview.dislike.length}}</i>
-            </a>
-            <a ng-click="model.reviewUpVote(review._id)">
-                <i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{userReview.thumbsUp.length}}</i>
-            </a>
-        </h4>
-        Description : {{userReview.description}}
-        <hr>
-    </div>
-</div>
-
-<div class="tab-content" ng-show="selectedTab == 3">
     <div ng-repeat="user in model.users">
         <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
     </div>
     <div class="panel-heading">
-        <div class="container-fluid"><h4><b>{{model.user.username}}</b> is following:</h4>
+        <div class="container-fluid"><h3><b>UserName : {{model.user.username}}</b></h3>
+            <h4><b>Role : {{model.user.role[0]}}</b></h4>
         </div>
+        <a class="btn btn-success pull-right" ng-click="model.followVisitedUser()" >Follow</a>
+        <a class="btn btn-danger pull-right"  ng-click="model.unFollowVisitedUser()" >Unfollow</a>
     </div>
-    <div class="panel-body">
-        <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1"> Not following anyone yet !!! </div>
-        <div ng-repeat="user in model.UsersFollowing">
-            <h4> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h4>
-            <h4> Role : {{user.role[0]}}</h4>
-            <hr>
-        </div>
+
+</div>
+</div>
+
+<div class="tab-content" ng-show="selectedTab == 2">
+<div ng-repeat="userReview in model.allUserReviews">
+    <h5>Movie :
+
+        <a href="#!/user/movies/{{userReview.movieID}}" class="btn btn-link"> {{userReview.moviename}}</a></h5>
+    <h5>
+        <a>
+            <span class="glyphicon glyphicon-thumbs-down pull-right">{{userReview.dislike.length}}</span></a>
+        <a>
+            <span id ="thumbsup" class="glyphicon glyphicon-thumbs-up pull-right"> {{userReview.thumbsUp.length}}</span></a>
+
+    </h5>
+    Description : {{userReview.description}}
+
+    <hr>
+</div>
+</div>
+
+<div class="tab-content" ng-show="selectedTab == 3">
+<div ng-repeat="user in model.users">
+    <h1><a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h1>
+</div>
+<div class="panel-heading">
+    <div class="container-fluid"><h4><b>{{model.user.username}}</b>'s following:</h4>
     </div>
 </div>
+<div class="panel-body">
+    <div class="alert alert-danger"  ng-if="(model.UsersFollowing).length < 1">Following List Empty</div>
+    <div ng-repeat="user in model.UsersFollowing">
+        <h5> Username : <a href="#!/profile/visitor/{{user._id}}"> {{user.username}}</a></h5>
+
+        <h5> Role : {{user.role[0]}}</h5>
+
+        <hr></div>
+</div>
+</div>
 <div class="tab-content" ng-show="selectedTab == 4">
-    <div class="panel-heading">
-        <div class="container-fluid"><h4>Users following <b>{{model.user.username}}</b>:</h4>
-        </div>
+<div class="panel-heading">
+    <div class="container-fluid"><h5>{{model.user.username}}'s Followers :</h5>
     </div>
-    <div class="panel-body">
-        <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1"> No followers yet! </div>
-        <div ng-repeat="follower in model.UsersFollowers">
-            <h4> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h4>
-            <h4> Role : {{follower.role[0]}}</h4>
-            <hr>
-        </div>
-    </div>
+</div>
+<div class="panel-body">
+    <div class="alert alert-danger"  ng-if="(model.UsersFollowers).length < 1">Followers List Empty</div>
+    <div ng-repeat="follower in model.UsersFollowers">
+        <h5> Username : <a href="#!/profile/visitor/{{follower._id}}">{{follower.username}}</a></h5>
+        <h5> Role : {{follower.role[0]}}</h5>
+
+        <hr></div>
+</div>
 </div>
 </div>
 </div>

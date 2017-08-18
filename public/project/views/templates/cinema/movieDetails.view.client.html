@@ -54,8 +54,8 @@
 </p>
 </div>
 <ul class="movie-meta">
-<li  ng-hide="model.user.role == 'CRITIC'"><span class="glyphicon glyphicon-star-empty"><strong>Rating:</strong></span>
-<div class="star-rating" title="Rated {{model.movie.imdbRating}} out of 10"><span><strong class="rating">{{model.movie.imdbRating}}</strong> out of 10</span></div>
+<li  ng-hide="model.user.role == 'CRITIC'"><span class="glyphicon glyphicon-star-empty"><strong>Rating:</strong>
+	{{model.movie.imdbRating}}/10</span>
 </li>
 <li><span class="glyphicon glyphicon-play-circle"></span>
 <strong>Runtime:</strong>{{model.movie.Runtime}}
@@ -107,25 +107,25 @@
 	</li>
 </ul>
 <div class="tab-content" ng-show="selectedTab == 1">
-	<div  ng-repeat="review in model.criticReviews">
-	<span class="glyphicon glyphicon-user"></span> CRITIC :<a href="#!/profile" class="btn btn-link">
-	{{review.user_name}}</a>
-	<a ng-click="model.dislike(review._id)">
-		<i class="fa fa-thumbs-down pull-right" aria-hidden="true"> {{review.dislike.length}}</i>
+	<div  ng-repeat="criticReview in model.criticReviews">
+	<span class="glyphicon glyphicon-user"></span> CRITIC :<a href="#!/profile/visitor/{{criticReview.userID}}" class="btn btn-link">
+	{{criticReview.user_name}}</a>
+	<a  ng-click="model.dislike(review._id)">
+		<span class="glyphicon glyphicon-thumbs-down pull-right"> {{criticReview.dislike.length}}</span>
 	</a>
 	<a ng-click="model.thumbsUp(review._id)">
-		<i class="fa fa-thumbs-up pull-right" aria-hidden="true"> {{review.thumbsUp.length}}</i>
+		<span id ="thumbsup" class="glyphicon glyphicon-thumbs-up pull-right"> {{criticReview.thumbsUp.length}}</span>
 	</a>
 	</h4>
-	<p>{{review.description}}</p>
+	<p>REVIEW : {{criticReview.description}}</p>
 </div>
 </div>
 <div class="tab-content" ng-show="selectedTab == 2">
-	<div ng-repeat="review in model.userReviews">
-		<span class="glyphicon glyphicon-user"></span> USER :<a href="#!/profile" class="btn btn-link">
-		{{review.user_name}}</a>
+	<div ng-repeat="userReview in model.userReviews">
+		<span class="glyphicon glyphicon-user"></span> USER :<a href="#!/profile/visitor/{{userReview.userID}}" class="btn btn-link">
+		{{userReview.user_name}}</a>
 		</h4>
-		<p>{{review.description}}</p>
+		<p>REVIEW : {{userReview.description}}</p>
 	</div>
 </div>
 <div class="tab-content" ng-show="selectedTab ==3">

@@ -215,7 +215,6 @@ table {
  */
 body {
   background-color: #131a20;
-  background-image: url(../vendor/dummy/background.jpg);
   background-position: top center;
   background-repeat: no-repeat;
   color: #84878d;
@@ -251,6 +250,22 @@ hr {
 ul, ol {
   margin: 0;
   padding-left: 0; }
+
+.profileg{
+  width: 10px;
+  height: 10px;
+}
+
+#profiledown{
+  padding-right: 5px;
+}
+
+#thumbsup{
+  margin-right: 10px;
+}
+#glyph{
+  margin-right: 20px;
+}
 
 a {
   text-decoration: none;
@@ -1703,7 +1718,7 @@ ul.arrow {
     width: 100%;
     border: 1px solid #bec1c8;
     background-color: transparent;
-    background-image: url(../vendor/images/arrow.png);
+    background-image: url(/images/arrow.png);
     background-repeat: no-repeat;
     background-position: right center;
     color: inherit;
