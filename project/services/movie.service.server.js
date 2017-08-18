@@ -6,28 +6,29 @@ var app=require('../../express');
 var http =require('http');
 var movieProjectModel = require("../models/movie/movie.model.server");
 
-app.get("/api/search/title/:movie",movieListByTitle);
-app.get("/api/id/:id",searchMovieByImdbId);
-app.post("/api/user/:userId/review", createReview);
-app.post("/api/user/del/:userId/review", deleteReviewsforUser);
-app.get("/api/user/:userId/review", findAllReviews);
-app.get("/api/rest/:mid/review", findUserReviewsforMovie);
-app.get("/api/rest/:mid/critic/review", findCriticReviewsforMovie);
-app.get("/api/review/:reviewId", findReviewById);
-app.put("/api/review/:reviewId", updateReview);
-app.delete("/api/review/:reviewId", deleteReview);
-app.get   ("/api/getReviewByUserId/:userId",getReviewByUserId);
-app.delete("/api/review/:reviewId",deleteReview);
-app.put   ("/api/review/:reviewId",updateReview);
-app.get   ("/api/review/:reviewId",findReview);
-app.get   ("/api/getReviewByMovieId/:movieId",getReviewByMovieId);
-app.get   ("/api/reviews",getAllReviews);
-app.put   ("/api/:userId/thumbsUp/:reviewId",thumbsUp);
-app.put   ("/api/:userId/dislike/:reviewId",dislike);
+app.get("/api/search/movieName/:movie",movieListByTitle);
+app.put("/api/project/userReview/:reviewId", updateReview);
+app.get("/api/project/movie/id/:id",searchMovieByImdbId);
+app.post("/api/project/user/:userId/review", createReview);
+app.post("/api/project/user/del/:userId/review", deleteReviewsforUser);
+app.get("/api/project/user/:userId/review", findAllReviews);
+app.delete("/api/project/userReview/:reviewId", deleteReview);
+app.get("/api/project/getReviewForUser/:userId",getReviewByUserId);
+app.get("/api/project/getMovieReview/:movieId",getReviewByMovieId);
+app.get("/api/reviews",getAllReviews);
+app.put("/api/:userId/thumbsUp/:reviewId",thumbsUp);
+app.put("/api/:userId/dislike/:reviewId",dislike);
+app.get("/api/project/:mid/review", findUserReviewsforMovie);
+app.get("/api/project/:mid/critic/review", findCriticReviewsforMovie);
+app.get("/api/project/userReview/:reviewId", findReviewById);
+
+
 
 function getAllReviews(req,res) {
-    movieProjectModel.findAllReview()
-        .then(function (response) {
+    movieProjectModel
+        .findAllReview()
+        .then(function (response)
+        {
             console.log(response);
             res.json(response);
         });
@@ -38,9 +39,10 @@ function getAllReviews(req,res) {
 
 function getReviewByUserId(req,res) {
     var userId=req.params.userId;
-    movieProjectModel.findReviewByUserId(userId)
+    movieProjectModel
+        .findReviewByUserId(userId)
         .then(function (reviews) {
-            //console.log(reviews);
+            // console.log(reviews);
             res.json(reviews);
         });
 }
@@ -73,14 +75,6 @@ function dislike(req,res) {
         });
 }
 
-
-function findReview(req,res) {
-    var reviewId=req.params.reviewId;
-    movieProjectModel.findReview(reviewId)
-        .then(function (response) {
-            res.json(response);
-        });
-}
 
 
 function createReview(req,res) {
@@ -185,24 +179,6 @@ function deleteReview(req, res) {
         }, function (err) {
             res.sendStatus(500).send(err);
         });
-}
-
-function searchMoviByImdbId(req, res) {
-var imdbID = req.params['id'];
-console.log("found");
-var url = "http://www.omdbapi.com/?i="+imdbID+"&apikey=509f6a23";
-return http.get(url, function (response) {
-res.send(response);
-});
-}
-
-function searchMovieBTitle(req, res) {
-var movieTitle = req.params['movie'];
-var url = "http://www.omdbapi.com/?s=" + movieTitle + "&apikey=509f6a23";
-return http.get(url, function (response) {
-res.send(response);
-});
-
 }
 
 function movieListByTitle(req,res) {

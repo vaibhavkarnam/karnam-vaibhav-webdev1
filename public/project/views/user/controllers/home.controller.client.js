@@ -28,7 +28,7 @@ init();
 
 function searchMovieByTitle(movieTitle) {
 movieService
-.searchMovieByTitle(movieTitle)
+.movieListByTitle(movieTitle)
 .then(renderMovies);
 }
 function CarouselDemoCtrl($scope){

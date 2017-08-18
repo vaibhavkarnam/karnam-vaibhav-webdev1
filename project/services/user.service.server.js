@@ -26,13 +26,12 @@ app1.get('/api/project/user', findAllUsers);
 app1.post('/api/project/user', createUser);
 app1.put('/api/project/user/:userId', updateUser);
 app1.delete('/api/project/user/:userId', deleteUser);
-app1.post("/api/project/followUser", FollowUser);
-app1.get("/api/project/followingUser/:userId", findfollowingforUser);
-app1.get("/api/project/followersUser/:userId", findfollowersforUser);
-app1.post("/api/project/followingRemove", removeFromFollowing);
-app1.post("/api/followers", addFollowers);
+app1.post("/api/project/followVisitedUser", FollowUser);
+app1.get("/api/project/followingforUser/:userId", findfollowingforUser);
+app1.post("/api/project/followingDelete", removeFromFollowing);
+app1.post("/api/project/addNewfollowers", addFollowers);
 app1.get ('/api/getallusers',findAllUser);
-app1.post('/api/remove/user/followers', removeFollowers);
+app1.post('/api/project/followersDelete', removeFollowers);
 
 var bcrypt = require("bcrypt-nodejs");
 

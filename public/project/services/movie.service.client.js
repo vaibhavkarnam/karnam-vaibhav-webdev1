@@ -1,137 +1,175 @@
 /**
- * Created by vaibhav on 02-08-2017.
- */
+* Created by vaibhav on 02-08-2017.
+*/
 (function () {
-    angular
-        .module('cineReview')
-        .factory('movieService', movieService);
+angular
+.module('cineReview')
+.factory('movieService', movieService);
 
-    function movieService($http) {
-        var api ={
-            movieListByTitle : movieListByTitle,
-            searchMovieById : searchMovieById,
-            createReview : createReview,
-            findReviewById : findReviewById,
-            updateUserReview : updateUserReview,
-            deleteReview : deleteReview,
-            findAllReviews : findAllReviews,
-            findUserReviewsforMovie : findUserReviewsforMovie,
-            findCriticReviewsforMovie : findCriticReviewsforMovie,
-            deleteReviewsforUser : deleteReviewsforUser,
-            getAllUserReviews : getAllUserReviews,
-            getReviewById : getReviewById,
-            getUserReviews : getUserReviews,
-            thumbsUp : thumbsUp,
-        dislike : dislike
-        };
+function movieService($http) {
+var api ={
 
-        return api;
+movieListByTitle : movieListByTitle,
+searchMovieById : searchMovieById,
+findUserReviewsforMovie : findUserReviewsforMovie,
+findCriticReviewsforMovie : findCriticReviewsforMovie,
+createReview : createReview,
+findReviewById : findReviewById,
+updateUserReview : updateUserReview,
+deleteReview : deleteReview,
+thumbsUp : thumbsUp,
+findAllReviews : findAllReviews,
+deleteReviewsforUser : deleteReviewsforUser,
+getAllUserReviews : getAllUserReviews,
+getReviewById : getReviewById,
+getUserReviews : getUserReviews,
+dislike : dislike
 
-        function searchMovieById(imdbID) {
-            var url = "/api/id/"+imdbID;
-            return $http.get(url)
-                .then(function (response) {
-                    console.log(response);
-                    return response.data;
-                });
-        }
+};
 
-        function getUserReviews(movieId) {
-            var url="/api/getReviewByMovieId/"+movieId;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
+return api;
 
-        function thumbsUp(reviewId,userId) {
-            var url="/api/"+userId+"/thumbsUp/"+reviewId;
-            return $http.put(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-        function dislike(reviewId,userId) {
-            var url="/api/"+userId+"/dislike/"+reviewId;
-            return $http.put(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
+function searchMovieById(imdb)
+{
+var url = "/api/project/movie/id/"+imdb;
+return $http
+.get(url)
+.then(function (response)
+{
+    // console.log(response);
+    return response.data;
+});
+}
 
-        function movieListByTitle(movieTitle) {
-                var url = "/api/search/title/"+movieTitle;
-                return $http.get(url)
-                    .then(function (response) {
-                        console.log(response);
-                        return response.data;
-                    });
-            }
+function findReviewById(reviewId)
+{
+return $http
+.get("/api/project/userReview/" + reviewId);
+}
 
-        function deleteReview(reviewId) {
-            var url ="/api/review/"+reviewId;
-            return $http.delete(url)
-                .then(function (response) {
-                    return response;
-                });
-        }
-
-        function updateUserReview(reviewId,review) {
-            var url="/api/review/"+reviewId;
-            return $http
-                .put(url,review)
-                .then(function (response)
-                {
-                    return response.data;
-                });
-        }
-
-        function getReviewById(reviewId) {
-            var url="/api/review/"+reviewId;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function createReview(review, userId) {
-            return $http.post("/api/user/"+userId+"/review", review);
-        }
-
-        function deleteReviewsforUser(userID) {
-            return $http.post("/api/user/del/" + userID + "/review");
-        }
-
-        function findReviewById(reviewId) {
-            return $http.get("/api/review/" + reviewId);
-        }
-
-        function updateReview(reviewId, review) {
-            return $http.put("/api/review/" + reviewId, review);
-        }
-
-        function findAllReviews(userID) {
-            return $http.get("/api/user/" + userID + "/review");
-        }
-
-        function findUserReviewsforMovie(movieId) {
-            return $http.get("/api/rest/" + movieId + "/review");
-        }
-
-        function findCriticReviewsforMovie(movieId) {
-            return $http.get("/api/rest/" + movieId + "/critic/review");
-        }
+function findAllReviews(userId)
+{
+return $http
+.get("/api/project/user/"+userId+"/review");
+}
 
 
-        function getAllUserReviews(userId) {
-            var url="/api/getReviewByUserId/"+userId;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
+function getUserReviews(newmovieId)
+{
+var url="/api/project/getMovieReview/"+newmovieId;
+return $http
+.get(url)
+.then(function (response)
+{
+    return response.data;
+});
+}
+
+function thumbsUp(reviewId,userId)
+{
+var url="/api/"+userId+"/thumbsUp/"+reviewId;
+return $http
+.put(url)
+.then(function (response)
+{
+    return response.data;
+});
+}
+
+function deleteReviewsforUser(userId)
+{
+return $http
+.post("/api/project/user/del/"+userId+"/review");
+}
 
 
-    }
+function dislike(reviewId,userId)
+{
+var url="/api/"+userId+"/dislike/"+reviewId;
+return $http
+.put(url)
+.then(function (response)
+{
+    return response.data;
+});
+}
+
+function movieListByTitle(movieName)
+{
+var url = "/api/search/movieName/"+movieName;
+return $http
+    .get(url)
+    .then(function (response)
+    {
+        // console.log(response);
+        return response.data;
+    });
+}
+
+function deleteReview(Id)
+{
+var url ="/api/project/userReview/"+Id;
+return $http
+.delete(url)
+.then(function (response)
+{
+    return response;
+});
+}
+
+function updateUserReview(reviewId,review)
+{
+var url="/api/project/userReview/"+reviewId;
+return $http
+.put(url,review)
+.then(function (response)
+{
+    return response.data;
+});
+}
+
+function getReviewById(reviewId)
+{
+var url="/api/project/userReview/"+reviewId;
+return $http.get(url)
+.then(function (response)
+{
+    return response.data;
+});
+}
+
+function createReview(review, userId)
+{
+return $http
+.post("/api/project/user/"+userId+"/review", review);
+}
+
+
+function getAllUserReviews(userId)
+{
+var url="/api/project/getReviewForUser/"+userId;
+return $http.get(url)
+.then(function (response)
+{
+    return response.data;
+});
+}
+
+
+
+function findUserReviewsforMovie(Id)
+{
+return $http
+.get("/api/project/"+Id+"/review");
+}
+
+function findCriticReviewsforMovie(Id) {
+console.log(Id);
+return $http
+.get("/api/project/"+Id+"/critic/review");
+}
+
+
+}
 })();
 
