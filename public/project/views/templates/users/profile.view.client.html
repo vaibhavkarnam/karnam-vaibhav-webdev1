@@ -83,10 +83,10 @@
 
             <a href="#!/user/movies/{{userReviews.movieID}}" class="btn btn-link"> {{userReviews.moviename}}</a></h5>
             <h5>
-            <a ng-click="model.dislike(userReviews._id)">
+            <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.dislike(userReviews._id)">
                 <span id ="profiledown" class="glyphicon glyphicon-thumbs-down pull-right">{{userReviews.dislike.length}}</span>
             </a>
-            <a ng-click="model.thumbsUp(userReviews._id)">
+            <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.thumbsUp(userReviews._id)">
                 <span id ="thumbsup" class="glyphicon glyphicon-thumbs-up pull-right"> {{userReviews.thumbsUp.length}}</span>
             </a></h5>
 
