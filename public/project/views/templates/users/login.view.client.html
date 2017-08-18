@@ -3,11 +3,11 @@
 <header class="site-header">
 <div class="container">
 <a href="../home.html" id="branding">
-	<img src="https://raw.githubusercontent.com/vaibhavkarnam/karnam-vaibhav-webdev1/master/public/project/images/logo.png" alt="" class="logo">
-	<div class="logo-copy">
-		<h1 class="site-title">CINEREVIEW</h1>
-		<small class="site-description">Explore Hollywood!</small>
-	</div>
+<img src="https://raw.githubusercontent.com/vaibhavkarnam/karnam-vaibhav-webdev1/master/public/project/images/logo.png" alt="" class="logo">
+<div class="logo-copy">
+	<h1 class="site-title">CINEREVIEW</h1>
+	<small class="site-description">Explore Hollywood!</small>
+</div>
 </a> <!-- #branding -->
 
 <div class="mobile-navigation"></div>
@@ -16,36 +16,36 @@
 <main class="main-content">
 <div class="container">
 <div class="page">
-	<div class="breadcrumbs">
-		<a href="../home.html">Home</a>
-		<span>Login</span>
-	</div>
+<div class="breadcrumbs">
+	<a href="#!/">Home</a>
+	<span>Login</span>
+</div>
 
-	<div class="content">
-		<div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
-		<div ng-show="model.error" class="alert alert-danger">
-			{{model.error}}
-		</div>
-		<h1>Login</h1>
-		<label for="username">
-			Username</label>
-		<input id = "username" ng-model="model.username" type="text" class="form-control" placeholder="vaibhav"/>
-		<div class="form-group">
-		<label for="password">
-			Password</label>
-		<input id="password"  ng-model="model.password" type="password" class="form-control" placeholder="pass"/>
-		</div>
-		<div class="form-group">
-		<a class="btn btn-primary btn-block" ng-click="model.login(model.username, model.password)">
-			Login</a>
-			<a class="btn btn-block btn-danger" href="/auth/project/google">
-				<i class="fa fa-google-plus"></i> Google
-			</a>
-		<a class="btn btn-success btn-block"
-		   href="#!/register">
-			Register</a>
+<div class="content">
+	<div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+	<div ng-show="model.error" class="alert alert-danger">
+		{{model.error}}
 	</div>
+	<h1>Login</h1>
+	<label for="username">
+		Username</label>
+	<input id = "username" ng-model="model.username" type="text" class="form-control" placeholder="vaibhav"/>
+	<div class="form-group">
+	<label for="password">
+		Password</label>
+	<input id="password"  ng-model="model.password" type="password" class="form-control" placeholder="pass"/>
 	</div>
+	<div class="form-group">
+	<a class="btn btn-primary btn-block" ng-click="model.login(model.username, model.password)">
+		Login</a>
+		<a class="btn btn-block btn-danger" href="/auth/project/google">
+			<i class="fa fa-google-plus"></i> Google
+		</a>
+	<a class="btn btn-success btn-block"
+	   href="#!/register">
+		Register</a>
+</div>
+</div>
 </div>
 </div> <!-- .container -->
 </main>

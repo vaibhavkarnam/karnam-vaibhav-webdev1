@@ -4,26 +4,26 @@
 <a href="../home.html" id="branding">
 <img src="https://raw.githubusercontent.com/vaibhavkarnam/karnam-vaibhav-webdev1/master/public/project/images/logo.png" alt="" class="logo">
 <div class="logo-copy">
-    <h1 class="site-title">CINEREVIEW</h1>
-    <small class="site-description">Explore Hollywood!</small>
+<h1 class="site-title">CINEREVIEW</h1>
+<small class="site-description">Explore Hollywood!</small>
 </div>
 </a> <!-- #branding -->
 
 <div class="main-navigation">
 <button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
 </button>
 </div>
 <div>
 <div class="collapse navbar-collapse navbar-right" id="myNavbar">
-    <ul class="nav navbar-nav">
-        <li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
-        <li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
-        <li><a ng-show="model.user._id" href="#!/profile">Profile</a></li>
-        <li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
-    </ul>
+<ul class="nav navbar-nav">
+<li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
+<li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
+<li><a ng-show="model.user._id" href="#!/profile">Profile</a></li>
+<li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
+</ul>
 </div>
 </div> <!-- .main-navigation -->
 
@@ -34,154 +34,154 @@
 <div class="container">
 <div class="page">
 <div class="breadcrumbs">
-    <a href="../home.html">Home</a>
-    <span>Admin</span>
+<a href="#!/">Home</a>
+<span>Admin</span>
 </div>
 
 <div class="tabbable tabs-below" ng-init="selectedTab = 1;">
-    <ul class="nav nav-tabs nav-justified">
-        <li ng-class="{active: selectedTab == 1}">
-            <a data-target="#" ng-click="selectedTab = 1;">User Details</a>
-        </li>
-        <li ng-class="{active: selectedTab == 2}">
-            <a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
-        </li>
-        <li ng-class="{active: selectedTab == 3}">
-            <a data-target="#" ng-click="selectedTab = 3;">Create User</a>
-        </li>
-    </ul>
+<ul class="nav nav-tabs nav-justified">
+<li ng-class="{active: selectedTab == 1}">
+<a data-target="#" ng-click="selectedTab = 1;">User Details</a>
+</li>
+<li ng-class="{active: selectedTab == 2}">
+<a data-target="#" ng-click="selectedTab = 2;">Reviews</a>
+</li>
+<li ng-class="{active: selectedTab == 3}">
+<a data-target="#" ng-click="selectedTab = 3;">Create User</a>
+</li>
+</ul>
 
-    <div class="tab-content" ng-show="selectedTab == 1">
-        <div ng-show="model.users.length == 0">
-            <h3>No Users have Signed Up</h3>
+<div class="tab-content" ng-show="selectedTab == 1">
+<div ng-show="model.users.length == 0">
+<h3>No Users have Signed Up</h3>
+</div>
+<div id="adminUserSection" ng-repeat="user in model.foundUsers">
+<div class="row">
+<div class="col-xs-4 col-md-1">
+    <image id="adminUserImage" ng-src="{{user.ProfilePic}}"></image>
+</div>
+<div id="adminUsers" class="col-xs-8 col-md-11">
+    <form>
+        <div class="form-group">
+            <label>Username</label>
+            <input ng-model="user.username"
+                   type="email"
+                   class="form-control">
         </div>
-        <div id="adminUserSection" ng-repeat="user in model.foundUsers">
-            <div class="row">
-                <div class="col-xs-4 col-md-1">
-                    <image id="adminUserImage" ng-src="{{user.ProfilePic}}"></image>
-                </div>
-                <div id="adminUsers" class="col-xs-8 col-md-11">
-                    <form>
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input ng-model="user.username"
-                                   type="email"
-                                   class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input ng-model="user.firstName"
-                                   type="text"
-                                   required
-                                   class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input ng-model="user.lastName"
-                                   type="text"
-                                   class="form-control">
-                        </div>
-                    </form>
-                    <div>
-                        <button id="deleteAdminButton" ng-click="model.unregister(user._id)"
-                                class="btn btn-block btn-danger">Delete User
-                        </button>
-                    </div>
-                    <button id="editAdminButton" ng-click="model.updateUser(user)"
-                            class="btn btn-block btn-success">Update User
-                    </button>
-                </div>
-            </div>
-            <hr>
+        <div class="form-group">
+            <label>First Name</label>
+            <input ng-model="user.firstName"
+                   type="text"
+                   required
+                   class="form-control">
         </div>
-    </div>
-
-
-    <div class="tab-content" ng-show="selectedTab == 2">
-        <div ng-repeat="review in model.foundReviews">
-            <form>
-                <div class="form-group">
-                    <label>Movie Name</label>
-                    <input ng-model="review.moviename"
-                           type="text"
-                           required
-                           class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input ng-model="review.user_name"
-                           type="text"
-                           class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Review</label>
-                    <input ng-model="review.description"
-                           type="text"
-                           class="form-control">
-                </div>
-            </form>
-            <div>
-                <button  ng-click="model.reviewDelete(review._id)"
-                        class="btn btn-block btn-danger">Delete Review
-                </button>
-            </div>
-            <button ng-click="model.reviewUpdate(review._id, review)"
-                    class="btn btn-block btn-success">Update Review
-            </button>
-            <hr>
-        </div>
-        </div>
-    </div>
-
-    <div class="tab-content" ng-show="selectedTab == 3">
-        <div ng-show="model.error"
-             class="errorAlert alert alert-danger"
-             role="alert">
-            <p><strong></strong> {{model.error}}</p>
-        </div>
-        <form>
-            <div class="form-group">
-                <label>First Name</label>
-                <input ng-model="user.firstName"
-                       type="text"
-                       required
-                       class="form-control"
-                       placeholder="First Name">
-            </div>
+        <div class="form-group">
             <label>Last Name</label>
-            <div class="form-group">
-                <input ng-model="user.lastName"
-                       type="text"
-                       class="form-control"
-                       required placeholder="Last Name">
-            </div>
-            <div class="form-group">
-                <label>Username</label>
-                <input ng-model="user.username"
-                       type="text"
-                       class="form-control"
-                       required placeholder="Username">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input ng-model="user.email"
-                       type="email"
-                       class="form-control"
-                       required placeholder="Email Address">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input ng-model="user.password"
-                       type="password"
-                       class="form-control"
-                       required placeholder="Password">
-            </div>
-            <button type="submit"
-                    ng-click="model.register(user)"
-                    class="btn btn-block btn-primary">Create User
-            </button>
-        </form>
+            <input ng-model="user.lastName"
+                   type="text"
+                   class="form-control">
+        </div>
+    </form>
+    <div>
+        <button id="deleteAdminButton" ng-click="model.unregister(user._id)"
+                class="btn btn-block btn-danger">Delete User
+        </button>
     </div>
+    <button id="editAdminButton" ng-click="model.updateUser(user)"
+            class="btn btn-block btn-success">Update User
+    </button>
+</div>
+</div>
+<hr>
+</div>
+</div>
+
+
+<div class="tab-content" ng-show="selectedTab == 2">
+<div ng-repeat="review in model.foundReviews">
+<form>
+<div class="form-group">
+    <label>Movie Name</label>
+    <input ng-model="review.moviename"
+           type="text"
+           required
+           class="form-control">
+</div>
+<div class="form-group">
+    <label>Username</label>
+    <input ng-model="review.user_name"
+           type="text"
+           class="form-control">
+</div>
+<div class="form-group">
+    <label>Review</label>
+    <input ng-model="review.description"
+           type="text"
+           class="form-control">
+</div>
+</form>
+<div>
+<button  ng-click="model.reviewDelete(review._id)"
+        class="btn btn-block btn-danger">Delete Review
+</button>
+</div>
+<button ng-click="model.reviewUpdate(review._id, review)"
+    class="btn btn-block btn-success">Update Review
+</button>
+<hr>
+</div>
+</div>
+</div>
+
+<div class="tab-content" ng-show="selectedTab == 3">
+<div ng-show="model.error"
+class="errorAlert alert alert-danger"
+role="alert">
+<p><strong></strong> {{model.error}}</p>
+</div>
+<form>
+<div class="form-group">
+<label>First Name</label>
+<input ng-model="user.firstName"
+       type="text"
+       required
+       class="form-control"
+       placeholder="First Name">
+</div>
+<label>Last Name</label>
+<div class="form-group">
+<input ng-model="user.lastName"
+       type="text"
+       class="form-control"
+       required placeholder="Last Name">
+</div>
+<div class="form-group">
+<label>Username</label>
+<input ng-model="user.username"
+       type="text"
+       class="form-control"
+       required placeholder="Username">
+</div>
+<div class="form-group">
+<label>Email</label>
+<input ng-model="user.email"
+       type="email"
+       class="form-control"
+       required placeholder="Email Address">
+</div>
+<div class="form-group">
+<label>Password</label>
+<input ng-model="user.password"
+       type="password"
+       class="form-control"
+       required placeholder="Password">
+</div>
+<button type="submit"
+    ng-click="model.register(user)"
+    class="btn btn-block btn-primary">Create User
+</button>
+</form>
+</div>
 <!-- the fileinput plugin initialization -->
 
 </div>

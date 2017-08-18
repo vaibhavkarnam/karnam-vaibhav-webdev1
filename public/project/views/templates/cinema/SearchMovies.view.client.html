@@ -28,25 +28,25 @@
 <!--</div> &lt;!&ndash; .main-navigation &ndash;&gt;-->
 
 
-	<div class="main-navigation">
-		<button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-	</div>
-	<div>
-		<div class="collapse navbar-collapse navbar-right" id="myNavbar">
-			<ul class="nav navbar-nav">
-				<li><a ng-show="model.user.role[0] == 'ADMIN'" href="#!/admin">ADMIN</a></li>
-				<li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
-				<li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
-				<li><a ng-show="model.user._id" href="#!/profile">Profile</a></li>
-				<li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
-				<li><a href="#!/">BACK</a></li>
-			</ul>
-		</div>
-	</div>
+<div class="main-navigation">
+<button type="button" id ="navbutton" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<div>
+<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+<ul class="nav navbar-nav">
+	<li><a ng-show="model.user.role[0] == 'ADMIN'" href="#!/admin">ADMIN</a></li>
+	<li><a ng-show="!model.user._id" href="#!/login">Login</a></li>
+	<li><a ng-show="!model.user._id" href="#!/register">Register</a></li>
+	<li><a ng-show="model.user._id" href="#!/profile">Profile</a></li>
+	<li><a ng-show="model.user._id" ng-click="model.logout()">logout</a></li>
+	<li><a href="#!/">BACK</a></li>
+</ul>
+</div>
+</div>
 
 
 <div class="mobile-navigation"></div>
@@ -56,7 +56,7 @@
 <div class="container">
 <div class="page">
 <div class="breadcrumbs">
-<a href="../home.html">Home</a>
+<a href="#!/">Home</a>
 <span>Movie Review</span>
 </div>
 <!--<div class="filters">-->
