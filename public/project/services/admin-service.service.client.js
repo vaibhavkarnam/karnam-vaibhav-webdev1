@@ -11,13 +11,22 @@
 function adminService($http) {
 
 
-    this.getAllUsers=getAllUsers;
+    this.findUsers=findUsers;
     this.getUserByid=getUserByid;
-    this.updateProfile=updateProfile;
     this.deleteProfile=deleteProfile;
-    this.getAllReviews=getAllReviews;
+    this.updateProfile=updateProfile;
     this.deleteUserReview=deleteUserReview;
     this.deleteFollow=deleteFollow;
+    this.findReviews=findReviews;
+
+    function findUsers()
+    {
+        var url="/api/getallusers";
+        return $http.get(url)
+            .then(function (response) {
+                return response.data;
+            });
+    }
 
 
     function deleteUserReview(reviewId) {
@@ -29,24 +38,6 @@ function adminService($http) {
     }
 
 
-    function getAllUsers() {
-        var url="/api/getallusers";
-        return $http.get(url)
-            .then(function (response) {
-                return response.data;
-            });
-    }
-
-    function updateProfile(userId, user) {
-        var url = '/api/user/' + userId;
-        return $http.put(url, user)
-            .then(renderUser);
-        //return the user
-        function renderUser(response) {
-            return response.data;
-        }
-    }
-    //function to delete
     function deleteProfile(userId) {
         var url = '/api/user/' + userId;
         return $http.delete(url)
@@ -56,8 +47,7 @@ function adminService($http) {
             );
     }
 
-    //function to get all review
-    function getAllReviews() {
+    function findReviews() {
         var url="/api/reviews";
         return $http.get(url)
             .then(function (response) {
@@ -65,7 +55,8 @@ function adminService($http) {
             });
 
     }
-    //function to delete follow
+
+
     function deleteFollow(followId) {
         var url="/api/deletefollow/"+followId;
         return $http.delete(url)
@@ -73,6 +64,15 @@ function adminService($http) {
                     return response.data;
                 }
             );
+    }
+
+    function updateProfile(userId, user) {
+        var url = '/api/user/' + userId;
+        return $http.put(url, user)
+            .then(renderUser);
+        function renderUser(response) {
+            return response.data;
+        }
     }
 
 

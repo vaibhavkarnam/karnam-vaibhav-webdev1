@@ -117,7 +117,8 @@ movieService
 
 
 function findAllUsers() {
-userService.findAllUsers()
+userService
+    .findAllUsers()
     .then(function (users)
     {
         // console.log(users);

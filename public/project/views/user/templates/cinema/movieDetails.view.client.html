@@ -134,11 +134,11 @@
 		<div class="page-header">
 			Post a Review
 		</div>
-		<textarea id="reviewdes" ng-model="model.rev.description"
+		<textarea id="reviewdes" ng-model="model.userReview.description"
 				  placeholder="Description" rows="5" class="col-xs-12"></textarea>
 	</div>
 	<a class="btn btn-success form-control" id="post"
-	   ng-click="model.postReview(model.rev)" data-dismiss="modal">Post</a>
+	   ng-click="model.postNewReview(model.userReview)" data-dismiss="modal">Post</a>
 </div>
 </div>
 </div>

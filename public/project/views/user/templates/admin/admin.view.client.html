@@ -55,7 +55,7 @@
         <div ng-show="model.users.length == 0">
             <h3>No Users have Signed Up</h3>
         </div>
-        <div id="adminUserSection" ng-repeat="user in model.allUsers">
+        <div id="adminUserSection" ng-repeat="user in model.foundUsers">
             <div class="row">
                 <div class="col-xs-4 col-md-1">
                     <image id="adminUserImage" ng-src="{{user.ProfilePic}}"></image>
@@ -98,19 +98,7 @@
 
 
     <div class="tab-content" ng-show="selectedTab == 2">
-        <div ng-repeat="review in model.allReviews">
-            <!--<a ng-click="model.reviewDelete(review._id)" class="btn btn-danger btn-sm pull-right" style="margin-left: 4px">-->
-                <!--<i class="fa fa-trash " aria-hidden="true"></i>-->
-            <!--</a>-->
-            <!--<a ng-click="model.getReviewById(review._id)" data-toggle="modal" data-target="#editReview" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px">-->
-                <!--<i class="fa fa-pencil " aria-hidden="true"></i>-->
-            <!--</a>-->
-            <!--<h4>Movie :-->
-                <!--<a href="#!/movies/{{review.tmdbMovieId}}" class="btn btn-link"> {{review.moviename}}</a>-->
-                <!--Author :<a ng-click="model.getProfile(review._userId)" class="btn btn-link"> {{review.user_name}}</a>-->
-            <!--</h4>-->
-            <!--<h4>Content :</h4> <p>{{review.description}}</p>-->
-            <!--<hr>-->
+        <div ng-repeat="review in model.foundReviews">
             <form>
                 <div class="form-group">
                     <label>Movie Name</label>

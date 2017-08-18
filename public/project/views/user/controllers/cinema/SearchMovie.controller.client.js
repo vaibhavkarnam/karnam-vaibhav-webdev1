@@ -17,29 +17,36 @@ model.movieListByTitle = movieListByTitle;
 model.logout = logout;
 model.movie = $routeParams.movie;
 
-function init() {
 
-    movieListByTitle(model.movie)
+function init()
+{
+
+movieListByTitle(model.movie)
 }
 init();
 
-function movieListByTitle(movieTitle) {
-    // console.log("movies");
-    movieService
-        .movieListByTitle(movieTitle)
-        .then(renderMovies);
+function movieListByTitle(movieTitle)
+{
+// console.log("movies");
+movieService
+    .movieListByTitle(movieTitle)
+    .then(renderMovies);
 }
 
-function renderMovies(movies) {
-    model.searchedMovies = movies;
+
+function renderMovies(movies)
+{
+model.searchedMovies = movies;
 }
 
-function logout() {
-    userService
-        .logout()
-        .then(function () {
-            $location.url('/login');
-        });
+function logout()
+{
+userService
+    .logout()
+    .then(function ()
+    {
+        $location.url('/login');
+    });
 }
 
 }
