@@ -5,182 +5,191 @@ var mongoose1 = require('mongoose');
 var userSchemaNew = require('./user.schema.server');
 var userModelNew = mongoose1.model('userModelNew', userSchemaNew);
 userModelNew.createUser = createUser;
+userModelNew.FollowUser = FollowUser;
 userModelNew.findUserById = findUserById;
-userModelNew.findAllUser = findAllUser;
 userModelNew.findUserByUsername = findUserByUsername;
 userModelNew.findUserByCredentials = findUserByCredentials;
 userModelNew.updateUser = updateUser;
 userModelNew.deleteUser = deleteUser;
-userModelNew.FollowUser = FollowUser;
-userModelNew.findfollowingforUser = findfollowingforUser;
-userModelNew.findfollowersforUser = findfollowersforUser;
-userModelNew.remFollowing = remFollowing;
-userModelNew.deleteWebsite = deleteWebsite;
+userModelNew.ImageUpload =ImageUpload;
+userModelNew.findfollowersforUserById = findfollowersforUserById;
+userModelNew.findUserByGoogleId =findUserByGoogleId;
+userModelNew.removeFollowers = removeFollowers;
+userModelNew.findfollowingforUserById = findfollowingforUserById;
+userModelNew.removeFromFollowing = removeFromFollowing;
 userModelNew.addFollowers = addFollowers;
 userModelNew.addReview = addReview;
-userModelNew.ImageUpload =ImageUpload;
-userModelNew.findUserByGoogleId =findUserByGoogleId;
-userModelNew.findUserByFacebookId =findUserByFacebookId;
-userModelNew.remFollower = remFollower;
-
+userModelNew.findAllUser = findAllUser;
 
 module.exports = userModelNew;
 
-function deleteWebsite(userId, websiteId) {
+function findUserByGoogleId(googleId) {
 return userModelNew
-.findById(userId)
-.then(function (user) {
-var index = user.websites.indexOf(websiteId);
-user.websites.splice(index, 1);
+.findOne({'google.id':googleId});
+}
+
+
+function ImageUpload (userId, img) {
+// console.log("userID" + userId);
+// console.log("url"+ url);
+return userModelNew
+.update(
+    {_id: userId},
+    {
+        $set: {
+            ProfilePic: img
+        }
+    }
+);
+}
+
+function addReview(reviewId,Id)
+{
+return userModelNew
+.findUserById(Id)
+.then(function (user)
+{
+user.UserReview.push(reviewId);
 return user.save();
+}, function (error)
+{
+return error;
 });
 }
 
-function findUserByGoogleId(googleId) {
-    return userModelNew
-        .findOne({'google.id':googleId});
-}
-
-function findUserByFacebookId(facebookId) {
-    return userModelNew
-        .findOne({'facebook.id':facebookId});
-}
-// function findUserByGoogleId(googleId) {
-//     return userModel.findOne({'google.id' : googleId});
-// }
-
-function ImageUpload (userId, url) {
-    // console.log("userID" + userId);
-    // console.log("url"+ url);
-    return userModelNew
-        .update(
-            {_id: userId},
-            {
-                $set: {
-                    ProfilePic: url
-                }
-            }
-        );
-}
-
-function addReview(reviewId,userId) {
+function createUser(user)
+{
 return userModelNew
-.findUserById(userId)
-.then(function (user) {
-
-    user.UserReview.push(reviewId);
-
-    return user.save();
-}, function (error) {
-    return error;
-}
-);
-
+.create(user);
 }
 
-function createUser(user) {
-return userModelNew.create(user);
+function findUserByUsername(username)
+{
+return userModelNew
+.findOne({username: username});
 }
 
-function findUserById(userId) {
-return userModelNew.findById(userId);
+function findUserByCredentials(username, password)
+{
+return userModelNew
+.findOne({username: username, password: password});
 }
 
-function findAllUser() {
-return userModelNew.find();
-}
+function updateUser(userId, newUser)
+{
 
-function findUserByUsername(username) {
-return userModelNew.findOne({username: username});
-}
-
-function findUserByCredentials(username, password) {
-return userModelNew.findOne({username: username, password: password});
-}
-
-function updateUser(userId, newUser) {
 delete newUser.username;
 delete newUser.password;
-return userModelNew.update({_id: userId}, {$set: newUser});
+
+return userModelNew
+.update({_id: userId}, {$set: newUser});
+}
+
+function findfollowersforUserById(userId)
+{
+return userModelNew
+.find({_id: userId})
 }
 
 
-function FollowUser(follow) {
+function findUserById(userId)
+{
+return userModelNew
+.findById(userId);
+}
+
+function addFollowers(followerUserId,userId)
+{
+return userModelNew
+.findUserById(userId)
+.then(
+    function (user)
+    {
+        user
+            .followers.push(followerUserId);
+        return user.save();
+    },
+    function (error)
+    {
+        return error;
+    });
+
+}
+
+function findAllUser()
+{
+return userModelNew
+.find();
+}
+
+function FollowUser(follow)
+{
+var followingUserId = follow._following;
 var userId = follow._follower;
-var followId = follow._following;
+
 return userModelNew
 .findUserById(userId)
-.then(
-function (user) {
-user.following.push(followId);
+.then(function (user)
+{
+user
+    .following.push(followingUserId);
 return user.save();
 },
 function (error) {
 return error;
-}
-);
-
+});
 }
 
-
-
-
-function remFollowing(followId,userId) {
+function removeFromFollowing(followingUserId,userId)
+{
 return userModelNew
 .findUserById(userId)
 .then(
-function (user) {
-var index = user.following.indexOf(followId);
-user.following.splice(index,1);
-return user.save();
-},
-function (error) {
-return error;
-}
-);
+    function (user)
+    {
+        var index = user
+            .following.indexOf(followingUserId);
+        user
+            .following.splice(index,1);
+        return user.save();
+    },
+    function (error)
+    {
+        return error;
+    });
 
 }
 
-function addFollowers(followId,userId) {
+
+
+function findfollowingforUserById(userId)
+{
+return userModelNew
+.find({_id: userId})
+}
+
+function removeFollowers(followerUserId,userId)
+{
 return userModelNew
 .findUserById(userId)
 .then(
-function (user) {
-user.followers.push(followId);
-return user.save();
-},
-function (error) {
-return error;
-}
-);
+    function (user)
+    {
+        var index = user.followers.indexOf(followerUserId);
+        user
+            .followers.splice(index,1);
+        return user.save();
+    },
+    function (error)
+    {
+        return error;
+    });
 
 }
 
-function remFollower(followId,userId) {
+
+function deleteUser(userId)
+{
 return userModelNew
-.findUserById(userId)
-.then(
-function (user) {
-var index = user.followers.indexOf(followId);
-user.followers.splice(index,1);
-return user.save();
-},
-function (error) {
-return error;
-}
-);
-
-}
-
-function findfollowingforUser(userID) {
-return userModelNew.find({_id: userID})
-}
-
-function findfollowersforUser(userID) {
-return userModelNew.find({_id: userID})
-}
-
-
-function deleteUser(userId) {
-return userModelNew.remove({_id: userId});
+.remove({_id: userId});
 }

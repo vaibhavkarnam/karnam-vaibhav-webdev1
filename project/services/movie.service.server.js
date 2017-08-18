@@ -4,205 +4,170 @@
 var app=require('../../express');
 
 var http =require('http');
+
 var movieProjectModel = require("../models/movie/movie.model.server");
 
+app.delete("/api/project/userReview/:reviewId", deleteReview);
 app.get("/api/search/movieName/:movie",movieListByTitle);
 app.put("/api/project/userReview/:reviewId", updateReview);
 app.get("/api/project/movie/id/:id",searchMovieByImdbId);
 app.post("/api/project/user/:userId/review", createReview);
-app.post("/api/project/user/del/:userId/review", deleteReviewsforUser);
-app.get("/api/project/user/:userId/review", findAllReviews);
-app.delete("/api/project/userReview/:reviewId", deleteReview);
-app.get("/api/project/getReviewForUser/:userId",getReviewByUserId);
 app.get("/api/project/getMovieReview/:movieId",getReviewByMovieId);
-app.get("/api/reviews",getAllReviews);
-app.put("/api/:userId/thumbsUp/:reviewId",thumbsUp);
 app.put("/api/:userId/dislike/:reviewId",dislike);
-app.get("/api/project/:mid/review", findUserReviewsforMovie);
-app.get("/api/project/:mid/critic/review", findCriticReviewsforMovie);
-app.get("/api/project/userReview/:reviewId", findReviewById);
+app.get("/api/project/userReview/:reviewId", findReviewByReviewId);
+app.post("/api/project/user/del/:userId/review", deleteReviews);
+app.get("/api/project/getReviewForUser/:userId",findReviewforUserId);
+app.get("/api/reviews",getReviews);
+app.put("/api/:userId/thumbsUp/:reviewId",thumbsUp);
 
 
+var APIKey = process.env.IMDB;
 
-function getAllReviews(req,res) {
-    movieProjectModel
-        .findAllReview()
-        .then(function (response)
-        {
-            console.log(response);
-            res.json(response);
-        });
+function findReviewforUserId(req,res) {
+var userId=req.params.userId;
+
+movieProjectModel
+.getReviewforUserId(userId)
+.then(function (reviews)
+{
+    // console.log(reviews);
+    res.json(reviews);
+});
 }
 
-
-
-
-function getReviewByUserId(req,res) {
-    var userId=req.params.userId;
-    movieProjectModel
-        .findReviewByUserId(userId)
-        .then(function (reviews) {
-            // console.log(reviews);
-            res.json(reviews);
-        });
+function findReviewByReviewId(req, res)
+{
+var reviewId = req.params.reviewId;
+movieProjectModel
+.findReviewByReviewId(reviewId)
+.then(function (response)
+{
+    res.json(response);
+});
 }
 
-function getReviewByMovieId(req,res) {
-    console.log("review in server");
-    var movieId= req.params.movieId;
-    movieProjectModel.findReviewByMovieId(movieId)
-        .then(function (reviews) {
-            //console.log(reviews);
-            res.json(reviews);
-        });
+function getReviews(req,res)
+{
+movieProjectModel
+.findReview()
+.then(function (response)
+{
+    console.log(response);
+    res.json(response);
+});
+}
+
+function getReviewByMovieId(req,res)
+{
+// console.log("review in server");
+var movieReviewId = req.params.movieId;
+movieProjectModel.
+getReviewforMovieId(movieReviewId)
+.then(function (reviews)
+{
+    //console.log(reviews);
+    res.json(reviews);
+});
 }
 
 function thumbsUp(req,res) {
-    var reviewId=req.params.reviewId;
-    var userId=req.params.userId;
-    movieProjectModel.thumbsUp(reviewId,userId)
-        .then(function (response) {
-            res.json(response);
-        });
+var userReviewId = req.params.reviewId;
+var userId = req.params.userId;
+movieProjectModel
+.thumbsUp(userReviewId,userId)
+.then(function (response)
+{
+    res.json(response);
+});
 }
 
-function dislike(req,res) {
-    var reviewId=req.params.reviewId
-    var userId=req.params.userId;
-    movieProjectModel.dislike(reviewId,userId)
-        .then(function (response) {
-            res.json(response);
-        });
+function createReview(req,res)
+{
+var obj=req.body;
+// console.log(review);
+movieProjectModel
+.createReview(obj)
+.then(function (response)
+{
+    // console.log("in revieww");
+    // console.log(response);
+    res.sendStatus(200);
+});
+}
+
+function deleteReviews(req, res)
+{
+var userId = req.params.userId;
+movieProjectModel
+.deleteReviews(userId)
+.then(function (status)
+{
+    res.sendStatus(200);
+});
+}
+
+function updateReview(req, res)
+{
+var review = req.body;
+var Id = req.params.reviewId;
+movieProjectModel
+.updateReview(Id, review)
+.then(function (response)
+{
+    res.json(response);
+});
+}
+
+function dislike(req,res)
+{
+var movieReviewId  =  req.params.reviewId;
+var userId  =  req.params.userId;
+movieProjectModel
+.dislike(movieReviewId,userId)
+.then(function (response)
+{
+    res.json(response);
+});
 }
 
 
-
-function createReview(req,res) {
-    var review=req.body;
-    console.log(review);
-    movieProjectModel.createReview(review)
-        .then(function (response) {
-            console.log("in revieww");
-            console.log(response);
-            res.sendStatus(200);
-        });
-}
-
-function deleteReviewsforUser(req, res) {
-    var userID = req.params.userId;
-    console.log("Boli" + userID)
-    movieProjectModel
-        .deleteReviewsforUser(userID)
-        .then(function (status) {
-            res.sendStatus(200);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function findAllReviews(req, res) {
-    var userId = req.params.userId;
-    movieProjectModel
-        .findAllReviews(userId)
-        .then(function (reviews) {
-            res.json(reviews);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function findUserReviewsforMovie(req, res) {
-    var movieId = req.params.mid;
-    movieProjectModel
-        .findUserReviewsforMovie(movieId)
-        .then(function (reviews) {
-            // console.log("reviews:"+reviews);
-            res.json(reviews);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function findCriticReviewsforMovie(req, res) {
-    var movieId = req.params.mid;
-    movieProjectModel
-        .findCriticReviewsforMovie(movieId)
-        .then(function (reviews) {
-            // console.log("reviews:"+reviews);
-            res.json(reviews);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function findReviewsforMovie(req, res) {
-    var movieId = req.params.mid;
-    movieProjectModel
-        .findReviewsforMovie(movieId)
-        .then(function (reviews) {
-            // console.log("reviews:"+reviews);
-            res.json(reviews);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function findReviewById(req, res) {
-    var ReviewId = req.params.reviewId;
-    movieProjectModel
-        .findReviewById(ReviewId)
-        .then(function (website) {
-            res.json(website);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function updateReview(req, res) {
-    var reviewId = req.params.reviewId;
-    var review = req.body;
-    movieProjectModel
-        .updateReview(reviewId, review)
-        .then(function (website) {
-            res.json(website);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
-}
-
-function deleteReview(req, res) {
-    var reviewId = req.params.reviewId;
-    movieProjectModel
-        .deleteReview(reviewId)
-        .then(function (status) {
-            res.sendStatus(200);
-        }, function (err) {
-            res.sendStatus(500).send(err);
-        });
+function deleteReview(req, res)
+{
+var Id = req.params.reviewId;
+movieProjectModel
+.deleteReview(Id)
+.then(function (status)
+{
+    res.sendStatus(200);
+});
 }
 
 function movieListByTitle(req,res) {
+
 var movieName = req.params['movie'];
 var options =
-    {
+{
 
-    host:"www.omdbapi.com",
-    path:"/?s="+movieName+"&apikey=509f6a23"
+host:"www.omdbapi.com",
+path:"/?s="+movieName+"&apikey=API_KEY"
+.replace("API_KEY",APIKey)
 
 };
-var callback = function (response) {
+var callback = function (response)
+{
 var str = '';
 
-response.on('data', function (data) {
-    str += data;
+response.on('data', function (data)
+{
+str += data;
 });
 
 response.on('end', function ()
 {
-    res.writeHead(200,
-            {"Content-Type": "application/json"});
-    res
-        .end(str);
+res.writeHead(200,
+    {"Content-Type": "application/json"});
+res
+.end(str);
 });
 };
 
@@ -215,17 +180,21 @@ var imdbID = req.params['id'];
 console.log(imdbID);
 var options ={
 host:"www.omdbapi.com",
-path:"/?i="+imdbID+"&apikey=509f6a23"
+path:"/?i="+imdbID+"&apikey=API_KEY"
+.replace("API_KEY",APIKey)
 
 };
-var callback = function (response) {
+var callback = function (response)
+{
 var str = '';
-response.on('data', function (data) {
-    str += data;
+response.on('data', function (data)
+{
+str += data;
 });
-response.on('end', function () {
-    res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(str);
+response.on('end', function ()
+{
+res.writeHead(200, {"Content-Type": "application/json"});
+res.end(str);
 });
 };
 http.get(options,callback);

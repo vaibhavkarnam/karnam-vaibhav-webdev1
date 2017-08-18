@@ -11,8 +11,6 @@ var api ={
 
 movieListByTitle : movieListByTitle,
 searchMovieById : searchMovieById,
-findUserReviewsforMovie : findUserReviewsforMovie,
-findCriticReviewsforMovie : findCriticReviewsforMovie,
 createReview : createReview,
 findReviewById : findReviewById,
 updateUserReview : updateUserReview,
@@ -36,7 +34,7 @@ return $http
 .get(url)
 .then(function (response)
 {
-    // console.log(response);
+     console.log(response);
     return response.data;
 });
 }
@@ -154,22 +152,6 @@ return $http.get(url)
     return response.data;
 });
 }
-
-
-
-function findUserReviewsforMovie(Id)
-{
-return $http
-.get("/api/project/"+Id+"/review");
-}
-
-function findCriticReviewsforMovie(Id) {
-console.log(Id);
-return $http
-.get("/api/project/"+Id+"/critic/review");
-}
-
-
 }
 })();
 

@@ -10,7 +10,7 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/user/templates/home.html',
+                templateUrl: 'views/templates/home.html',
                 controller  : 'homeController',
                 controllerAs: 'model',
                 resolve:{
@@ -18,17 +18,17 @@
                 }
             })
             .when('/login',{
-                templateUrl : 'views/user/templates/users/login.view.client.html',
+                templateUrl : 'views/templates/users/login.view.client.html',
                 controller  : 'loginController',
                 controllerAs: 'model'
             })
             .when('/register',{
-                templateUrl : 'views/user/templates/users/register.view.client.html',
+                templateUrl : 'views/templates/users/register.view.client.html',
                 controller  : 'registerController',
                 controllerAs: 'model'
             })
             .when('/profile',{
-                templateUrl : 'views/user/templates/users/profile.view.client.html',
+                templateUrl : 'views/templates/users/profile.view.client.html',
                 controller  : 'profileController',
                 controllerAs: 'model',
                 resolve: {
@@ -36,7 +36,7 @@
                 }
             })
             .when('/movie',{
-                templateUrl : 'views/user/templates/cinema/movieDetails.view.client.html',
+                templateUrl : 'views/templates/cinema/movieDetails.view.client.html',
                 controller  : 'profileController',
                 controllerAs: 'model',
                 resolve: {
@@ -45,7 +45,7 @@
 
             })
             .when('/profile/visitor/:visitorId',{
-                templateUrl : 'views/user/templates/users/profile-visit.view.client.html',
+                templateUrl : 'views/templates/users/profile-visit.view.client.html',
                 controller  : 'profileVisitController',
                 controllerAs: 'model',
                 resolve: {
@@ -53,7 +53,7 @@
                 }
             })
             .when('/movies/reviewUpdate/:reviewId',{
-                templateUrl : 'views/user/templates/cinema/review-update.view.client.html',
+                templateUrl : 'views/templates/cinema/review-update.view.client.html',
                 controller  : 'reviewController',
                 controllerAs: 'model',
                 resolve: {
@@ -61,7 +61,7 @@
                 }
             })
             .when('/user/movie/search/:movie',{
-                templateUrl : 'views/user/templates/cinema/SearchMovies.view.client.html',
+                templateUrl : 'views/templates/cinema/SearchMovies.view.client.html',
                 controller  : 'searchMovieController',
                 controllerAs: 'model',
                 resolve: {
@@ -69,7 +69,7 @@
                 }
             })
             .when('/user/movies/:id',{
-                templateUrl : 'views/user/templates/cinema/movieDetails.view.client.html',
+                templateUrl : 'views/templates/cinema/movieDetails.view.client.html',
                 controller  : 'searchController',
                 controllerAs: 'model',
                 resolve: {
@@ -77,7 +77,7 @@
                 }
             })
             .when('/admin',{
-                templateUrl : 'views/user/templates/admin/admin.view.client.html',
+                templateUrl : 'views/templates/admin/admin.view.client.html',
                 controller  : 'adminController',
                 controllerAs: 'model',
                 resolve: {
