@@ -73,6 +73,7 @@ function dislike(reviewId)
 {
 if(model.user.role[0] == 'CRITIC')
 {
+    // console.log(reviewId);
 movieService
     .dislike(reviewId, model.user._id)
     .then(function (status)
@@ -85,6 +86,7 @@ movieService
 }
 function thumbsUp(reviewId)
 {
+    // console.log(reviewId);
 if(model.user.role[0] == 'CRITIC')
 {
 movieService.thumbsUp(reviewId, model.user._id)
