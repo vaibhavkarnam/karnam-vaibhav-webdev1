@@ -77,7 +77,7 @@ movieService
     .dislike(reviewId, model.user._id)
     .then(function (status)
     {
-        getAllUserReviews(model.movieId);
+        // getAllUserReviews(model.movieId);
         $route.reload();
 
     });
@@ -90,7 +90,7 @@ if(model.user.role[0] == 'CRITIC')
 movieService.thumbsUp(reviewId, model.user._id)
     .then(function (status)
     {
-        getAllUserReviews(model.movieId);
+        // getAllUserReviews(model.movieId);
         $route.reload();
     });
 }
@@ -117,8 +117,8 @@ movieService
 .getUserReviews(movieId)
 .then(function (response)
 {
-     // console.log("response in review");
-     // console.log(response);
+      // console.log("response in review");
+      // console.log(response);
     response
         .forEach(function (review) {
         // console.log(review.userRole);
@@ -126,7 +126,7 @@ movieService
         {
             model.criticReviews.push(review);
 
-            console.log( model.criticReviews);
+             // console.log( model.criticReviews);
         }
        else if (review.userRole=="USER")
        {

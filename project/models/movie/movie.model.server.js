@@ -135,8 +135,7 @@ return movieProjectModel
 function getReviewforMovieId(movieReviewId)
 {
 return movieProjectModel
-.find({ movieId : movieReviewId })
-.sort({ sort : -1 });
+.find({ movieId : movieReviewId });
 }
 
 
