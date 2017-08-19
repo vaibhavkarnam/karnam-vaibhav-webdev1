@@ -16,6 +16,7 @@ passport.use(new LocalStrategy(localStrategy));
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
+
 app1.post ('/api/login', passport.authenticate('local'),login);
 app1.get ('/api/loggedin', loggedin);
 app1.post ('/api/register', register);
@@ -56,6 +57,7 @@ var multer = require('multer');
 
 var upload = multer({dest: __dirname + '/../../public/uploads'});
 app1.post('/api/upload/project', upload.single('avatar-2'), uploadImage);
+
 
 
 function localStrategy(username, password, done) {
@@ -177,7 +179,8 @@ userModelNew
             res
                 .redirect('/project/#!/profile');
         },
-        function (error) {
+        function (error)
+        {
             res.send(error);
         }
     );
@@ -198,7 +201,8 @@ userModelNew
 }
 
 
-function googleStrategy(token, refreshToken, profile, done) {
+function googleStrategy(token, refreshToken, profile, done)
+{
 userModelNew
 .findUserByGoogleId(profile.id)
 .then(
@@ -222,7 +226,8 @@ function(user)
                 token: token
             }
         };
-        return userModelNew.createUser(newGoogleUser);
+        return userModelNew
+            .createUser(newGoogleUser);
     }
 },
 function(err)
@@ -246,14 +251,17 @@ function(err)
 );
 }
 
-function FollowUser(req, res) {
+function FollowUser(req, res)
+{
 var follow = req.body;
-console.log(follow);
+// console.log(follow);
 userModelNew.FollowUser(follow)
-    .then(function (response) {
-        res.json(response);
-    }, function (err) {
-        res.sendStatus(500).send(err);
+    .then(function (users)
+    {
+        res.json(users);
+    }, function (err)
+    {
+        res.sendStatus(500);
     });
 }
 
@@ -261,8 +269,6 @@ userModelNew.FollowUser(follow)
 function findAllUsers(req, res) {
 var username = req.query['username'];
 var password = req.query.password;
-console.log(username);
-console.log(password);
 if(username && password)
 {
 userModelNew
@@ -270,7 +276,8 @@ userModelNew
     .then(function (user) {
         if(user) {
             res.json(user);
-        } else {
+        } else
+            {
             res.sendStatus(404);
         }
     });
@@ -283,7 +290,8 @@ userModelNew
     .then(function (user) {
         if(user) {
             res.json(user);
-        } else {
+        } else
+            {
             res.sendStatus(404);
         }
     });
@@ -325,7 +333,8 @@ userModelNew
     });
 }
 
-function updateUser(req, res) {
+function updateUser(req, res)
+{
 var user = req.body;
 userModelNew
 .updateUser(req.params.userId, user)
@@ -338,13 +347,14 @@ userModelNew
 
 function addFollowers(req, res){
 
-var following = req.body;
+var followingUsers = req.body;
 userModelNew
-    .addFollowers(following._follower, following._following)
+    .addFollowers(followingUsers._follower,
+        followingUsers._following)
     .then(function (review) {
         res.json(review);
     }, function (err) {
-        res.sendStatus(500).send(err);
+        res.sendStatus(500);
     });
 }
 
@@ -374,10 +384,11 @@ function findFollowingforUserById(req, res)
 var userId = req.params.userId;
 userModelNew
     .findfollowingforUserById(userId)
-    .then(function (response)
+    .then(function (followingUsers)
     {
-        res.json(response);
-    }, function (err) {
+        res.json(followingUsers);
+    }, function (err)
+    {
         res.sendStatus(404);
     });
 }
@@ -392,10 +403,12 @@ userModelNew
 });
 }
 
-function removeFollowers(req, res) {
+function removeFollowers(req, res)
+{
 var obj = req.body;
 userModelNew
-    .removeFollowers(obj._follower, obj._following)
+    .removeFollowers(obj._follower,
+        obj._following)
     .then(function (response)
     {
         res.json(response);

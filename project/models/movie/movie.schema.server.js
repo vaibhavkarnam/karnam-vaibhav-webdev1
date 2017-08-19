@@ -6,13 +6,13 @@ var mongoose = require("mongoose");
 
 var movieProjectSchema = mongoose.Schema({
 userID:{type:mongoose.Schema.Types.ObjectId, ref:"userModelNew"},
-user_name: String,
+userName: String,
 type: String,
 title: String,
 description: String,
-movieID: String,
+movieId: String,
 sort:{type:Number,default:0},
-moviename: String,
+imdbMovieName: String,
 userRole: String,
 thumbsUp:[{type:mongoose.Schema.Types.ObjectId,ref:"userModelNew"}],
 dislike:[{type:mongoose.Schema.Types.ObjectId,ref:"userModelNew"}],

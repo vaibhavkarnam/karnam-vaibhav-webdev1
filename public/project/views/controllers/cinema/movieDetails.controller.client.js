@@ -49,11 +49,11 @@ userService
 .then(function (user)
 {
     model.user = user;
-    model.userReview.movieID = imdbID;
+    model.userReview.movieId = imdbID;
     model.userReview.userID = userId;
     model.userReview.userRole = user.role;
-    model.userReview.moviename = model.movie.Title;
-    model.userReview.user_name = user.username;
+    model.userReview.imdbMovieName = model.movie.Title;
+    model.userReview.userName = user.username;
     // console.log(model.userReview.userRole);
     movieService
         .createReview(model.userReview, model.userReview.userID)

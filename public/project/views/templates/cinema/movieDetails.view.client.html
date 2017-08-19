@@ -109,7 +109,7 @@
 <div class="tab-content" ng-show="selectedTab == 1">
 	<div  ng-repeat="criticReview in model.criticReviews">
 	<span class="glyphicon glyphicon-user"></span> CRITIC :<a href="#!/profile/visitor/{{criticReview.userID}}" class="btn btn-link">
-	{{criticReview.user_name}}</a>
+	{{criticReview.userName}}</a>
 	<a  ng-click="model.dislike(criticReview._id)">
 		<span class="glyphicon glyphicon-thumbs-down pull-right"> {{criticReview.dislike.length}}</span>
 	</a>
@@ -123,7 +123,7 @@
 <div class="tab-content" ng-show="selectedTab == 2">
 	<div ng-repeat="userReview in model.userReviews">
 		<span class="glyphicon glyphicon-user"></span> USER :<a href="#!/profile/visitor/{{userReview.userID}}" class="btn btn-link">
-		{{userReview.user_name}}</a>
+		{{userReview.userName}}</a>
 		</h4>
 		<p>REVIEW : {{userReview.description}}</p>
 	</div>

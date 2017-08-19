@@ -81,7 +81,7 @@
         </a>
         <h5>Title :
 
-            <a href="#!/user/movies/{{userReviews.movieID}}" class="btn btn-link"> {{userReviews.moviename}}</a></h5>
+            <a href="#!/user/movies/{{userReviews.movieId}}" class="btn btn-link"> {{userReviews.imdbMovieName}}</a></h5>
             <h5>
             <a ng-show="model.user.role[0] == 'CRITIC'" ng-click="model.dislike(userReviews._id)">
                 <span id ="profiledown" class="glyphicon glyphicon-thumbs-down pull-right">{{userReviews.dislike.length}}</span>

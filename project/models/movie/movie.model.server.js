@@ -23,24 +23,24 @@ module.exports = movieProjectModel;
 function thumbsUp(reviewId,userId)
 {
 return movieProjectModel
-.findOne({_id:reviewId})
+.findOne({_id : reviewId})
 .then(function (response)
 {
-    var NewPos=response.dislike
+    var NewPos = response.dislike
         .indexOf(userId);
-    var OldPos=response.thumbsUp
+    var OldPos = response.thumbsUp
         .indexOf(userId);
-    if(NewPos!==-1)
+    if(NewPos!==  -1)
     {
         response.dislike
             .splice(NewPos,1);
     }
-    if(OldPos===-1)
+    if(OldPos ===  -1)
     {
 
         response.thumbsUp.push(userId);
         response
-            .sort= response.thumbsUp.length
+            .sort = response.thumbsUp.length
             - response.dislike.length;
         return response.save();
 
@@ -55,7 +55,7 @@ return movieProjectModel
 function findReviewByReviewId(reviewId)
 {
 return movieProjectModel
-.findById(reviewId)
+.findById( reviewId)
 }
 
 function findReview()
@@ -69,17 +69,17 @@ return movieProjectModel
 function dislike(reviewId,userId)
 {
 return movieProjectModel
-.findOne({_id:reviewId})
+.findOne({ _id : reviewId})
 .then(function (response)
 {
 
-    var NewIndex=response.dislike
+    var NewIndex = response.dislike
         .indexOf(userId);
-    var OldIndex=response.thumbsUp
+    var OldIndex = response.thumbsUp
         .indexOf(userId);
-    if(OldIndex!==-1)
+    if(OldIndex!== -1)
     {
-        response.thumbsUp.splice(OldIndex,1);
+        response.thumbsUp.splice( OldIndex,1);
     }
     if(NewIndex===-1)
     {
@@ -105,12 +105,12 @@ return movieProjectModel
 .then(function (review)
 {
     userModelNew
-        .addReview(review._id, userId );
+        .addReview( review._id, userId);
     return review;
 })
 }
 
-function updateReview(reviewId, review) {
+function updateReview( reviewId, review) {
 return movieProjectModel.update(
 { _id : reviewId },
 {
@@ -123,25 +123,25 @@ return movieProjectModel.update(
 function getReviewforUserId(userId)
 {
 return movieProjectModel
-.find({ userID:userId});
+.find({ userID : userId });
 }
 
 function deleteReviews(userId)
 {
 return movieProjectModel
-.deleteMany({ _user : userId })
+.deleteMany({ userID : userId })
 }
 
 function getReviewforMovieId(movieReviewId)
 {
 return movieProjectModel
-.find({movieID:movieReviewId})
-.sort({sort:-1});
+.find({ movieId : movieReviewId })
+.sort({ sort : -1 });
 }
 
 
 function deleteReview(reviewId)
 {
 return movieProjectModel
-.findByIdAndRemove({_id: reviewId})
+.findByIdAndRemove({ _id : reviewId})
 }

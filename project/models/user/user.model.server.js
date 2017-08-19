@@ -23,15 +23,14 @@ userModelNew.findAllUser = findAllUser;
 
 module.exports = userModelNew;
 
-function findUserByGoogleId(googleId) {
+function findUserByGoogleId(googleId)
+{
 return userModelNew
-.findOne({'google.id':googleId});
+.findOne({'google.id' : googleId});
 }
 
 
 function ImageUpload (userId, img) {
-// console.log("userID" + userId);
-// console.log("url"+ url);
 return userModelNew
 .update(
     {_id: userId},
@@ -72,7 +71,8 @@ return userModelNew
 function findUserByCredentials(username, password)
 {
 return userModelNew
-.findOne({username: username, password: password});
+.findOne({username: username,
+    password: password});
 }
 
 function updateUser(userId, newUser)
@@ -82,13 +82,14 @@ delete newUser.username;
 delete newUser.password;
 
 return userModelNew
-.update({_id: userId}, {$set: newUser});
+.update({ _id : userId},
+    { $set : newUser});
 }
 
 function findfollowersforUserById(userId)
 {
 return userModelNew
-.find({_id: userId})
+.find({ _id : userId})
 }
 
 
@@ -147,10 +148,10 @@ return userModelNew
 .then(
     function (user)
     {
-        var index = user
+        var pos = user
             .following.indexOf(followingUserId);
         user
-            .following.splice(index,1);
+            .following.splice(pos,1);
         return user.save();
     },
     function (error)
@@ -175,9 +176,9 @@ return userModelNew
 .then(
     function (user)
     {
-        var index = user.followers.indexOf(followerUserId);
+        var pos = user.followers.indexOf(followerUserId);
         user
-            .followers.splice(index,1);
+            .followers.splice(pos,1);
         return user.save();
     },
     function (error)
@@ -191,5 +192,5 @@ return userModelNew
 function deleteUser(userId)
 {
 return userModelNew
-.remove({_id: userId});
+.remove({ _id : userId});
 }
