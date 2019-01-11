@@ -456,8 +456,24 @@ span.shortline5 {
 }
 
 #github{
-	width:40px;
-	height:40px;
+
+}
+
+#screen{
+	 width : 780px;
+	 width : 85%;
+ }
+#screen1{
+	width : 780px;
+	width : 85%;
+}
+#screen3{
+	width : 780px;
+	width : 85%;
+}
+#screen4{
+	width : 780px;
+	width : 85%;
 }
 .mygallery h3 {
 	color:#A1B3A4;
